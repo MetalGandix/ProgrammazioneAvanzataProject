@@ -1,0 +1,18 @@
+CASSA
+Saldo: 45.0
+Valuta: €
+
+Lista Movimenti:
+
+Movimento di tipo: RICAVO
+Categoria: Sport
+Importo: 30.0
+Data: Wed May 27 17:14:36 CEST 2020
+ID: 0
+
+Movimento di tipo: SPESA
+Categoria: 
+Importo: -15.0
+Data: Wed May 27 17:14:49 CEST 2020
+ID: 1
+
