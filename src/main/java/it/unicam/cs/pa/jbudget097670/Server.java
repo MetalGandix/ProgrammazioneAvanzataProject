@@ -14,8 +14,8 @@ public class Server implements Serializable {
 	ServerSocket server = null;
 	Socket socket = null;
 	
-	private static String fileName = "C:\\Users\\User\\Desktop\\Programmo\\leonardo\\GestioneBudgetFamiliare\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\Oggetto.txt";
-	
+	private static String fileName = "C:\\Users\\User\\Desktop\\Repository GitHub\\JavaSocketPa\\ProgrammazioneAvanzataProject\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\Oggetto.txt";
+
 	// Porta del Server
 	int porta = 4999;
 
