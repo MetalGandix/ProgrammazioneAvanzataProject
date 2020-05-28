@@ -13,7 +13,10 @@ public class Movimento implements gestisciMovimento,Serializable {
 
 	public Movimento(Categoria c, double importo,Date data, int id) {
 		this.categoria = c;		
-		this.importo = importo;
+		if (importo < 0)
+			this.importo = importo * -1;
+		else
+			this.importo = importo;
 		if(importo>0)
 			this.tipo=Type.RICAVO;
 		else 

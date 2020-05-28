@@ -134,13 +134,12 @@ public class InputController {
 		return c;
 	}
 	
-	public static Asset aggiornaPiano(Asset c) {
+	public static Asset aggiornaPiano(Asset c, Type tipo) {
 			double importoPiano = InputController.inputInt("Scrivi l'importo da aggiungere al piano: ");
 			double importo = InputController.inputInt("Scrivi il tasso a regime: ");
 			int durataPiano = (int) InputController.inputInt("Scrivi quanti mesi durerà il piano: ");
-			Piano piano = new Piano(importoPiano, durataPiano, importo, c.getTipoPiano(), c.getPiano().size());
-			piano.importoMensile();
-			System.out.println("Piano di tipo: " + piano.getTipo() + "\nL'importo mensile del piano è: " + piano.importoMensile());
+			Piano piano = new Piano(importoPiano, durataPiano, importo, tipo, c.getPiano().size());
+			System.out.println("Piano di tipo: " + tipo + "\nL'importo mensile del piano è: " + piano.importoMensile());
 		return c;
 	}
 }

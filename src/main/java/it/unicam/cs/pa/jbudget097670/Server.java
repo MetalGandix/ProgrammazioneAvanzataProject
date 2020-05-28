@@ -14,7 +14,7 @@ public class Server implements Serializable {
 	ServerSocket server = null;
 	Socket socket = null;
 	
-	private static String fileName = "C:\\Users\\User\\Desktop\\Repository GitHub\\JavaSocketPa\\ProgrammazioneAvanzataProject\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\Oggetto.txt";
+	private static String fileName = "/Oggetto.txt";
 
 	// Porta del Server
 	int porta = 4999;
@@ -45,14 +45,8 @@ public class Server implements Serializable {
 				Asset asset = (Asset) input.readObject();
 				System.out.println("Inserisco nel file txt Oggetto.txt le informazioni dei miei conti con i loro Movimenti.\n");
 				
-				File f = new File(fileName);
-				FileWriter writer = new FileWriter(f);
-				
-				String riga = asset.getTipoConto() + "\nSaldo: " + asset.getSaldoDisponibile() + "\nValuta: " + asset.getValuta() + "\n";
-				writer.write(riga + "\nLista Movimenti:\n\n" + asset.toString());
-				writer.close();
+				GestioneFile.scritturaFile(asset);
 			}
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

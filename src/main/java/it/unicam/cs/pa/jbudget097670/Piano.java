@@ -17,11 +17,16 @@ public class Piano implements OperazioniPiano{
 	
 	public Piano(double importoTotale,int durataMesi,double tassoARegime,Type tipo, int id) {
 		this.tipo = tipo;
+		this.tassoARegime = tassoARegime;
+		this.durataMesi = durataMesi;
+		this.id = id;
+		this.importoTotale = importoTotale;
 	}
 
 	@Override
 	public double importoMensile() {
-		System.out.println("Questo è l'importo da pagare mensilmente: ");
+		System.out.println("Questo è l'importo da pagare mensilmente: " + (importoTotale*tassoARegime)/durataMesi);
+	
 		return (importoTotale*tassoARegime)/durataMesi;
 	}
 	

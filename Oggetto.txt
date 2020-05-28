@@ -1,11 +1,12 @@
 CASSA
-Saldo: 4.0
+Saldo: 2.0
 Valuta: €
 
 Lista Movimenti:
 
 Movimento di tipo: RICAVO
-Importo: 4.0
-Data: Mon May 25 23:28:11 CEST 2020
+Categoria: t
+Importo: 2.0
+Data: Thu May 28 19:31:53 CEST 2020
 ID: 0
 

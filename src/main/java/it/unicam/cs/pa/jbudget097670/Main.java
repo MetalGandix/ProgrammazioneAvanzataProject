@@ -39,9 +39,9 @@ public class Main {
 		OperazioniPiano.Type tipoPiano = InputController
 				.apriPiano("Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
 			if (tipoPiano == OperazioniPiano.Type.Ammortamento)
-				contoCorrente = InputController.aggiornaPiano(contoCorrente);
+				contoCorrente = InputController.aggiornaPiano(contoCorrente,tipoPiano.Ammortamento);
 			else
-				cassa = InputController.aggiornaPiano(cassa);
+				cassa = InputController.aggiornaPiano(cassa,tipoPiano.Investimento);
 			boolean continuaPiano = InputController.sceltaNuovoM("Digita 1 per crearlo o 2 per fermarti qua. \n");
 			if (!continuaPiano) {
 				break;
@@ -50,11 +50,17 @@ public class Main {
 		
 		// Quando stampo l'oggetto, stampo in realtà il toString che ho creato nella
 		if (tipo == tipoConto.CONTO_CORRENTE) {
+			contoCorrente.getMovimentiperCategoria(new Categoria(InputController.inputString("Scegli quale categoria raggruppare."))).forEach(movimento->{
+				System.out.println(movimento);
+			});
 			System.out.println("I movimenti del conto corrente sono: ");
 			System.out.println(contoCorrente);
 			// Mando dal Client al Server l'oggetto
 			c.output.writeObject(contoCorrente);
 		} else {
+			cassa.getMovimentiperCategoria(new Categoria(InputController.inputString("Scegli quale categoria raggruppare."))).forEach(movimento->{
+				System.out.println(movimento);
+			});
 			System.out.println("I movimenti della cassa sono: ");
 			System.out.println(cassa);
 			c.output.writeObject(cassa);
