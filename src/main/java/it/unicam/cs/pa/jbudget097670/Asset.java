@@ -73,6 +73,7 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	public ArrayList<Movimento> getMovimenti(){
 		return movimenti;
 	}
+	
 
 	//Mostra i movimenti per il tipo di categoria
 	@Override
@@ -131,18 +132,22 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	}
 	
 	public OperazioniPiano.Type getTipoPiano() {
-		Piano p = new Piano(saldoContabile, id, saldoContabile, null, id);
+		Piano p = new Piano(null, saldoContabile, saldoContabile, id, null, id);
 		return p.getTipo();
 	}
 	
 	@Override
 	public String toString() {
 		ArrayList<Movimento> lista = this.getMovimenti();
+		ArrayList<Piano> listaPiani = this.getPiano();
 		String risultato = "";
 		//Foreach
 		for(Movimento mov: lista) {
 			risultato += mov + "\n";
 		}
+		/*for(Piano p: listaPiani) {
+			risultato += p +"\n";
+		}*/
 		return risultato;
 	}
 

@@ -9,6 +9,13 @@ public class DateController {
 		Date today = Calendar.getInstance().getTime();
 		return today;
 	}
+	
+	public static Date getFinalDate() {
+	Calendar cal = Calendar.getInstance(); 
+	cal.add(Calendar.MONTH, (int) InputController.inputInt(""));
+	Date finalDate = cal.getTime();
+	return null;
+	}
 
 	
 }

@@ -25,7 +25,7 @@ public class Main {
 				contoCorrente = InputController.aggiornaConto(contoCorrente);
 			else
 				cassa = InputController.aggiornaConto(cassa);
-			boolean continuaMovimento = InputController.sceltaNuovoM("Digita 1 per crearlo o 2 per fermarti qua. \n");
+			boolean continuaMovimento = InputController.sceltaNuovoM("Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
 			if (!continuaMovimento) {
 				break;
 			}

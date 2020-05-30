@@ -138,7 +138,7 @@ public class InputController {
 			double importoPiano = InputController.inputInt("Scrivi l'importo da aggiungere al piano: ");
 			double importo = InputController.inputInt("Scrivi il tasso a regime: ");
 			int durataPiano = (int) InputController.inputInt("Scrivi quanti mesi durerà il piano: ");
-			Piano piano = new Piano(importoPiano, durataPiano, importo, tipo, c.getPiano().size());
+			Piano piano = new Piano(tipo, importoPiano,importo, durataPiano, DateController.getFinalDate(), c.getPiano().size());
 			System.out.println("Piano di tipo: " + tipo + "\nL'importo mensile del piano è: " + piano.importoMensile());
 		return c;
 	}

@@ -1,12 +1,15 @@
-CONTO_CORRENTE
-Saldo: 20.0
+CASSA
+Saldo: 250.0
 Valuta: €
-
-Lista Movimenti:
-
 Movimento di tipo: RICAVO
-Categoria: r
-Importo: 20.0
-Data: Thu May 28 20:04:46 CEST 2020
+Categoria: Sport
+Importo: 300.0
+Data: Sat May 30 18:34:03 CEST 2020
 ID: 0
+
+Movimento di tipo: SPESA
+Categoria: Uni
+Importo: 50.0
+Data: Sat May 30 18:34:13 CEST 2020
+ID: 1
 
