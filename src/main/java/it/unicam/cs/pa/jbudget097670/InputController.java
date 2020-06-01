@@ -35,6 +35,55 @@ public class InputController {
 		return risultato;
 	}
 
+	public static tipoConto start(String messaggio, Asset asset1, Asset asset2) {
+		InputController.getInstance();
+		System.out.print(messaggio);
+		int risultato = 0;
+		risultato = i.nextInt();
+		i.nextLine();
+		Asset contoCorrente = new Asset(null, tipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
+		Asset cassa = new Asset(null, tipoConto.CASSA, 0, 0, '€', 0);
+		switch (risultato) {
+		default:
+			System.out.println("Devi scegliere un numero tra 1, 2, 3 o 4");
+		case 1:
+			tipoConto tipo = InputController
+					.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
+			while (true) {
+				if (tipo == tipoConto.CONTO_CORRENTE)
+					asset1 = InputController.aggiornaConto(asset1);
+				else
+					asset2 = InputController.aggiornaConto(asset2);
+				boolean continuaMovimento = InputController
+						.sceltaNuovoM("Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
+				if (!continuaMovimento) {
+					break;
+				}
+			}
+		case 2: 
+			while (true) {
+				boolean iniziaPiano = InputController
+						.sceltaNuovoP("Digita 1 se vuoi aprire un piano, altrimenti digita 2.");
+				if (!iniziaPiano) {
+					break;
+				}
+				OperazioniPiano.Type tipoPiano = InputController.apriPiano(
+						"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
+				if (tipoPiano == OperazioniPiano.Type.Ammortamento)
+					asset1 = InputController.aggiornaPiano(asset1, tipoPiano.Ammortamento);
+				else
+					asset2 = InputController.aggiornaPiano(asset2, tipoPiano.Investimento);
+				boolean continuaPiano = InputController.sceltaNuovoM("Digita 1 per crearlo o 2 per fermarti qua. \n");
+				if (!continuaPiano) {
+					break;
+				}
+			}
+		case 3: 
+			System.exit(1);
+		}
+		return null;
+	}
+
 	// Scelgo se rifare o no un movimento/piano
 	public static boolean sceltaNuovoM(String messaggio) {
 		InputController.getInstance();
@@ -52,7 +101,7 @@ public class InputController {
 			return false;
 		}
 	}
-	
+
 	// Scelgo se aggiungere un nuovo piano al mio conto
 	public static boolean sceltaNuovoP(String messaggio) {
 		InputController.getInstance();
@@ -133,13 +182,14 @@ public class InputController {
 		System.out.println("Movimento con ID: " + mov.getId());
 		return c;
 	}
-	
+
 	public static Asset aggiornaPiano(Asset c, Type tipo) {
-			double importoPiano = InputController.inputInt("Scrivi l'importo da aggiungere al piano: ");
-			double importo = InputController.inputInt("Scrivi il tasso a regime: ");
-			int durataPiano = (int) InputController.inputInt("Scrivi quanti mesi durerà il piano: ");
-			Piano piano = new Piano(tipo, importoPiano,importo, durataPiano, DateController.getFinalDate(), c.getPiano().size());
-			System.out.println("Piano di tipo: " + tipo + "\nL'importo mensile del piano è: " + piano.importoMensile());
+		double importoPiano = InputController.inputInt("Scrivi l'importo da aggiungere al piano: ");
+		double importo = InputController.inputInt("Scrivi il tasso a regime: ");
+		int durataPiano = (int) InputController.inputInt("Scrivi quanti mesi durerà il piano: ");
+		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, DateController.getFinalDate(),
+				c.getPiano().size());
+		System.out.println("Piano di tipo: " + tipo + "\nL'importo mensile del piano è: " + piano.importoMensile());
 		return c;
 	}
 }
