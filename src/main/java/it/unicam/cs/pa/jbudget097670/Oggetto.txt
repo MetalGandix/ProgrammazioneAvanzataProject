@@ -1,12 +1,15 @@
 CASSA
-Saldo: 3.0
+Saldo: 250.0
 Valuta: €
-
-Lista Movimenti:
-
 Movimento di tipo: RICAVO
 Categoria: t
-Importo: 3.0
-Data: Mon Jun 01 17:27:05 CEST 2020
+Importo: 300.0
+Data: Tue Jun 02 12:54:14 CEST 2020
 ID: 0
+
+Movimento di tipo: SPESA
+Categoria: t
+Importo: 50.0
+Data: Tue Jun 02 12:54:21 CEST 2020
+ID: 1
 

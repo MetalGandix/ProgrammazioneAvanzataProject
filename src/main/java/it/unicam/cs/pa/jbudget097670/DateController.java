@@ -10,12 +10,10 @@ public class DateController {
 		return today;
 	}
 	
-	public static Date getFinalDate() {
+	public static Date getFinalDate(int mesi) {
 	Calendar cal = Calendar.getInstance(); 
-	cal.add(Calendar.MONTH, (int) InputController.inputInt(""));
+	cal.add(Calendar.MONTH, mesi);
 	Date finalDate = cal.getTime();
-	return null;
+	return finalDate;
 	}
-
-	
 }

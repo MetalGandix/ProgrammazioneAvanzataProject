@@ -68,6 +68,7 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 		}
 		this.movimenti.add(m);
 	}
+
 	
 	//Mostra tutti i movimenti
 	public ArrayList<Movimento> getMovimenti(){
@@ -127,10 +128,6 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 		return tipoConto;
 	}
 	
-	public ArrayList<Piano> getPiano(){
-		return piani;
-	}
-	
 	public OperazioniPiano.Type getTipoPiano() {
 		Piano p = new Piano(null, saldoContabile, saldoContabile, id, null, id);
 		return p.getTipo();
@@ -138,17 +135,27 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	
 	@Override
 	public String toString() {
-		ArrayList<Movimento> lista = this.getMovimenti();
-		ArrayList<Piano> listaPiani = this.getPiano();
+		ArrayList<Movimento> listaMov = this.getMovimenti();
+		ArrayList<Piano> listaPiani = this.getPiani();
 		String risultato = "";
 		//Foreach
-		for(Movimento mov: lista) {
+		for(Movimento mov: listaMov) {
 			risultato += mov + "\n";
 		}
-		/*for(Piano p: listaPiani) {
+		for(Piano p: listaPiani) {
 			risultato += p +"\n";
-		}*/
+		}
 		return risultato;
+	}
+
+	@Override
+	public void aggiungiPiano(Piano p) {
+		piani.add(p);
+	}
+
+	@Override
+	public ArrayList<Piano> getPiani() {
+		return piani;
 	}
 
 }

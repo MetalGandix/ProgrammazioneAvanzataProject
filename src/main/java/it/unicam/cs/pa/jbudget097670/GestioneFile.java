@@ -2,6 +2,9 @@ package it.unicam.cs.pa.jbudget097670;
 
 import java.io.FileWriter;
 import java.io.IOException;
+
+import it.unicam.cs.pa.jbudget097670.OperazioniPiano.Type;
+
 import java.io.File;
 
 public class GestioneFile {
@@ -17,8 +20,8 @@ public class GestioneFile {
 		FileWriter writer;
 		try {
 			writer = new FileWriter(GestioneFile.pathAssoluta());
-			String riga = asset.getTipoConto() + "\nSaldo: " + asset.getSaldoDisponibile() + "\nValuta: " + asset.getValuta() + "\n";
-			writer.write(riga + "\nLista Movimenti:\n\n" + asset.toString());
+			String rigaMovimento = asset.getTipoConto() + "\nSaldo: " + asset.getSaldoDisponibile() + "\nValuta: " + asset.getValuta() + "\n";
+			writer.write(rigaMovimento + asset.toString());
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();

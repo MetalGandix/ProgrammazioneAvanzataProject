@@ -12,7 +12,6 @@ public class Piano implements OperazioniPiano{
 	private double tassoARegime;
 	private Type tipo;
 	private int id;
-	private ArrayList<Piano> piani;
 	private Date dataFinale;
 	
 	
@@ -28,7 +27,6 @@ public class Piano implements OperazioniPiano{
 
 	@Override
 	public double importoMensile() {
-		System.out.println("Questo è l'importo da pagare mensilmente: " + (importoTotale*tassoARegime)/durataMesi);
 		return (importoTotale*tassoARegime)/durataMesi;
 	}
 	
@@ -46,10 +44,6 @@ public class Piano implements OperazioniPiano{
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public ArrayList<Piano> getPiani() {
-		return piani;
 	}
 	
 	@Override //Richiamando l'oggetto Movimento richiamo in automatico il toString()
@@ -70,7 +64,7 @@ public class Piano implements OperazioniPiano{
 
 	@Override
 	public Date getDataFinale() {
-		return DateController.getFinalDate();
+		return DateController.getFinalDate(durataMesi);
 	}
 
 }

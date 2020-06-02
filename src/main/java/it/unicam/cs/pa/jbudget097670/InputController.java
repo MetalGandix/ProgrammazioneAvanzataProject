@@ -17,6 +17,39 @@ public class InputController {
 		if (i == null)
 			i = new Scanner(System.in);
 	}
+	
+	public static void start(String messaggio) throws IOException {
+		InputController.getInstance();
+		Client c = new Client();
+		c.connetti();
+		Asset contoCorrente = new Asset(null, tipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
+		Asset cassa = new Asset(null, tipoConto.CASSA, 0, 0, '€', 0);
+		while(true) {
+			System.out.print(messaggio);
+			int risultato = 0;
+			risultato = i.nextInt();
+			i.nextLine();
+			tipoConto tipo = null;
+			switch (risultato) {
+				default:
+					System.out.println("Devi scegliere un numero tra 1, 2, 3 o 4");
+					continue;
+				case 1:
+					tipo=InputController.creaMovimento(contoCorrente, cassa);
+					continue;
+				case 2: 
+					InputController.aggiungiPiani(contoCorrente, cassa);
+					continue;
+				case 3: 
+					System.out.println("Uscita dall'app in corso...");
+					System.exit(1);
+				case 4:
+					InputController.stampaRisultati(tipo, c, contoCorrente, cassa);
+					continue;
+			}
+		}
+	}
+	
 
 	// Inserisco il double per l'importo da aggiungere o rimuovere nel saldo
 	public static double inputInt(String messaggio) {
@@ -35,53 +68,64 @@ public class InputController {
 		return risultato;
 	}
 
-	public static tipoConto start(String messaggio, Asset asset1, Asset asset2) {
-		InputController.getInstance();
-		System.out.print(messaggio);
-		int risultato = 0;
-		risultato = i.nextInt();
-		i.nextLine();
-		Asset contoCorrente = new Asset(null, tipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
-		Asset cassa = new Asset(null, tipoConto.CASSA, 0, 0, '€', 0);
-		switch (risultato) {
-		default:
-			System.out.println("Devi scegliere un numero tra 1, 2, 3 o 4");
-		case 1:
-			tipoConto tipo = InputController
-					.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
-			while (true) {
-				if (tipo == tipoConto.CONTO_CORRENTE)
-					asset1 = InputController.aggiornaConto(asset1);
-				else
-					asset2 = InputController.aggiornaConto(asset2);
-				boolean continuaMovimento = InputController
-						.sceltaNuovoM("Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
-				if (!continuaMovimento) {
-					break;
-				}
+	
+	public static tipoConto creaMovimento(Asset contoCorrente, Asset cassa) {
+		tipoConto tipo = null;
+		tipo = InputController
+				.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
+		while (true) {
+			if (tipo == tipoConto.CONTO_CORRENTE)
+				contoCorrente = InputController.aggiornaConto(contoCorrente);
+			else
+				cassa = InputController.aggiornaConto(cassa);
+			boolean continuaMovimento = InputController
+					.sceltaNuovoM("Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
+			if (!continuaMovimento) {
+				break;
 			}
-		case 2: 
-			while (true) {
-				boolean iniziaPiano = InputController
-						.sceltaNuovoP("Digita 1 se vuoi aprire un piano, altrimenti digita 2.");
-				if (!iniziaPiano) {
-					break;
-				}
-				OperazioniPiano.Type tipoPiano = InputController.apriPiano(
-						"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
-				if (tipoPiano == OperazioniPiano.Type.Ammortamento)
-					asset1 = InputController.aggiornaPiano(asset1, tipoPiano.Ammortamento);
-				else
-					asset2 = InputController.aggiornaPiano(asset2, tipoPiano.Investimento);
-				boolean continuaPiano = InputController.sceltaNuovoM("Digita 1 per crearlo o 2 per fermarti qua. \n");
-				if (!continuaPiano) {
-					break;
-				}
-			}
-		case 3: 
-			System.exit(1);
 		}
-		return null;
+		return tipo;
+	}
+	
+	public static void aggiungiPiani(Asset contoCorrente, Asset cassa) {
+		while (true) {
+			OperazioniPiano.Type tipoPiano = InputController.apriPiano(
+					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
+			if (tipoPiano == OperazioniPiano.Type.Ammortamento)
+				contoCorrente = InputController.aggiornaPiano(contoCorrente, tipoPiano.Ammortamento);
+			else
+				cassa = InputController.aggiornaPiano(cassa, tipoPiano.Investimento);
+			boolean continuaPiano = InputController.sceltaNuovoM("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
+			if (!continuaPiano) {
+				break;
+			}
+		}
+	}
+	
+	public static void stampaRisultati(tipoConto tipo, Client c, Asset contoCorrente, Asset cassa) throws IOException {
+		// Quando stampo l'oggetto, stampo in realtà il toString che ho creato nella
+		if (tipo == tipoConto.CONTO_CORRENTE) {
+			/*
+			 * contoCorrente.getMovimentiperCategoria(new
+			 * Categoria(InputController.inputString("Scegli quale categoria raggruppare."))
+			 * ).forEach(movimento->{ System.out.println(movimento); });
+			 */
+			System.out.println("I movimenti del conto corrente sono: ");
+			System.out.println(contoCorrente);
+			// Mando dal Client al Server l'oggetto
+			c.output.writeObject(contoCorrente);
+		} else {
+			/*
+			 * cassa.getMovimentiperCategoria(new
+			 * Categoria(InputController.inputString("Scegli quale categoria raggruppare."))
+			 * ).forEach(movimento->{ System.out.println(movimento); });
+			 */
+			System.out.println("I movimenti della cassa sono: ");
+			System.out.println(cassa);
+			c.output.writeObject(cassa);
+		}
+		c.output.flush();
+		c.output.close();
 	}
 
 	// Scelgo se rifare o no un movimento/piano
@@ -187,8 +231,9 @@ public class InputController {
 		double importoPiano = InputController.inputInt("Scrivi l'importo da aggiungere al piano: ");
 		double importo = InputController.inputInt("Scrivi il tasso a regime: ");
 		int durataPiano = (int) InputController.inputInt("Scrivi quanti mesi durerà il piano: ");
-		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, DateController.getFinalDate(),
-				c.getPiano().size());
+		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, DateController.getFinalDate(durataPiano),
+				c.getPiani().size());
+		c.aggiungiPiano(piano);
 		System.out.println("Piano di tipo: " + tipo + "\nL'importo mensile del piano è: " + piano.importoMensile());
 		return c;
 	}

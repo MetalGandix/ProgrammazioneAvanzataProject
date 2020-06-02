@@ -19,4 +19,8 @@ public interface OperazioniAsset {
 	public ArrayList<Movimento> getMovimenti();
 	
 	public int getId();
+	
+	public void aggiungiPiano(Piano p);
+	
+	public ArrayList<Piano> getPiani();
 }

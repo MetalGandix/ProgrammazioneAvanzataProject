@@ -45,6 +45,7 @@ public class Server implements Serializable {
 				Asset asset = (Asset) input.readObject();
 				System.out.println("Inserisco nel file txt Oggetto.txt le informazioni dei miei conti con i loro Movimenti.\n");
 				
+				//Passa l'oggetto asset che ha al suo interno le info dei movimenti e dei piano alla classe GestioneFile che lo scrive poi sul file di testo Oggetto.txt
 				GestioneFile.scritturaFile(asset);
 			}
 		} catch (IOException e) {
