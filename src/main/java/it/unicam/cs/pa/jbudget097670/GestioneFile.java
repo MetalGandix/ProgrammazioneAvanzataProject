@@ -19,9 +19,9 @@ public class GestioneFile {
 	public static void scritturaFile(Asset asset) {
 		FileWriter writer;
 		try {
-			writer = new FileWriter(GestioneFile.pathAssoluta());
-			String rigaMovimento = asset.getTipoConto() + "\nSaldo: " + asset.getSaldoDisponibile() + "\nValuta: " + asset.getValuta() + "\n";
-			writer.write(rigaMovimento + asset.toString());
+			writer = new FileWriter(GestioneFile.pathAssoluta(), true);
+			String rigaMovimento = asset.getTipoConto() + "\n\nSaldo: " + asset.getSaldoDisponibile() + "\nValuta: " + asset.getValuta() + "\n";
+			writer.write(rigaMovimento + "\n" + asset.toString());
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -42,11 +42,13 @@ public class Server implements Serializable {
 				output = new ObjectOutputStream(socket.getOutputStream());
 				input = new ObjectInputStream(socket.getInputStream());
 				
-				Asset asset = (Asset) input.readObject();
+				Asset contoCorrente = (Asset) input.readObject();
+				Asset cassa = (Asset) input.readObject();
 				System.out.println("Inserisco nel file txt Oggetto.txt le informazioni dei miei conti con i loro Movimenti.\n");
 				
 				//Passa l'oggetto asset che ha al suo interno le info dei movimenti e dei piano alla classe GestioneFile che lo scrive poi sul file di testo Oggetto.txt
-				GestioneFile.scritturaFile(asset);
+				GestioneFile.scritturaFile(contoCorrente);
+				GestioneFile.scritturaFile(cassa);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

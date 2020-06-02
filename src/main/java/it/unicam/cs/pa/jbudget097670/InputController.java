@@ -24,18 +24,22 @@ public class InputController {
 		c.connetti();
 		Asset contoCorrente = new Asset(null, tipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
 		Asset cassa = new Asset(null, tipoConto.CASSA, 0, 0, '€', 0);
+		tipoConto tipo = null;
 		while(true) {
 			System.out.print(messaggio);
 			int risultato = 0;
 			risultato = i.nextInt();
 			i.nextLine();
-			tipoConto tipo = null;
+			if(risultato != 1 && tipo == null) {
+				System.out.println("Devi prima creare il conto.");
+				continue;
+			}
 			switch (risultato) {
 				default:
 					System.out.println("Devi scegliere un numero tra 1, 2, 3 o 4");
 					continue;
 				case 1:
-					tipo=InputController.creaMovimento(contoCorrente, cassa);
+					tipo = InputController.creaMovimento(contoCorrente, cassa);
 					continue;
 				case 2: 
 					InputController.aggiungiPiani(contoCorrente, cassa);
@@ -44,7 +48,7 @@ public class InputController {
 					System.out.println("Uscita dall'app in corso...");
 					System.exit(1);
 				case 4:
-					InputController.stampaRisultati(tipo, c, contoCorrente, cassa);
+					InputController.stampaRisultati(c, contoCorrente, cassa);
 					continue;
 			}
 		}
@@ -88,13 +92,19 @@ public class InputController {
 	}
 	
 	public static void aggiungiPiani(Asset contoCorrente, Asset cassa) {
+		tipoConto tipo = InputController.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
 		while (true) {
 			OperazioniPiano.Type tipoPiano = InputController.apriPiano(
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
-			if (tipoPiano == OperazioniPiano.Type.Ammortamento)
-				contoCorrente = InputController.aggiornaPiano(contoCorrente, tipoPiano.Ammortamento);
-			else
-				cassa = InputController.aggiornaPiano(cassa, tipoPiano.Investimento);
+			switch(tipo) {
+			case CASSA:
+				InputController.aggiornaPiano(cassa, tipoPiano);
+				break;
+			default:
+			case CONTO_CORRENTE:
+				InputController.aggiornaPiano(contoCorrente, tipoPiano);
+				break;
+			}
 			boolean continuaPiano = InputController.sceltaNuovoM("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
 			if (!continuaPiano) {
 				break;
@@ -102,9 +112,8 @@ public class InputController {
 		}
 	}
 	
-	public static void stampaRisultati(tipoConto tipo, Client c, Asset contoCorrente, Asset cassa) throws IOException {
-		// Quando stampo l'oggetto, stampo in realtà il toString che ho creato nella
-		if (tipo == tipoConto.CONTO_CORRENTE) {
+	public static void stampaRisultati(Client c, Asset contoCorrente, Asset cassa) throws IOException {
+		// Quando stampo l'oggetto, stampo in realtà il toString che ho creato nella classe Asset
 			/*
 			 * contoCorrente.getMovimentiperCategoria(new
 			 * Categoria(InputController.inputString("Scegli quale categoria raggruppare."))
@@ -114,16 +123,9 @@ public class InputController {
 			System.out.println(contoCorrente);
 			// Mando dal Client al Server l'oggetto
 			c.output.writeObject(contoCorrente);
-		} else {
-			/*
-			 * cassa.getMovimentiperCategoria(new
-			 * Categoria(InputController.inputString("Scegli quale categoria raggruppare."))
-			 * ).forEach(movimento->{ System.out.println(movimento); });
-			 */
 			System.out.println("I movimenti della cassa sono: ");
 			System.out.println(cassa);
 			c.output.writeObject(cassa);
-		}
 		c.output.flush();
 		c.output.close();
 	}

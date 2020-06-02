@@ -1,15 +1,32 @@
 CASSA
-Saldo: 250.0
+
+Saldo: 50.0
 Valuta: €
+
 Movimento di tipo: RICAVO
-Categoria: t
-Importo: 300.0
-Data: Tue Jun 02 12:54:14 CEST 2020
+Categoria: cassa
+Importo: 50.0
+Data: Tue Jun 02 22:06:38 CEST 2020
 ID: 0
 
-Movimento di tipo: SPESA
+Piano di tipo: Investimento
+Importo: 12.0
+Data iniziale di apertura del piano: Tue Jun 02 22:07:08 CEST 2020
+Data in cui il piano finirà: Mon Nov 02 22:07:08 CET 2020ID: 0
+
+CONTO_CORRENTE
+
+Saldo: 0.0
+Valuta: €
+
+CASSA
+
+Saldo: 30.0
+Valuta: €
+
+Movimento di tipo: RICAVO
 Categoria: t
-Importo: 50.0
-Data: Tue Jun 02 12:54:21 CEST 2020
-ID: 1
+Importo: 30.0
+Data: Tue Jun 02 22:09:37 CEST 2020
+ID: 0
 

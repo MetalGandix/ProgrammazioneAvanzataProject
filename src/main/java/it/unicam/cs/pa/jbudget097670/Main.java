@@ -12,6 +12,6 @@ public class Main {
 
 		System.out.println("\nBenvenuto su GestioneBadgetPA");
 		InputController.start(
-				"Premi: \n 1)Se vuoi fare fare un movimento su un asset.\n 2)Creare un nuovo piano.\n 3)Fermare l'applicazione.\n 4)Guardare i tuoi asset.\n");
+				"Premi: \n 1)Se vuoi creare un piano e fare dei movimenti.\n 2)Creare un nuovo piano.\n 3)Fermare l'applicazione.\n 4)Guardare i tuoi asset.\n");
 	}
 }

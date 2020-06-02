@@ -1,12 +1,17 @@
 package it.unicam.cs.pa.jbudget097670;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import it.unicam.cs.pa.jbudget097670.OperazioniPiano.Type;
 
-public class Piano implements OperazioniPiano{
+public class Piano implements OperazioniPiano, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4496010640226398163L;
 	private double importoTotale;
 	private int durataMesi;
 	private double tassoARegime;
@@ -49,7 +54,7 @@ public class Piano implements OperazioniPiano{
 	@Override //Richiamando l'oggetto Movimento richiamo in automatico il toString()
 	public String toString() {
 		String piano = "";
-		piano += "Movimento di tipo: " + this.getTipo() + "\n";
+		piano += "Piano di tipo: " + this.getTipo() + "\n";
 		piano += "Importo: " + this.importoMensile() + "\n";
 		piano += "Data iniziale di apertura del piano: " + this.getDataIniziale() + "\n";
 		piano += "Data in cui il piano finirà: " + this.getDataFinale();
