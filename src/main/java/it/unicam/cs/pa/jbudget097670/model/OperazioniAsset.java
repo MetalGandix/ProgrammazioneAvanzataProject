@@ -24,7 +24,7 @@ public interface OperazioniAsset {
 	/**
 	 * @return ritornerà il saldo del conto
 	 */
-	public double getSaldo();
+	public double getSaldoDisponibile();
 	
 	/**
 	 * @return ritornerà una lista di Movimenti

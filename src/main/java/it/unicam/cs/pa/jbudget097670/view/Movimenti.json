@@ -1,18 +1,27 @@
 {
-  "tipoConto": "CASSA",
-  "saldoDisponibile": 3.0,
-  "saldoContabile": 0.0,
+  "tipoConto": "CONTO_CORRENTE",
+  "saldoDisponibile": 300.0,
   "valuta": "€",
   "movimenti": [
     {
       "categoria": {
-        "tipo": "t"
+        "tipo": "Sport"
       },
-      "importo": 3.0,
+      "importo": 300.0,
       "tipo": "RICAVO",
-      "data": "Jun 3, 2020, 9:20:57 PM",
+      "data": "Jun 3, 2020, 11:16:53 PM",
       "id": 0
     }
   ],
-  "piani": []
+  "piani": [
+    {
+      "importoTotale": 50.0,
+      "durataMesi": 3,
+      "tassoARegime": 5.0,
+      "tipo": "Ammortamento",
+      "id": 0,
+      "dataFinale": "Sep 3, 2020, 11:17:03 PM",
+      "dataIniziale": "Jun 3, 2020, 11:17:03 PM"
+    }
+  ]
 }

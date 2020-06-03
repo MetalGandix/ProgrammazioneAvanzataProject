@@ -46,8 +46,8 @@ public class InputController {
 		c.connetti();
 
 		// Inizializzo a 0 i 2 conti
-		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
-		Asset cassa = new Asset(TipoConto.CASSA, 0, 0, '€', 0);
+		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€', 0);
+		Asset cassa = new Asset(TipoConto.CASSA, 0, '€', 0);
 
 		// TipoConto inizialmente è null, successivamente l'utente deciderà su quale
 		// tipo di conto fare il movimento o il piano
@@ -322,8 +322,8 @@ public class InputController {
 		double importoPiano = InputController.inputInt("Scrivi l'importo da aggiungere al piano: ");
 		double importo = InputController.inputInt("Scrivi il tasso a regime: ");
 		int durataPiano = (int) InputController.inputInt("Scrivi quanti mesi durerà il piano: ");
-		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, DateController.getFinalDate(durataPiano),
-				asset.getPiani().size());
+		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, DateController.getDate(),
+				DateController.getFinalDate(durataPiano), asset.getPiani().size());
 		asset.aggiungiPiano(piano);
 		System.out.println("Piano di tipo: " + tipo + "\nL'importo mensile del piano è: " + piano.importoMensile());
 		return asset;

@@ -21,11 +21,6 @@ public interface gestisciMovimento {
 	public Categoria getCategoria();
 	
 	/**
-	 * @return ritornerà la categoria del Movimento
-	 */
-	public String getTipoCategoria();
-	
-	/**
 	 * @return ritornerà l'importo del Movimento
 	 */
 	public double getImporto();

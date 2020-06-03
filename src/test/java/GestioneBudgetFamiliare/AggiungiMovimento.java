@@ -13,12 +13,12 @@ public class AggiungiMovimento {
 
 	@Test
 	public void test() {
-		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
-		Movimento mov = new Movimento();
+		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€', 0);
+		Movimento mov = new Movimento(null, 0, null, 0);
 		contoCorrente.aggiungiMovimento(mov);
 		Iterator<Movimento> iter = contoCorrente.getMovimenti().iterator();
 		while(iter.hasNext()) {
 			assertEquals(iter.next(), mov);
 		}
-	}
+	} 
 }

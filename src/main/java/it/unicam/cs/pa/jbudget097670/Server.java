@@ -74,7 +74,7 @@ public class Server implements Serializable {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 		return socket;
 	}
 	
