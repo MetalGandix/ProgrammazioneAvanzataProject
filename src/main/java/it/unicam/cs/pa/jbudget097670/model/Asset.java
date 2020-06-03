@@ -108,11 +108,6 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	public ArrayList<Asset> getConti() {
 		return this.nomeConto;
 	}
-	
-	@Override
-	public void aggiungiConto(Asset a) {
-		this.nomeConto.add(a);
-	}
 
 	@Override
 	public double getSaldo() {
