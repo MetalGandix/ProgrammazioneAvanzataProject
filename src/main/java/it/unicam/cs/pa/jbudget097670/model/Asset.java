@@ -9,16 +9,11 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Scanner;
 
-import it.unicam.cs.pa.jbudget097670.interfaces.Budget;
-import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniAsset;
-import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano;
-import it.unicam.cs.pa.jbudget097670.interfaces.TipoConto;
-import it.unicam.cs.pa.jbudget097670.interfaces.gestisciMovimento.Type;
+import it.unicam.cs.pa.jbudget097670.model.gestisciMovimento.Type;
 
 public class Asset implements OperazioniAsset,Budget,Serializable{
 	
 	private static final long serialVersionUID = 8186361857135749011L;
-	private int id = 0;
 	private TipoConto tipoConto;
 	private double saldoDisponibile = 0.0; 
 	private double saldoContabile;   
@@ -27,7 +22,6 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	private ArrayList<Piano> piani;
 
 	public Asset(TipoConto tipoConto,double saldoDisponibile,double saldoContabile,char valuta, int id) {
-		this.id = id;
 		piani = new ArrayList<Piano>();
 		movimenti = new ArrayList<Movimento>();
 		this.saldoDisponibile = saldoDisponibile;
@@ -35,7 +29,7 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 		this.valuta = valuta;
 		this.tipoConto = tipoConto;
 	}
-	
+
 	public Asset() {
 	}
 
@@ -48,13 +42,11 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 		return saldoDisponibile;
 	}
 	
-	//Deposita un importo
 	@Override
 	public void deposita(double importo) {
 		this.setSaldoDisponibile(this.getSaldoDisponibile()+importo);
 	}
 
-	//Preleva un importo dal saldo disponibile
 	@Override
 	public void preleva(double importo) {
 		this.setSaldoDisponibile(this.getSaldoDisponibile()-importo); 
@@ -107,22 +99,12 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 		return saldoContabile;
 	}
 
-	@Override
-	public int getId() {
-		return id;
-	}
-
 	public char getValuta() {
 		return valuta;
 	}
 
 	public TipoConto getTipoConto() {
 		return tipoConto;
-	}
-	
-	public OperazioniPiano.Type getTipoPiano() {
-		Piano p = new Piano(null, saldoContabile, saldoContabile, id, null, id);
-		return p.getTipo();
 	}
 
 	@Override

@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import it.unicam.cs.pa.jbudget097670.controller.DateController;
-import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano;
-import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano.Type;
+import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
 public class Piano implements OperazioniPiano, Serializable{
 	

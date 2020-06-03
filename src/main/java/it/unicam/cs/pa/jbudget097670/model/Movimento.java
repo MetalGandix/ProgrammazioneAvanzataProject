@@ -2,8 +2,7 @@ package it.unicam.cs.pa.jbudget097670.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import it.unicam.cs.pa.jbudget097670.interfaces.gestisciMovimento;
-import it.unicam.cs.pa.jbudget097670.interfaces.gestisciMovimento.Type;
+import it.unicam.cs.pa.jbudget097670.model.gestisciMovimento.Type;
 
 public class Movimento implements gestisciMovimento,Serializable {
 	

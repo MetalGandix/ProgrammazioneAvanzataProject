@@ -1,0 +1,4 @@
+CASSA
+
+Saldo: 3.0
+Valuta: €

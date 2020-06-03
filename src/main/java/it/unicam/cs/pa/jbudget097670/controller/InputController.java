@@ -8,13 +8,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import it.unicam.cs.pa.jbudget097670.Client;
-import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano;
-import it.unicam.cs.pa.jbudget097670.interfaces.TipoConto;
-import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano.Type;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.model.Categoria;
 import it.unicam.cs.pa.jbudget097670.model.Movimento;
+import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano;
 import it.unicam.cs.pa.jbudget097670.model.Piano;
+import it.unicam.cs.pa.jbudget097670.model.TipoConto;
+import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
 /**
  * @author Leonardo Mogianesi Questa classe serve per controllare tutti gli
@@ -63,7 +63,6 @@ public class InputController {
 				System.out.println("Devi prima creare il conto.");
 				continue;
 			}
-
 			/**
 			 * Se il @risultato dello switch è un numero diverso da 1,2,3 o 4, stampa il
 			 * messaggio di default Se @risultato è = 1, l'utente potrà creare un Movimento

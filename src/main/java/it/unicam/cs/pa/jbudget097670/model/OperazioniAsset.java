@@ -1,10 +1,6 @@
-package it.unicam.cs.pa.jbudget097670.interfaces;
+package it.unicam.cs.pa.jbudget097670.model;
 
 import java.util.ArrayList;
-
-import it.unicam.cs.pa.jbudget097670.model.Asset;
-import it.unicam.cs.pa.jbudget097670.model.Movimento;
-import it.unicam.cs.pa.jbudget097670.model.Piano;
 
 public interface OperazioniAsset {
 
@@ -34,11 +30,6 @@ public interface OperazioniAsset {
 	 * @return ritornerà una lista di Movimenti
 	 */
 	public ArrayList<Movimento> getMovimenti();
-	
-	/**
-	 * @return ritornerà l'ID del movimento
-	 */
-	public int getId();
 	
 	/**
 	 * @param p

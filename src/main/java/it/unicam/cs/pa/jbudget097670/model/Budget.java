@@ -1,9 +1,6 @@
-package it.unicam.cs.pa.jbudget097670.interfaces;
+package it.unicam.cs.pa.jbudget097670.model;
 
 import java.util.Collection;
-
-import it.unicam.cs.pa.jbudget097670.model.Categoria;
-import it.unicam.cs.pa.jbudget097670.model.Movimento;
 
 /**
  * @author Leonardo Mogianesi

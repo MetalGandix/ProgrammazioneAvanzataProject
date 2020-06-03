@@ -3,9 +3,9 @@ package GestioneBudgetFamiliare;
 import static org.junit.Assert.*;
 import java.util.Iterator;
 import it.unicam.cs.pa.jbudget097670.*;
-import it.unicam.cs.pa.jbudget097670.interfaces.TipoConto;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.model.Movimento;
+import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 
 import org.junit.Test;
 
