@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
  *
  */
 public class Client implements Serializable {
-	
+
 	/**
 	 * Il serializableUID serve per dire al programma per capire quali classi invieranno e riceveranno oggetti
 	 */

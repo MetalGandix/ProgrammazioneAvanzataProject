@@ -13,7 +13,7 @@ public class AggiungiMovimento {
 
 	@Test
 	public void test() {
-		Asset contoCorrente = new Asset(null, TipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
+		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
 		Movimento mov = new Movimento();
 		contoCorrente.aggiungiMovimento(mov);
 		Iterator<Movimento> iter = contoCorrente.getMovimenti().iterator();

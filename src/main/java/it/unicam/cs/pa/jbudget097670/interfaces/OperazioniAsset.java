@@ -7,12 +7,6 @@ import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.Piano;
 
 public interface OperazioniAsset {
-	
-	
-	/**
-	 * @return ritornerà la lista dei conti
-	 */
-	public ArrayList<Asset> getConti();
 
 	/**
 	 * Questo metodo permetterà di depositare denaro all'interno dei conti

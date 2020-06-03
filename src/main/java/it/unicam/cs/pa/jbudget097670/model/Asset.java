@@ -19,7 +19,6 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	
 	private static final long serialVersionUID = 8186361857135749011L;
 	private int id = 0;
-	private ArrayList<Asset> nomeConto;
 	private TipoConto tipoConto;
 	private double saldoDisponibile = 0.0; 
 	private double saldoContabile;   
@@ -27,8 +26,7 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	private ArrayList<Movimento> movimenti;
 	private ArrayList<Piano> piani;
 
-	public Asset(ArrayList<Asset> nomeConto, TipoConto tipoConto,double saldoDisponibile,double saldoContabile,char valuta, int id) {
-		this.nomeConto = new ArrayList<Asset>();
+	public Asset(TipoConto tipoConto,double saldoDisponibile,double saldoContabile,char valuta, int id) {
 		this.id = id;
 		piani = new ArrayList<Piano>();
 		movimenti = new ArrayList<Movimento>();
@@ -45,7 +43,7 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	public void setSaldoDisponibile(double importo) {
 		this.saldoDisponibile=importo;
 	}
-	
+
 	public double getSaldoDisponibile() {
 		return saldoDisponibile;
 	}
@@ -103,11 +101,6 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 		});
 		return risultato;
 	}
-	
-	@Override
-	public ArrayList<Asset> getConti() {
-		return this.nomeConto;
-	}
 
 	@Override
 	public double getSaldo() {
@@ -130,17 +123,6 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	public OperazioniPiano.Type getTipoPiano() {
 		Piano p = new Piano(null, saldoContabile, saldoContabile, id, null, id);
 		return p.getTipo();
-	}
-	
-	@Override
-	public String toString() {
-		ArrayList<Movimento> listaMov = this.getMovimenti();
-		String risultato = "";
-		//Foreach
-		for(Movimento mov: listaMov) {
-			risultato += mov + "\n";
-		}
-		return risultato;
 	}
 
 	@Override

@@ -14,6 +14,6 @@ public class Main {
 	public static void main(String[] args) throws IOException, ParseException {
 		System.out.println("\nBenvenuto su GestioneBadgetPA");
 		InputController.start(
-				"Premi: \n 1)Se vuoi creare un piano e fare dei movimenti.\n 2)Creare un nuovo piano.\n 3)Fermare l'applicazione.\n 4)Guardare i tuoi asset.\n");
+				"Premi: \n 1)Se vuoi creare un conto e fare dei movimenti.\n 2)Creare un nuovo piano.\n 3)Fermare l'applicazione.\n 4)Guardare i tuoi asset.\n");
 	}
 }

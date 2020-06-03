@@ -57,7 +57,7 @@ public class Server implements Serializable {
 				 */
 				socket = server.accept();
 				System.out.println("Connessione client-server stabilita");
-				
+			
 				/**
 				 * @input riceve in input l'oggetto dal Client
 				 */
@@ -70,6 +70,7 @@ public class Server implements Serializable {
 				Asset asset = (Asset) input.readObject();
 				System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
 				GestioneFile.scritturaFileMovimenti(asset);
+				
 				System.out.println("Inserisco nel file txt Piano.txt le informazioni dei miei conti con i loro Movimenti.\n");
 				Piano piano = (Piano) input.readObject();
 				GestioneFile.scritturaFilePiani(piano);				

@@ -1,0 +1,19 @@
+{
+  "id": 0,
+  "tipoConto": "CONTO_CORRENTE",
+  "saldoDisponibile": 200.0,
+  "saldoContabile": 0.0,
+  "valuta": "€",
+  "movimenti": [
+    {
+      "categoria": {
+        "tipo": "t"
+      },
+      "importo": 200.0,
+      "tipo": "RICAVO",
+      "data": "Jun 3, 2020, 7:34:25 PM",
+      "id": 0
+    }
+  ],
+  "piani": []
+}

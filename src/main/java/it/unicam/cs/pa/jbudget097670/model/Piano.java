@@ -63,7 +63,7 @@ public class Piano implements OperazioniPiano, Serializable{
 		piano += "ID: " + this.getId() + "\n";
 		return piano;
 	}
-
+	
 	@Override
 	public Date getDataIniziale() {
 		return DateController.getDate();
