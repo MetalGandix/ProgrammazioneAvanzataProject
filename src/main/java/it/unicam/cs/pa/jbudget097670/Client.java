@@ -10,19 +10,34 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * @author Leonardo Mogianesi
+ * 
+ * Questa classe manda gli oggetti Movimento e Piano al server
+ *
+ */
 public class Client implements Serializable {
+	
+	/**
+	 * Il serializableUID serve per dire al programma per capire quali classi invieranno e riceveranno oggetti
+	 */
 	private static final long serialVersionUID = -1167949529498883236L;
+	
+	/**
+	 * Dichiaro un nuovo socket e la porta dove scambieranno dati client e server
+	 */
 	Socket socket = null;
 	int porta = 4999;
 
-	// Permette di fare delle richieste
-	ObjectInputStream input;
-
-	// Permette di avere delle risposte
+	/**
+	 * ObjectOutPutStream è quello che manda al server un dato
+	 */
 	public ObjectOutputStream output;
 
+	/**
+	 * In questo metodo viene connesso il client al server sulla porta 4999
+	 */
 	public void connetti() {
-		
 		try {
 			System.out.println("CLIENT:");
 			System.out.println("Connessione al server con porta: " + porta);
@@ -31,17 +46,16 @@ public class Client implements Serializable {
 			System.out.println("Connesso");
 			// Connesso
 			output = new ObjectOutputStream(socket.getOutputStream());
-			input = new ObjectInputStream(socket.getInputStream());
 		} catch (UnknownHostException e) {
 			System.err.println("Impossibile identificare l'host");
 		} catch (IOException e) {
 			System.err.println("Impossibile stabilire una connessione");
 		}
 	}
-
-	public ObjectInputStream input() {
-		return input;
-	}
+	
+	/**
+	 * @return ritorna il dato che sarà l'output da mandare al server
+	 */
 	public ObjectOutputStream output() {
 		return output;
 	}
