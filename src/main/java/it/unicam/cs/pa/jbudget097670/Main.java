@@ -5,7 +5,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.text.ParseException;
 import java.util.Date;
-import it.unicam.cs.pa.jbudget097670.gestisciMovimento.Type;
+
+import it.unicam.cs.pa.jbudget097670.controller.InputController;
+import it.unicam.cs.pa.jbudget097670.interfaces.gestisciMovimento.Type;
 
 public class Main {
 	public static void main(String[] args) throws IOException, ParseException {

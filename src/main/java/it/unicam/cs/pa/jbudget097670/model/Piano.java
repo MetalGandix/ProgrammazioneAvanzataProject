@@ -1,10 +1,12 @@
-package it.unicam.cs.pa.jbudget097670;
+package it.unicam.cs.pa.jbudget097670.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import it.unicam.cs.pa.jbudget097670.OperazioniPiano.Type;
+import it.unicam.cs.pa.jbudget097670.controller.DateController;
+import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano;
+import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano.Type;
 
 public class Piano implements OperazioniPiano, Serializable{
 	

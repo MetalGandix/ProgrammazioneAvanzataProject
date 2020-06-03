@@ -1,6 +1,10 @@
-package it.unicam.cs.pa.jbudget097670;
+package it.unicam.cs.pa.jbudget097670.interfaces;
 
 import java.util.ArrayList;
+
+import it.unicam.cs.pa.jbudget097670.model.Asset;
+import it.unicam.cs.pa.jbudget097670.model.Movimento;
+import it.unicam.cs.pa.jbudget097670.model.Piano;
 
 public interface OperazioniAsset {
 	

@@ -1,6 +1,8 @@
-package it.unicam.cs.pa.jbudget097670;
+package it.unicam.cs.pa.jbudget097670.interfaces;
 
 import java.util.Date;
+
+import it.unicam.cs.pa.jbudget097670.model.Categoria;
 
 public interface gestisciMovimento {
 

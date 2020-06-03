@@ -9,6 +9,10 @@ import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import it.unicam.cs.pa.jbudget097670.model.Asset;
+import it.unicam.cs.pa.jbudget097670.model.Piano;
+import it.unicam.cs.pa.jbudget097670.view.GestioneFile;
+
 public class Server implements Serializable {
 	private static final long serialVersionUID = -1167949529498883236L;
 	ServerSocket server = null;
@@ -42,13 +46,12 @@ public class Server implements Serializable {
 				output = new ObjectOutputStream(socket.getOutputStream());
 				input = new ObjectInputStream(socket.getInputStream());
 				
-				Asset contoCorrente = (Asset) input.readObject();
-				Asset cassa = (Asset) input.readObject();
-				System.out.println("Inserisco nel file txt Oggetto.txt le informazioni dei miei conti con i loro Movimenti.\n");
-				
-				//Passa l'oggetto asset che ha al suo interno le info dei movimenti e dei piano alla classe GestioneFile che lo scrive poi sul file di testo Oggetto.txt
-				GestioneFile.scritturaFile(contoCorrente);
-				GestioneFile.scritturaFile(cassa);
+				Asset asset = (Asset) input.readObject();
+				System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
+				GestioneFile.scritturaFileMovimenti(asset);
+				System.out.println("Inserisco nel file txt Piano.txt le informazioni dei miei conti con i loro Movimenti.\n");
+				Piano piano = (Piano) input.readObject();
+				GestioneFile.scritturaFilePiani(piano);				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

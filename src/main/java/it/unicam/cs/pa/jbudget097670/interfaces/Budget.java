@@ -1,6 +1,9 @@
-package it.unicam.cs.pa.jbudget097670;
+package it.unicam.cs.pa.jbudget097670.interfaces;
 
 import java.util.Collection;
+
+import it.unicam.cs.pa.jbudget097670.model.Categoria;
+import it.unicam.cs.pa.jbudget097670.model.Movimento;
 
 public interface Budget {
 	

@@ -19,7 +19,7 @@ public class Client implements Serializable {
 	ObjectInputStream input;
 
 	// Permette di avere delle risposte
-	ObjectOutputStream output;
+	public ObjectOutputStream output;
 
 	public void connetti() {
 		

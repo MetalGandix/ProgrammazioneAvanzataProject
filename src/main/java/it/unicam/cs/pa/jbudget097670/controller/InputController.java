@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.jbudget097670;
+package it.unicam.cs.pa.jbudget097670.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,14 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import it.unicam.cs.pa.jbudget097670.OperazioniPiano.Type;
+import it.unicam.cs.pa.jbudget097670.Client;
+import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano;
+import it.unicam.cs.pa.jbudget097670.interfaces.TipoConto;
+import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano.Type;
+import it.unicam.cs.pa.jbudget097670.model.Asset;
+import it.unicam.cs.pa.jbudget097670.model.Categoria;
+import it.unicam.cs.pa.jbudget097670.model.Movimento;
+import it.unicam.cs.pa.jbudget097670.model.Piano;
 
 public class InputController {
 	public static Scanner i = null;
@@ -22,9 +29,9 @@ public class InputController {
 		InputController.getInstance();
 		Client c = new Client();
 		c.connetti();
-		Asset contoCorrente = new Asset(null, tipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
-		Asset cassa = new Asset(null, tipoConto.CASSA, 0, 0, '€', 0);
-		tipoConto tipo = null;
+		Asset contoCorrente = new Asset(null, TipoConto.CONTO_CORRENTE, 0, 0, '€', 0);
+		Asset cassa = new Asset(null, TipoConto.CASSA, 0, 0, '€', 0);
+		TipoConto tipo = null;
 		while(true) {
 			System.out.print(messaggio);
 			int risultato = 0;
@@ -48,7 +55,7 @@ public class InputController {
 					System.out.println("Uscita dall'app in corso...");
 					System.exit(1);
 				case 4:
-					InputController.stampaRisultati(c, contoCorrente, cassa);
+					InputController.stampaRisultati(tipo, c, contoCorrente, cassa);
 					continue;
 			}
 		}
@@ -73,12 +80,12 @@ public class InputController {
 	}
 
 	
-	public static tipoConto creaMovimento(Asset contoCorrente, Asset cassa) {
-		tipoConto tipo = null;
+	public static TipoConto creaMovimento(Asset contoCorrente, Asset cassa) {
+		TipoConto tipo = null;
 		tipo = InputController
 				.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
 		while (true) {
-			if (tipo == tipoConto.CONTO_CORRENTE)
+			if (tipo == TipoConto.CONTO_CORRENTE)
 				contoCorrente = InputController.aggiornaConto(contoCorrente);
 			else
 				cassa = InputController.aggiornaConto(cassa);
@@ -92,7 +99,7 @@ public class InputController {
 	}
 	
 	public static void aggiungiPiani(Asset contoCorrente, Asset cassa) {
-		tipoConto tipo = InputController.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
+		TipoConto tipo = InputController.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
 		while (true) {
 			OperazioniPiano.Type tipoPiano = InputController.apriPiano(
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
@@ -112,22 +119,25 @@ public class InputController {
 		}
 	}
 	
-	public static void stampaRisultati(Client c, Asset contoCorrente, Asset cassa) throws IOException {
-		// Quando stampo l'oggetto, stampo in realtà il toString che ho creato nella classe Asset
+	public static void stampaRisultati(TipoConto tipo, Client c, Asset contoCorrente, Asset cassa) throws IOException {
 			/*
 			 * contoCorrente.getMovimentiperCategoria(new
 			 * Categoria(InputController.inputString("Scegli quale categoria raggruppare."))
 			 * ).forEach(movimento->{ System.out.println(movimento); });
 			 */
+			// Mando dal Client al Server l'oggetto
+			if(tipo == TipoConto.CONTO_CORRENTE) {
 			System.out.println("I movimenti del conto corrente sono: ");
 			System.out.println(contoCorrente);
-			// Mando dal Client al Server l'oggetto
-			c.output.writeObject(contoCorrente);
+			
+			}else {
 			System.out.println("I movimenti della cassa sono: ");
+			// Quando stampo l'oggetto, stampo in realtà il toString che ho creato nella classe Asset
 			System.out.println(cassa);
 			c.output.writeObject(cassa);
-		c.output.flush();
-		c.output.close();
+			}
+			c.output.flush();
+			c.output.close();
 	}
 
 	// Scelgo se rifare o no un movimento/piano
@@ -187,7 +197,7 @@ public class InputController {
 	}
 
 	// Qua scelgo quale conto utilizzare tra C.C. e la cassa
-	public static tipoConto inputConto(String messaggio) {
+	public static TipoConto inputConto(String messaggio) {
 		InputController.getInstance();
 		System.out.print(messaggio);
 		int risultato = 0;
@@ -198,10 +208,10 @@ public class InputController {
 			return inputConto(messaggio);
 		case 1:
 			System.out.println("Hai scelto il conto corrente.\n ");
-			return tipoConto.CONTO_CORRENTE;
+			return TipoConto.CONTO_CORRENTE;
 		case 2:
 			System.out.println("Hai scelto la cassa.\n");
-			return tipoConto.CASSA;
+			return TipoConto.CASSA;
 		}
 	}
 

@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.jbudget097670;
+package it.unicam.cs.pa.jbudget097670.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,21 +9,25 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Scanner;
 
-import it.unicam.cs.pa.jbudget097670.gestisciMovimento.Type;
+import it.unicam.cs.pa.jbudget097670.interfaces.Budget;
+import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniAsset;
+import it.unicam.cs.pa.jbudget097670.interfaces.OperazioniPiano;
+import it.unicam.cs.pa.jbudget097670.interfaces.TipoConto;
+import it.unicam.cs.pa.jbudget097670.interfaces.gestisciMovimento.Type;
 
 public class Asset implements OperazioniAsset,Budget,Serializable{
 	
 	private static final long serialVersionUID = 8186361857135749011L;
 	private int id = 0;
 	private ArrayList<Asset> nomeConto;
-	private tipoConto tipoConto;
+	private TipoConto tipoConto;
 	private double saldoDisponibile = 0.0; 
 	private double saldoContabile;   
 	private char valuta;
 	private ArrayList<Movimento> movimenti;
 	private ArrayList<Piano> piani;
 
-	public Asset(ArrayList<Asset> nomeConto, tipoConto tipoConto,double saldoDisponibile,double saldoContabile,char valuta, int id) {
+	public Asset(ArrayList<Asset> nomeConto, TipoConto tipoConto,double saldoDisponibile,double saldoContabile,char valuta, int id) {
 		this.nomeConto = new ArrayList<Asset>();
 		this.id = id;
 		piani = new ArrayList<Piano>();
@@ -124,7 +128,7 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 		return valuta;
 	}
 
-	public tipoConto getTipoConto() {
+	public TipoConto getTipoConto() {
 		return tipoConto;
 	}
 	
@@ -136,14 +140,10 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	@Override
 	public String toString() {
 		ArrayList<Movimento> listaMov = this.getMovimenti();
-		ArrayList<Piano> listaPiani = this.getPiani();
 		String risultato = "";
 		//Foreach
 		for(Movimento mov: listaMov) {
 			risultato += mov + "\n";
-		}
-		for(Piano p: listaPiani) {
-			risultato += p +"\n";
 		}
 		return risultato;
 	}

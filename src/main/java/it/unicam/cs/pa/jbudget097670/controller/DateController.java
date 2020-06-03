@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.jbudget097670;
+package it.unicam.cs.pa.jbudget097670.controller;
 
 import java.text.*;
 import java.util.Calendar;

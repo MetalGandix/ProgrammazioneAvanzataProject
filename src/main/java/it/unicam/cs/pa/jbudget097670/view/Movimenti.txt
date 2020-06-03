@@ -1,0 +1,11 @@
+CASSA
+
+Saldo: 30.0
+Valuta: €
+
+Movimento di tipo: RICAVO
+Categoria: t
+Importo: 30.0
+Data: Wed Jun 03 10:55:51 CEST 2020
+ID: 0
+
