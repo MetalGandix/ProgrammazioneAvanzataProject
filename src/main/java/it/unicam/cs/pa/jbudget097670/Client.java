@@ -67,7 +67,8 @@ public class Client implements Serializable {
 	public static void main(String[] args) throws IOException, ParseException {
 		System.out.println("-- Benvenuto su GestioneBadgetPA --\n");
 		GestioneInput.start(
-				"Premi: "
+				"- HOME -"
+				+ "\nPremi: "
 				+ "\n 1)Se vuoi creare un conto e fare dei movimenti."
 				+ "\n 2)Creare un nuovo piano."
 				+ "\n 3)Fermare l'applicazione."

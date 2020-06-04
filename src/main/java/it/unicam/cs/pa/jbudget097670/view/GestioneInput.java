@@ -31,18 +31,16 @@ public class GestioneInput {
 	public static void start(String messaggio) throws IOException {
 		// Chiamo lo scanner
 		GestioneInput.getInstance();
+		
 		// Connetto il Client con il server
 		Client c = new Client();
 		c.connetti();
+		
 		// Inizializzo a 0 i 2 conti
 		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€', 0);
 		Asset cassa = new Asset(TipoConto.CASSA, 0, '€', 0);
-
-		// TipoConto inizialmente è null, successivamente l'utente deciderà su quale
-		// tipo di conto fare il movimento o il piano
 		TipoConto tipo = null;
 		OggettiController o = new OggettiController();
-		
 		// Finchè è true, continua a chiedere all'utente cosa vuole fare
 		while (true) {
 			System.out.print(messaggio);
@@ -83,44 +81,41 @@ public class GestioneInput {
 			}
 		}
 	}
-	
-	
+
 	public static OggettiController selezionaOggetto(Asset asset) throws IOException {
 		OggettiController o = new OggettiController();
 		GestioneInput.getInstance();
-		while(true) {
-		System.out.println("Seleziona: "
-				+ "\n 0)Per tornare alla home."
-				+ "\n 1)Seleziona un Movimento con un ID specifico. "
-				+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
-				+ "\n 3)Seleziona un Piano con un id specifico. "
-				+ "\n 4)Seleziona uno o più Piani dello stesso tipo.");
-		int risultato = 0;
-		risultato = i.nextInt();
-		// Il lextLine() dopo il nextInt() serve per risolvere un bug che mi dava, se lo
-		// togliessi mi salterebbe una riga
-		i.nextLine();
-		switch (risultato) {
-		default:
-			System.out.println("Devi inserire un numero che sia 1, 2, 3 o 4");
-			continue;
-		case 0:
-			break;
-		case 1:
-			o.getMovimentoPerId(asset);
-			continue;
-		case 2:
-			o.getMovimentiperCategoria(asset);
-			continue;
-		case 3:
-			o.getPianoPerId(asset);
-			continue;
-		case 4:
-			o.getPianiPerTipo(asset);
-			continue;
+		while (true) {
+			System.out.println(
+					"Seleziona: " + "\n 0)Per tornare alla home." + "\n 1)Seleziona un Movimento con un ID specifico. "
+							+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
+							+ "\n 3)Seleziona un Piano con un id specifico. "
+							+ "\n 4)Seleziona uno o più Piani dello stesso tipo.");
+			int risultato = 0;
+			risultato = i.nextInt();
+			// Il lextLine() dopo il nextInt() serve per risolvere un bug che mi dava, se lo
+			// togliessi mi salterebbe una riga
+			i.nextLine();
+			switch (risultato) {
+			default:
+				System.out.println("Devi inserire un numero che sia 1, 2, 3 o 4");
+				continue;
+			case 0:
+				break;
+			case 1:
+				o.getMovimentoPerId(asset);
+				continue;
+			case 2:
+				o.getMovimentiperCategoria(asset);
+				continue;
+			case 3:
+				o.getPianoPerId(asset);
+				continue;
+			case 4:
+				o.getPianiPerTipo(asset);
+				continue;
+			}
 		}
-	}
-		
 	}
 
 	/**
@@ -172,8 +167,7 @@ public class GestioneInput {
 	 *                      piano
 	 */
 	public static void aggiungiPiani(Asset contoCorrente, Asset cassa) {
-		TipoConto tipo = GestioneInput
-				.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
+		TipoConto tipo = GestioneInput.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
 		while (true) {
 			OperazioniPiano.Type tipoPiano = GestioneInput.apriPiano(
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
@@ -323,12 +317,11 @@ public class GestioneInput {
 		descrizione = i.nextLine();
 		return descrizione;
 	}
-	
-	
+
 	/**
 	 * @param messaggio
-	 * @return ritorna un numero inserito dall'utente, che sarà poi usato per trovare un 
-	 * ID in una lista di movimenti
+	 * @return ritorna un numero inserito dall'utente, che sarà poi usato per
+	 *         trovare un ID in una lista di movimenti
 	 */
 	public static int cercaId(String messaggio) {
 		GestioneInput.getInstance();

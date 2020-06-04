@@ -1,25 +1,43 @@
 {
   "tipoConto": "CASSA",
-  "saldoDisponibile": 15.0,
+  "saldoDisponibile": 3000.0,
   "valuta": "€",
   "movimenti": [
     {
       "categoria": {
-        "tipo": "Sport"
+        "tipo": "t"
       },
-      "importo": 30.0,
+      "importo": 3000.0,
       "tipo": "RICAVO",
-      "data": "Jun 4, 2020, 6:58:24 PM",
+      "data": "Jun 4, 2020, 7:41:18 PM",
       "id": 0
-    },
+    }
+  ],
+  "piani": [
+    {
+      "importoTotale": 40.0,
+      "durataMesi": 6,
+      "tassoARegime": 2.0,
+      "tipo": "Investimento",
+      "id": 0,
+      "dataFinale": "Dec 4, 2020, 7:41:37 PM",
+      "dataIniziale": "Jun 4, 2020, 7:41:37 PM",
+      "data": {}
+    }
+  ]
+}{
+  "tipoConto": "CASSA",
+  "saldoDisponibile": 390.0,
+  "valuta": "€",
+  "movimenti": [
     {
       "categoria": {
-        "tipo": "Pallavolo"
+        "tipo": "c"
       },
-      "importo": 15.0,
-      "tipo": "SPESA",
-      "data": "Jun 4, 2020, 6:58:34 PM",
-      "id": 1
+      "importo": 390.0,
+      "tipo": "RICAVO",
+      "data": "Jun 4, 2020, 7:58:28 PM",
+      "id": 0
     }
   ],
   "piani": []

@@ -7,6 +7,7 @@ import java.io.Reader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.google.gson.stream.JsonReader;
 
 import it.unicam.cs.pa.jbudget097670.model.Asset;
 
