@@ -10,23 +10,27 @@ public interface GetOggetti {
 	
 	/**
 	 * @param asset
-	 * @return un Movimento con quel determinato ID
+	 * @return ritornerà un Movimento con quel determinato ID
 	 */
 	public Collection<Movimento> getMovimentoPerId(Asset asset);
 	
 	/**
 	 * @param a
-	 * @return un piano con l'id scelto dall'utente
+	 * @return ritornerà un piano con l'id scelto dall'utente
 	 */
-	public Collection<Piano> getPianoPerId(Asset a);
-	
-	public Asset getMovimentoPerGiorno(Asset a);
+	public Collection<Piano> getPianoPerId(Asset asset);
 	
 	/**
 	 * @param c
-	 * @return una lista di Movimenti con la stessa categoria
+	 * @return ritornerà una lista di Movimenti con la stessa categoria
 	 */
 	public Collection<Movimento> getMovimentiperCategoria(Asset asset);
+	
+	/**
+	 * @param asset
+	 * @return ritornerà una lista di Piani dello stesso tipo (Ammortamento o Investimento)
+	 */
+	public Collection<Piano> getPianiPerTipo(Asset asset);
 
 	
 

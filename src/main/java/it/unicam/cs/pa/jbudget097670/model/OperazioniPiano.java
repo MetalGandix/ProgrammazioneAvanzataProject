@@ -13,7 +13,7 @@ public interface OperazioniPiano {
 	public enum Type { Ammortamento,Investimento }
 	
 	/**
-	 * servirà per ottenere il tipo di piano
+	 * servirà per ottenere il tipo di piano (Ammortameno o Investimento)
 	 */
 	public Type getTipo();
 	

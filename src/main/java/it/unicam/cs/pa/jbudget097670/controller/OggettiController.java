@@ -27,10 +27,9 @@ public class OggettiController implements GetOggetti {
 		DateController odierna = new DateController();
 		Movimento mov = new Movimento(cat, importo, odierna.getDate(), asset.getMovimenti().size());
 		asset.aggiungiMovimento(mov);
-		System.out.println("Importo transitato nel Movimento: " + mov.getImporto());
-		System.out.println("Movimento con categoria: " + mov.getTipoCategoria());
-		System.out.println("Movimento effettuato in data: " + mov.getData());
-		System.out.println("Movimento con ID: " + mov.getId());
+		System.out.println("Importo transitato nel Movimento: " + mov.getImporto() + "\nMovimento con categoria: "
+				+ mov.getTipoCategoria() + "\nMovimento effettuato in data: " + mov.getData() + "\nMovimento con ID: "
+				+ mov.getId());
 		return asset;
 	}
 
@@ -78,8 +77,8 @@ public class OggettiController implements GetOggetti {
 	}
 
 	/**
-	 * In questo metodo ritorna il piano con Id selezionato dall'utente.
-	 * L'utente inserisce un ID associato al piano che vuole vedere stampato.
+	 * In questo metodo ritorna il piano con Id selezionato dall'utente. L'utente
+	 * inserisce un ID associato al piano che vuole vedere stampato.
 	 */
 	@Override
 	public Collection<Piano> getPianoPerId(Asset asset) {
@@ -92,22 +91,12 @@ public class OggettiController implements GetOggetti {
 		});
 		pianoId.forEach(p -> {
 			if (pianoId != null) {
-				System.out.println(
-						"ID del piano: " + p.getId() + 
-						"\nTipo del piano: " + p.getTipo() + 
-						"\nImporto del piano: "+ p.importoMensile() 
-						+ "\nData iniziale: " + p.getDataIniziale() 
-						+ "\nData finale: " + p.getDataFinale() 
-						+ "\n"
-						);
+				System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()
+						+ "\nImporto del piano: " + p.importoMensile() + "\nData iniziale: " + p.getDataIniziale()
+						+ "\nData finale: " + p.getDataFinale() + "\n");
 			}
 		});
 		return pianoId;
-	}
-
-	@Override
-	public Asset getMovimentoPerGiorno(Asset asset) {
-		return null;
 	}
 
 	/**
@@ -131,6 +120,30 @@ public class OggettiController implements GetOggetti {
 			}
 		});
 		return movWithCat;
+	}
+
+	/**
+	 * Questo metodo Ritorna la lista dei Piani con lo stesso tipo inserito dall'utente
+	 */
+	@Override
+	public Collection<Piano> getPianiPerTipo(Asset asset) {
+		ArrayList<Piano> pianoType = new ArrayList<Piano>();
+		Type x = GestioneInput.apriPiano("Per visualizzare la lista dei piani nserisci: "
+				+ "\n 1)Piani di tipo Ammortamento "
+				+ "\n 2)Piani di tipo Investimento");
+		asset.getPiani().forEach(p -> {
+			if (x == p.getTipo()) {
+				pianoType.add(p);
+			}
+		});
+		pianoType.forEach(p -> {
+			if (pianoType != null) {
+				System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()
+						+ "\nImporto del piano: " + p.importoMensile() + "\nData iniziale: " + p.getDataIniziale()
+						+ "\nData finale: " + p.getDataFinale() + "\n");
+			}
+		});
+		return pianoType;
 	}
 
 }

@@ -43,11 +43,8 @@ public class Client implements Serializable {
 	public void connetti() {
 		try {
 			System.out.println("CLIENT:");
-			System.out.println("Connessione al server con porta: " + porta);
-			// Inizializzo il servizio del Server
 			socket = new Socket(InetAddress.getLocalHost(), porta);
-			System.out.println("Connesso");
-			// Connesso
+			System.out.println("Connesso alla porta: " + porta + "\n");
 			output = new ObjectOutputStream(socket.getOutputStream());
 		} catch (UnknownHostException e) {
 			System.err.println("Impossibile identificare l'host");
@@ -74,7 +71,7 @@ public class Client implements Serializable {
 				+ "\n 1)Se vuoi creare un conto e fare dei movimenti."
 				+ "\n 2)Creare un nuovo piano."
 				+ "\n 3)Fermare l'applicazione."
-				+ "\n 4)Guardare i tuoi asset."
+				+ "\n 4)Guardare i tuoi risultati sul File."
 				+ "\n 5)Seleziona un Movimento o un Piano tra quelli creati. "
 				+ "\n");
 	}

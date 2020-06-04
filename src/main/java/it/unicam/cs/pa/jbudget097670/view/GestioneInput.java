@@ -92,8 +92,9 @@ public class GestioneInput {
 		System.out.println("Seleziona: "
 				+ "\n 0)Per tornare alla home."
 				+ "\n 1)Seleziona un Movimento con un ID specifico. "
-				+ "\n 2)Seleziona un Movimento con una categoria specifica. "
-				+ "\n 3)Seleziona un Piano con un id specifico");
+				+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
+				+ "\n 3)Seleziona un Piano con un id specifico. "
+				+ "\n 4)Seleziona uno o più Piani dello stesso tipo.");
 		int risultato = 0;
 		risultato = i.nextInt();
 		// Il lextLine() dopo il nextInt() serve per risolvere un bug che mi dava, se lo
@@ -113,6 +114,9 @@ public class GestioneInput {
 			continue;
 		case 3:
 			o.getPianoPerId(asset);
+			continue;
+		case 4:
+			o.getPianiPerTipo(asset);
 			continue;
 		}
 	}
@@ -273,13 +277,13 @@ public class GestioneInput {
 		i.nextLine();
 		switch (risultato) {
 		default:
-			System.out.println("Devi selezionare 1 per il piano d'ammortamento o 2 per il piano d'investimento");
+			System.out.println("Devi selezionare 1 per il piano d'ammortamento o 2 per il piano d'investimento.");
 			return apriPiano(messaggio);
 		case 1:
-			System.out.println("Hai aperto un piano d'ammortamento.");
+			System.out.println("Il Piano scelto è di tipo Ammortamento.\n");
 			return Type.Ammortamento;
 		case 2:
-			System.out.println("Hai aperto un piano d'investimento.");
+			System.out.println("Il Piano scelto è di tipo Investimento.\n");
 			return Type.Investimento;
 		}
 	}

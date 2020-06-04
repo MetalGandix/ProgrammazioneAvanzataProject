@@ -1,16 +1,25 @@
 {
   "tipoConto": "CASSA",
-  "saldoDisponibile": 30.0,
+  "saldoDisponibile": 15.0,
   "valuta": "€",
   "movimenti": [
     {
       "categoria": {
-        "tipo": "sport"
+        "tipo": "Sport"
       },
       "importo": 30.0,
       "tipo": "RICAVO",
-      "data": "Jun 4, 2020, 5:42:51 PM",
+      "data": "Jun 4, 2020, 6:58:24 PM",
       "id": 0
+    },
+    {
+      "categoria": {
+        "tipo": "Pallavolo"
+      },
+      "importo": 15.0,
+      "tipo": "SPESA",
+      "data": "Jun 4, 2020, 6:58:34 PM",
+      "id": 1
     }
   ],
   "piani": []
