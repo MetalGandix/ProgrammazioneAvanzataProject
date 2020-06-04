@@ -8,19 +8,17 @@
  
 apply plugin: 'java'
  
-task(runServer, dependsOn: 'classes', type: JavaExec) {
-    main = 'it.unicam.cs.pa.jbudget097670.Server'
-    classpath = sourceSets.main.runtimeClasspath
+task runServer(type: JavaExec) {
+ 	 classpath = sourceSets.main.runtimeClasspath
+     main = 'it.unicam.cs.pa.jbudget097670.Server'
 }
 
-defaultTasks 'runServer'
-
-task(runClient, dependsOn: 'classes', type: JavaExec) {
-    main = 'it.unicam.cs.pa.jbudget097670.Client'
-    classpath = sourceSets.main.runtimeClasspath
+task runClient(type: JavaExec) {
+	classpath = sourceSets.main.runtimeClasspath
+    main = 'it.unicam.cs.pa.jbudget097670.Client' 
 }
  
-defaultTasks 'runClient'
+
 
 repositories {
     // Use jcenter for resolving dependencies.
