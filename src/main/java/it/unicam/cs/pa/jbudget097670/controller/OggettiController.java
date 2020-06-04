@@ -96,8 +96,15 @@ public class OggettiController implements GetOggetti {
 		ArrayList<Movimento> movWithCat = new ArrayList<Movimento>(); 
 		String x = GestioneInput.inputString("Inserisci la categoria del Movimento che vuoi vedere: \n");
 		asset.getMovimenti().forEach(c->{
-			if(x == c.getTipoCategoria()) {
+			if(x.equals(c.getTipoCategoria())) {
 				movWithCat.add(c);
+			}
+		});
+		movWithCat.forEach(t -> {
+			if (movWithCat != null) {
+				System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
+						+ "\nCategoria del Movimento: " + t.getTipoCategoria() + "\nImporto del Movimento: "
+						+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
 			}
 		});
 		return movWithCat;
