@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.text.ParseException;
 
 import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
+import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
 
 /**
@@ -36,11 +37,26 @@ public class Client implements Serializable {
 	 * ObjectOutPutStream è quello che manda al server un dato
 	 */
 	public ObjectOutputStream output;
-
+	public ObjectInputStream input;
+	
+	/**
+	 * @return ritorna legge l'asset dal Server
+	 */
+	public Asset leggiOggetto() {
+			Asset asset = null;
+			try {
+				input = new ObjectInputStream(socket.getInputStream());
+				asset = (Asset) input.readObject();
+			} catch (ClassNotFoundException | IOException e) {
+				System.out.println("Errore");
+			}
+			return asset;
+	}
+	
 	/**
 	 * In questo metodo viene connesso il client al server sulla porta 4999
 	 */
-	public void connetti() {
+	public Socket connetti() {
 		try {
 			System.out.println("CLIENT:");
 			socket = new Socket(InetAddress.getLocalHost(), porta);
@@ -51,6 +67,7 @@ public class Client implements Serializable {
 		} catch (IOException e) {
 			System.err.println("Impossibile stabilire una connessione");
 		}
+		return socket;
 	}
 	
 	/**

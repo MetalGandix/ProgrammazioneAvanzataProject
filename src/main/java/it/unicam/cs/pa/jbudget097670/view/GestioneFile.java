@@ -6,36 +6,42 @@ import java.io.Reader;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
 import it.unicam.cs.pa.jbudget097670.model.Asset;
-
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 /**
- * @author Leonardo Mogianesi
- * In questa classe trasformo l'oggetto che il client manda al server in un JSON
- * Nel file Conti.txt ci stampo solamente il saldo che è disponibile nei conti
+ * @author Leonardo Mogianesi In questa classe trasformo l'oggetto che il client
+ *         manda al server in un JSON Nel file Conti.txt ci stampo solamente il
+ *         saldo che è disponibile nei conti
  */
 public class GestioneFile {
 	public static String fileNameMov = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\Movimenti.json";
 	public static String fileNameConti = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\Conti.txt";
-	
+
 	/**
 	 * @param asset
-	 * @throws JsonIOException
-	 * Questo metodo serve a trasformare l'oggetto asset in un JSON, usando la classe Gson
-	 * GsonBuilder().setPrettyPrinting().create() permette di avere il JSON più leggibile
-	 * il gson.toJson trasforma un oggetto in un JSON
+	 * @throws JsonIOException Questo metodo serve a trasformare l'oggetto asset in
+	 *                         un JSON, usando la classe Gson
+	 *                         GsonBuilder().setPrettyPrinting().create() permette
+	 *                         di avere il JSON più leggibile il gson.toJson
+	 *                         trasforma un oggetto in un JSON
 	 */
-	public static void scritturaFileMovimenti(Asset asset) throws JsonIOException{
+	public static void scritturaFileMovimenti(Asset asset) throws JsonIOException {
 		File file = new File("");
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		FileWriter writer = null;
 		try {
-			writer = new FileWriter(file.getAbsolutePath()+fileNameMov);
+			writer = new FileWriter(file.getAbsolutePath() + fileNameMov);
 			String g = gson.toJson(asset);
 			System.out.println(g);
 			gson.toJson(asset, writer);
@@ -47,24 +53,27 @@ public class GestioneFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	} 
+	}
 
 	/**
-	 * In questo metodo stampo il contenuto del JSON (convertito in una stringa) all'interno di un file txt
+	 * In questo metodo stampo il contenuto del JSON (convertito in una stringa)
+	 * all'interno di un file txt
 	 */
-	public static void letturaFile() {
-	    Gson gson = new Gson();
-	    File file = new File("");
-	    FileWriter writer;
-        try (Reader reader = new FileReader(file.getAbsolutePath()+fileNameMov)){
-            Asset asset = gson.fromJson(reader, Asset.class);
-            System.out.println(asset.getTipoConto());
-			writer = new FileWriter(file.getAbsolutePath()+fileNameConti);
-			writer.write(asset.getTipoConto() + "\n\nSaldo: " + asset.getSaldoDisponibile() + "\nValuta: " + asset.getValuta() + "\n");
-			writer.close();
-		} catch (IOException e) {
+	public static Asset letturaFile() {
+		File file = new File("");
+		String path = file.getAbsolutePath() + fileNameMov;
+        BufferedReader bufferedReader = null;
+		try {
+			bufferedReader = new BufferedReader(new FileReader(path));
+		} catch (FileNotFoundException e) {
+			System.out.println("Il file non esiste");
 			e.printStackTrace();
 		}
-		
+        Gson gson = new Gson();
+        Asset asset = gson.fromJson(bufferedReader, Asset.class);
+		return asset;
 	}
+
+
+
 }

@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.jbudget097670.view;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Scanner;
 
 import it.unicam.cs.pa.jbudget097670.Client;
@@ -29,7 +30,6 @@ public class GestioneInput {
 	 * @throws IOException
 	 */
 	public static void start(String messaggio) throws IOException {
-		// Chiamo lo scanner
 		GestioneInput.getInstance();
 		
 		// Connetto il Client con il server
@@ -38,10 +38,11 @@ public class GestioneInput {
 		
 		// Inizializzo a 0 i 2 conti
 		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€', 0);
-		Asset cassa = new Asset(TipoConto.CASSA, 0, '€', 0);
+		Asset cassa = c.leggiOggetto();
+		
 		TipoConto tipo = null;
 		OggettiController o = new OggettiController();
-		// Finchè è true, continua a chiedere all'utente cosa vuole fare
+
 		while (true) {
 			System.out.print(messaggio);
 			int risultato = 0;

@@ -2,6 +2,7 @@ package it.unicam.cs.pa.jbudget097670;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -31,6 +32,7 @@ public class Server implements Serializable {
 	int porta = 4999;
 
 	ObjectInputStream input;
+	ObjectOutputStream output;
 
 	/**
 	 * @return ritorna il server con l'oggetto ricevuto dal Client
@@ -38,7 +40,6 @@ public class Server implements Serializable {
 	 */
 	public Socket comunicazione() throws ClassNotFoundException {
 		try {
-
 			System.out.println("SERVER:");
 			System.out.println("Inizializzo il server");
 			
@@ -47,25 +48,28 @@ public class Server implements Serializable {
 			 */
 			server = new ServerSocket(porta);
 			System.out.println("Ascolto sulla porta " + porta);
-			
+			Asset asset = null;
 			while (true) {
-				
 				/**
 				 * @server.accept Ascolta le richieste nella porta
 				 */
 				socket = server.accept();
 				System.out.println("Connessione client-server stabilita");
+				if(asset == null) {
+				asset = GestioneFile.letturaFile();
+				output = new ObjectOutputStream(socket.getOutputStream());
+				output.writeObject(asset);
+				}
 			
 				/**
 				 * @input riceve in input l'oggetto dal Client
 				 */
 				input = new ObjectInputStream(socket.getInputStream());
 			
-				
 				/**
 				 * asset con il metodo .readObject() diventa l'oggetto che è stato letto dal server
 				 */
-				Asset asset = (Asset) input.readObject();
+				asset = (Asset) input.readObject();
 				System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
 				GestioneFile.scritturaFileMovimenti(asset);	
 				GestioneFile.letturaFile();
