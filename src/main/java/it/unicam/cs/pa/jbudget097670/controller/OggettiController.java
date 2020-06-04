@@ -132,7 +132,7 @@ public class OggettiController implements GetOggetti {
 	@Override
 	public Collection<Piano> getPianiPerTipo(Asset asset) {
 		ArrayList<Piano> pianoType = new ArrayList<Piano>();
-		Type x = GestioneInput.apriPiano("Per visualizzare la lista dei piani nserisci: "
+		Type x = GestioneInput.apriPiano("Per visualizzare la lista dei piani inserisci: "
 				+ "\n 1)Piani di tipo Ammortamento "
 				+ "\n 2)Piani di tipo Investimento");
 		asset.getPiani().forEach(p -> {
@@ -148,6 +148,19 @@ public class OggettiController implements GetOggetti {
 			}
 		});
 		return pianoType;
+	}
+
+	@Override
+	public Collection<Movimento> deleteMovimentoPerId(Asset asset) {
+		int x = GestioneInput.cercaId("Inserisci l'id del Movimento che vuoi rimuovere: \n");
+		asset.getMovimenti().remove(x);
+		return null;
+	}
+
+	@Override
+	public Collection<Piano> deletePianoPerId(Asset asset) {
+
+		return null;
 	}
 
 }

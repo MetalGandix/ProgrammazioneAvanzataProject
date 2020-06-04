@@ -60,7 +60,7 @@ public class Server implements Serializable {
 				output = new ObjectOutputStream(socket.getOutputStream());
 				output.writeObject(asset);
 				}
-			
+			 
 				/**
 				 * @input riceve in input l'oggetto dal Client
 				 */

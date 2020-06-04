@@ -40,7 +40,7 @@ public class GestioneFile {
 		File file = new File("");
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		FileWriter writer = null;
-		try {
+		try { 
 			writer = new FileWriter(file.getAbsolutePath() + fileNameMov);
 			String g = gson.toJson(asset);
 			System.out.println(g);
@@ -54,7 +54,7 @@ public class GestioneFile {
 			e.printStackTrace();
 		}
 	}
-
+ 
 	/**
 	 * In questo metodo stampo il contenuto del JSON (convertito in una stringa)
 	 * all'interno di un file txt

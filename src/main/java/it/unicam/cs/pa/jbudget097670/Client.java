@@ -89,8 +89,8 @@ public class Client implements Serializable {
 				+ "\n 1)Se vuoi creare un conto e fare dei movimenti."
 				+ "\n 2)Creare un nuovo piano."
 				+ "\n 3)Fermare l'applicazione."
-				+ "\n 4)Guardare i tuoi risultati sul File."
+				+ "\n 4)Per mandare i cambiamenti al server."
 				+ "\n 5)Seleziona un Movimento o un Piano tra quelli creati. "
 				+ "\n");
-	}
+	} 
 }

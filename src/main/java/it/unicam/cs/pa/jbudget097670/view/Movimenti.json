@@ -1,44 +1,7 @@
 {
   "tipoConto": "CASSA",
-  "saldoDisponibile": 306.0,
+  "saldoDisponibile": 0.0,
   "valuta": "€",
-  "movimenti": [
-    {
-      "categoria": {
-        "tipo": "y"
-      },
-      "importo": 500.0,
-      "tipo": "RICAVO",
-      "data": "Jun 4, 2020, 10:34:24 PM",
-      "id": 0
-    },
-    {
-      "categoria": {
-        "tipo": "w"
-      },
-      "importo": 356.0,
-      "tipo": "RICAVO",
-      "data": "Jun 4, 2020, 10:39:12 PM",
-      "id": 1
-    },
-    {
-      "categoria": {
-        "tipo": "ttt"
-      },
-      "importo": 450.0,
-      "tipo": "RICAVO",
-      "data": "Jun 4, 2020, 10:40:36 PM",
-      "id": 2
-    },
-    {
-      "categoria": {
-        "tipo": "CC"
-      },
-      "importo": 1000.0,
-      "tipo": "SPESA",
-      "data": "Jun 4, 2020, 10:40:57 PM",
-      "id": 3
-    }
-  ],
+  "movimenti": [],
   "piani": []
 }

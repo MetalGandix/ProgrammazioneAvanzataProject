@@ -15,7 +15,7 @@ import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
 public class GestioneInput {
 	public static Scanner i = null;
-
+	
 	/**
 	 * Creo un nuovo scanner
 	 */
@@ -35,7 +35,7 @@ public class GestioneInput {
 		// Connetto il Client con il server
 		Client c = new Client();
 		c.connetti();
-		
+
 		// Inizializzo a 0 i 2 conti
 		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€', 0);
 		Asset cassa = c.leggiOggetto();
@@ -83,6 +83,11 @@ public class GestioneInput {
 		}
 	}
 
+	/**
+	 * @param asset
+	 * @throws IOException
+	 * Questo metodo chiama i metodi all'interno del Controller
+	 */
 	public static void selezionaOggetto(Asset asset) throws IOException {
 		OggettiController o = new OggettiController();
 		GestioneInput.getInstance();
@@ -91,15 +96,15 @@ public class GestioneInput {
 					"Seleziona: " + "\n 0)Per tornare alla home." + "\n 1)Seleziona un Movimento con un ID specifico. "
 							+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
 							+ "\n 3)Seleziona un Piano con un id specifico. "
-							+ "\n 4)Seleziona uno o più Piani dello stesso tipo.");
+							+ "\n 4)Seleziona uno o più Piani dello stesso tipo. "
+							+ "\n 5)Cancella un Movimento inserendo il suo ID. "
+							+ "\n");
 			int risultato = 0;
 			risultato = i.nextInt();
-			// Il lextLine() dopo il nextInt() serve per risolvere un bug che mi dava, se lo
-			// togliessi mi salterebbe una riga
 			i.nextLine();
 			switch (risultato) {
 			default:
-				System.out.println("Devi inserire un numero che sia 1, 2, 3 o 4");
+				System.out.println("Devi inserire un numero che sia 1, 2, 3, 4 o 5");
 				continue;
 			case 0:
 				return;
@@ -118,6 +123,9 @@ public class GestioneInput {
 				continue;
 			case 4:
 				o.getPianiPerTipo(asset);
+				continue;
+			case 5:
+				o.deleteMovimentoPerId(asset);
 				continue;
 			}
 		}
@@ -198,8 +206,8 @@ public class GestioneInput {
 	 * @param c,             l'oggetto del client
 	 * @param contoCorrente, oggetto contoCorrente
 	 * @param cassa,         oggetto cassa
-	 * @throws IOException In questo metodo mando l'oggetto contoCorrente o cassa al
-	 *                     server, con writeObject()
+	 * @throws IOException 	 In questo metodo mando l'oggetto contoCorrente o cassa al
+	 *                       server, con writeObject()
 	 */
 	public static void stampaRisultati(TipoConto tipo, Client c, Asset contoCorrente, Asset cassa) throws IOException {
 		// Mando dal Client al Server l'oggetto

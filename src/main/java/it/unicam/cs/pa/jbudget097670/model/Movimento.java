@@ -22,7 +22,7 @@ public class Movimento implements gestisciMovimento,Serializable {
 	 * @param data       La data odierna
 	 * @param id         L'id aumenta di 1 per ogni Movimento
 	 */
-	public Movimento(Categoria c, double importo,Date data, int id) {
+	public Movimento(Categoria c, double importo, Date data, int id) {
 		this.categoria = c;		
 		if (importo < 0)
 			this.importo = importo * -1;

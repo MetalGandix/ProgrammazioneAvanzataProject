@@ -31,4 +31,16 @@ public interface GetOggetti {
 	 * @return ritornerà una lista di Piani dello stesso tipo (Ammortamento o Investimento)
 	 */
 	public Collection<Piano> getPianiPerTipo(Asset asset);	
-}
+	
+	/**
+	 * @param asset
+	 * @return ritornerà la lista dei Movimenti dove è stato rimosso il Movimento con l'ID selezionato
+	 */
+	public Collection<Movimento> deleteMovimentoPerId(Asset asset);
+	
+	/**
+	 * @param asset
+	 * @return ritornerà la lista dei Piani dove è stato rimosso il Piano con l'ID selezionato
+	 */
+	public Collection<Piano> deletePianoPerId(Asset asset);
+	}
