@@ -29,10 +29,8 @@ public class GestioneInput {
 	 * @throws IOException
 	 */
 	public static void start(String messaggio) throws IOException {
-
 		// Chiamo lo scanner
 		GestioneInput.getInstance();
-
 		// Connetto il Client con il server
 		Client c = new Client();
 		c.connetti();
@@ -47,7 +45,6 @@ public class GestioneInput {
 		
 		// Finchè è true, continua a chiedere all'utente cosa vuole fare
 		while (true) {
-			
 			System.out.print(messaggio);
 			int risultato = 0;
 			risultato = i.nextInt();
@@ -65,7 +62,7 @@ public class GestioneInput {
 			 */
 			switch (risultato) {
 			default:
-				System.out.println("Devi scegliere un numero tra 1, 2, 3 o 4");
+				System.out.println("Devi scegliere un numero tra 1, 2, 3, 4 o 5");
 				continue;
 			case 1:
 				tipo = GestioneInput.creaMovimento(contoCorrente, cassa);
@@ -81,13 +78,45 @@ public class GestioneInput {
 				c.connetti();
 				continue;
 			case 5:
-				o.getMovimentoPerId(cassa);
-				continue;
-			case 6:
-				o.getMovimentiperCategoria(cassa);
+				selezionaOggetto(cassa);
 				continue;
 			}
 		}
+	}
+	
+	
+	public static OggettiController selezionaOggetto(Asset asset) throws IOException {
+		OggettiController o = new OggettiController();
+		GestioneInput.getInstance();
+		while(true) {
+		System.out.println("Seleziona: "
+				+ "\n 0)Per tornare alla home."
+				+ "\n 1)Seleziona un Movimento con un ID specifico. "
+				+ "\n 2)Seleziona un Movimento con una categoria specifica. "
+				+ "\n 3)Seleziona un Piano con un id specifico");
+		int risultato = 0;
+		risultato = i.nextInt();
+		// Il lextLine() dopo il nextInt() serve per risolvere un bug che mi dava, se lo
+		// togliessi mi salterebbe una riga
+		i.nextLine();
+		switch (risultato) {
+		default:
+			System.out.println("Devi inserire un numero che sia 1, 2, 3 o 4");
+			continue;
+		case 0:
+			break;
+		case 1:
+			o.getMovimentoPerId(asset);
+			continue;
+		case 2:
+			o.getMovimentiperCategoria(asset);
+			continue;
+		case 3:
+			o.getPianoPerId(asset);
+			continue;
+		}
+	}
+		
 	}
 
 	/**

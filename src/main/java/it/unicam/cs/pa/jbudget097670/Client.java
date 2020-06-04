@@ -73,9 +73,9 @@ public class Client implements Serializable {
 				"Premi: "
 				+ "\n 1)Se vuoi creare un conto e fare dei movimenti."
 				+ "\n 2)Creare un nuovo piano."
-				+ "\n 3)Fermare l'applicazione.\n 4)Guardare i tuoi asset."
-				+ "\n 5)Seleziona un Movimento con un id specifico."
-				+ "\n 6)Seleziona un Movimento con una categoria specifica."
-				+ "\n ");
+				+ "\n 3)Fermare l'applicazione."
+				+ "\n 4)Guardare i tuoi asset."
+				+ "\n 5)Seleziona un Movimento o un Piano tra quelli creati. "
+				+ "\n");
 	}
 }

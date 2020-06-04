@@ -77,9 +77,32 @@ public class OggettiController implements GetOggetti {
 		return movWithId;
 	}
 
+	/**
+	 * In questo metodo ritorna il piano con Id selezionato dall'utente.
+	 * L'utente inserisce un ID associato al piano che vuole vedere stampato.
+	 */
 	@Override
-	public Asset getPianoPerId(Asset asset) {
-		return null;
+	public Collection<Piano> getPianoPerId(Asset asset) {
+		ArrayList<Piano> pianoId = new ArrayList<Piano>();
+		int x = GestioneInput.cercaId("Inserisci l'id del Piano che vuoi visualizzare: \n");
+		asset.getPiani().forEach(p -> {
+			if (x == p.getId()) {
+				pianoId.add(p);
+			}
+		});
+		pianoId.forEach(p -> {
+			if (pianoId != null) {
+				System.out.println(
+						"ID del piano: " + p.getId() + 
+						"\nTipo del piano: " + p.getTipo() + 
+						"\nImporto del piano: "+ p.importoMensile() 
+						+ "\nData iniziale: " + p.getDataIniziale() 
+						+ "\nData finale: " + p.getDataFinale() 
+						+ "\n"
+						);
+			}
+		});
+		return pianoId;
 	}
 
 	@Override
@@ -88,15 +111,15 @@ public class OggettiController implements GetOggetti {
 	}
 
 	/**
-	 * Questo metodo mostra una lista di Movimenti effettuati che hanno tutti la stessa 
-	 * Categoria inserita dall'utente
+	 * Questo metodo mostra una lista di Movimenti effettuati che hanno tutti la
+	 * stessa Categoria inserita dall'utente
 	 */
 	@Override
 	public Collection<Movimento> getMovimentiperCategoria(Asset asset) {
-		ArrayList<Movimento> movWithCat = new ArrayList<Movimento>(); 
+		ArrayList<Movimento> movWithCat = new ArrayList<Movimento>();
 		String x = GestioneInput.inputString("Inserisci la categoria del Movimento che vuoi vedere: \n");
-		asset.getMovimenti().forEach(c->{
-			if(x.equals(c.getTipoCategoria())) {
+		asset.getMovimenti().forEach(c -> {
+			if (x.equals(c.getTipoCategoria())) {
 				movWithCat.add(c);
 			}
 		});
