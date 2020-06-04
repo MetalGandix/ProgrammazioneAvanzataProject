@@ -11,7 +11,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 
-import it.unicam.cs.pa.jbudget097670.controller.InputController;
+import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
+import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
 
 /**
  * @author Leonardo Mogianesi
@@ -64,13 +65,11 @@ public class Client implements Serializable {
 	
 	/**
 	 * @author Leonardo Mogianesi
-	 * 
 	 * Il main esegue il metodo start dell'inputController, che da all'utente la possibilità di scegliere come procedere
-	 * 
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
 		System.out.println("-- Benvenuto su GestioneBadgetPA --\n");
-		InputController.start(
+		GestioneInput.start(
 				"Premi: \n 1)Se vuoi creare un conto e fare dei movimenti.\n 2)Creare un nuovo piano.\n 3)Fermare l'applicazione.\n 4)Guardare i tuoi asset.\n");
 	}
 }

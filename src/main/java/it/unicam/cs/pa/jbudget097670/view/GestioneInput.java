@@ -1,26 +1,16 @@
-package it.unicam.cs.pa.jbudget097670.controller;
+package it.unicam.cs.pa.jbudget097670.view;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import it.unicam.cs.pa.jbudget097670.Client;
+import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
-import it.unicam.cs.pa.jbudget097670.model.Categoria;
-import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano;
-import it.unicam.cs.pa.jbudget097670.model.Piano;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
-/**
- * @author Leonardo Mogianesi Questa classe serve per controllare tutti gli
- *         input che l'utente inserisce all'interno del programma
- */
-public class InputController {
+public class GestioneInput {
 	public static Scanner i = null;
 
 	/**
@@ -39,12 +29,11 @@ public class InputController {
 	public static void start(String messaggio) throws IOException {
 
 		// Chiamo lo scanner
-		InputController.getInstance();
+		GestioneInput.getInstance();
 
 		// Connetto il Client con il server
 		Client c = new Client();
 		c.connetti();
-
 		// Inizializzo a 0 i 2 conti
 		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€', 0);
 		Asset cassa = new Asset(TipoConto.CASSA, 0, '€', 0);
@@ -55,6 +44,7 @@ public class InputController {
 
 		// Finchè è true, continua a chiedere all'utente cosa vuole fare
 		while (true) {
+			
 			System.out.print(messaggio);
 			int risultato = 0;
 			risultato = i.nextInt();
@@ -75,16 +65,17 @@ public class InputController {
 				System.out.println("Devi scegliere un numero tra 1, 2, 3 o 4");
 				continue;
 			case 1:
-				tipo = InputController.creaMovimento(contoCorrente, cassa);
+				tipo = GestioneInput.creaMovimento(contoCorrente, cassa);
 				continue;
 			case 2:
-				InputController.aggiungiPiani(contoCorrente, cassa);
+				GestioneInput.aggiungiPiani(contoCorrente, cassa);
 				continue;
 			case 3:
 				System.out.println("Uscita dall'app in corso...");
 				System.exit(1);
 			case 4:
-				InputController.stampaRisultati(tipo, c, contoCorrente, cassa);
+				GestioneInput.stampaRisultati(tipo, c, contoCorrente, cassa);
+				c.connetti();
 				continue;
 			}
 		}
@@ -96,7 +87,7 @@ public class InputController {
 	 */
 	public static double inputInt(String messaggio) {
 		double risultato = 0;
-		InputController.getInstance();
+		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		while (true) {
 			try {
@@ -118,13 +109,13 @@ public class InputController {
 	 */
 	public static TipoConto creaMovimento(Asset contoCorrente, Asset cassa) {
 		TipoConto tipo = null;
-		tipo = InputController.inputConto("Digita il conto che vuoi utilizzare: 1) Conto Corrente, 2) Cassa\n ");
+		tipo = GestioneInput.inputConto("Digita il conto che vuoi utilizzare: 1) Conto Corrente, 2) Cassa\n ");
 		while (true) {
 			if (tipo == TipoConto.CONTO_CORRENTE)
-				contoCorrente = InputController.aggiornaConto(contoCorrente);
+				contoCorrente = OggettiController.aggiornaConto(contoCorrente);
 			else
-				cassa = InputController.aggiornaConto(cassa);
-			boolean continuaMovimento = InputController
+				cassa = OggettiController.aggiornaConto(cassa);
+			boolean continuaMovimento = GestioneInput
 					.sceltaNuovoM("Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
 			if (!continuaMovimento) {
 				break;
@@ -139,21 +130,21 @@ public class InputController {
 	 *                      piano
 	 */
 	public static void aggiungiPiani(Asset contoCorrente, Asset cassa) {
-		TipoConto tipo = InputController
+		TipoConto tipo = GestioneInput
 				.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
 		while (true) {
-			OperazioniPiano.Type tipoPiano = InputController.apriPiano(
+			OperazioniPiano.Type tipoPiano = GestioneInput.apriPiano(
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
 			switch (tipo) {
-			case CASSA:
-				InputController.aggiornaPiano(cassa, tipoPiano);
-				break;
 			default:
+			case CASSA:
+				OggettiController.aggiornaPiano(cassa, tipoPiano);
+				break;
 			case CONTO_CORRENTE:
-				InputController.aggiornaPiano(contoCorrente, tipoPiano);
+				OggettiController.aggiornaPiano(contoCorrente, tipoPiano);
 				break;
 			}
-			boolean continuaPiano = InputController
+			boolean continuaPiano = GestioneInput
 					.sceltaNuovoM("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
 			if (!continuaPiano) {
 				break;
@@ -192,7 +183,7 @@ public class InputController {
 	 *         ritorna false
 	 */
 	public static boolean sceltaNuovoM(String messaggio) {
-		InputController.getInstance();
+		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		int risultato = 0;
 		risultato = i.nextInt();
@@ -216,7 +207,7 @@ public class InputController {
 	 *         ritorna false
 	 */
 	public static boolean sceltaNuovoP(String messaggio) {
-		InputController.getInstance();
+		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		int sceltaNuovoPiano = 0;
 		sceltaNuovoPiano = i.nextInt();
@@ -239,7 +230,7 @@ public class InputController {
 	 *         questo metodo scelgo quale tipo di piano aprire
 	 */
 	public static OperazioniPiano.Type apriPiano(String messaggio) {
-		InputController.getInstance();
+		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		int risultato = 0;
 		risultato = i.nextInt();
@@ -263,7 +254,7 @@ public class InputController {
 	 *         cassa In questo metodo scelgo dove fare Movimenti
 	 */
 	public static TipoConto inputConto(String messaggio) {
-		InputController.getInstance();
+		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		int risultato = 0;
 		risultato = i.nextInt();
@@ -286,46 +277,10 @@ public class InputController {
 	 *         Movimento
 	 */
 	public static String inputString(String messaggio) {
-		InputController.getInstance();
+		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		String descrizione = null;
 		descrizione = i.nextLine();
 		return descrizione;
-	}
-
-	/**
-	 * @param asset
-	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
-	 *         aggiorno iil conto creando un nuovo Movimento
-	 */
-	public static Asset aggiornaConto(Asset asset) {
-		double importo = InputController.inputInt("Scrivi l'importo da transitare: ");
-		Categoria cat = new Categoria(InputController.inputString("Scrivi categoria: "));
-		Date odierna = DateController.getDate();
-		Movimento mov = new Movimento(cat, importo, odierna, asset.getMovimenti().size());
-		asset.aggiungiMovimento(mov);
-		System.out.println("Importo transitato nel Movimento: " + mov.getImporto());
-		System.out.println("Movimento con categoria: " + mov.getTipoCategoria());
-		System.out.println("Movimento effettuato in data: " + mov.getData());
-		System.out.println("Movimento con ID: " + mov.getId());
-		return asset;
-	}
-
-	/**
-	 * @param asset
-	 * @param tipo
-	 * @return ritorno il piano aggiunto dall'utente In questa classe l'utente
-	 *         creerà un nuovo piano inserendo l'importo, il tasso e le date del
-	 *         piano.
-	 */
-	public static Asset aggiornaPiano(Asset asset, Type tipo) {
-		double importoPiano = InputController.inputInt("Scrivi l'importo da aggiungere al piano: ");
-		double importo = InputController.inputInt("Scrivi il tasso a regime: ");
-		int durataPiano = (int) InputController.inputInt("Scrivi quanti mesi durerà il piano: ");
-		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, DateController.getDate(),
-				DateController.getFinalDate(durataPiano), asset.getPiani().size());
-		asset.aggiungiPiano(piano);
-		System.out.println("Piano di tipo: " + tipo + "\nL'importo mensile del piano è: " + piano.importoMensile());
-		return asset;
 	}
 }

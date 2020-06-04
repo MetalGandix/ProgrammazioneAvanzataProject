@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
 import it.unicam.cs.pa.jbudget097670.model.gestisciMovimento.Type;
+import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
 
-public class Asset implements OperazioniAsset,Budget,Serializable{
+public class Asset implements OperazioniAsset,Serializable{
 	
 	private static final long serialVersionUID = 8186361857135749011L;
 	private TipoConto tipoConto;
@@ -58,10 +60,17 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 
 	/**
 	 * Questo metodo serve a diminuire il saldo dell'asset di una cifra stabilita dall'utente
+	 * se il saldo disponibile è minore o uguale all'importo, il metodo stampa un messaggio e non rimuove denaro dalla cassa
 	 */
 	@Override
 	public void preleva(double importo) {
-		this.setSaldoDisponibile(this.getSaldoDisponibile()-importo); 
+		if(this.saldoDisponibile <= importo) {
+			System.out.println("Nel saldo non ci sono abbastanza soldi, preleva una cifra possibile.\nSaldo disponibile: " + this.saldoDisponibile + "\n");
+			importo = 0;
+			this.deposita(GestioneInput.inputInt("Scrivi un importo da aggiungere: "));
+		}else {
+			this.setSaldoDisponibile(this.getSaldoDisponibile()-importo); 
+		}	
 	}
 
 
@@ -86,36 +95,6 @@ public class Asset implements OperazioniAsset,Budget,Serializable{
 	 */
 	public ArrayList<Movimento> getMovimenti(){
 		return movimenti;
-	}
-	
-
-	
-	/**
-	 * Mostra i movimenti raggruppati per Categoria
-	 */
-	@Override
-	public Collection<Movimento> getMovimentiperCategoria(Categoria c) {
-		ArrayList<Movimento> risultato = new ArrayList<Movimento>();
-		getMovimenti().forEach(mov ->{
-			if(mov.getCategoria() == c){
-				risultato.add(mov);
-			}
-		});
-		return risultato;
-	}
-
-	/**
-	 * Mostra i movimenti in un determinato periodo di tempo     datainizio -------- movimento ----------- datafine
-	 */
-	@Override
-	public Collection<Movimento> getMovimentiPerData(Date dataInizio, Date dataFine) {
-		ArrayList<Movimento> risultato = new ArrayList<Movimento>();
-		getMovimenti().forEach(mov->{
-			if(mov.getData().after(dataInizio) && mov.getData().before(dataFine) ) {
-				risultato.add(mov);
-			}
-		});
-		return risultato;
 	}
 
 	

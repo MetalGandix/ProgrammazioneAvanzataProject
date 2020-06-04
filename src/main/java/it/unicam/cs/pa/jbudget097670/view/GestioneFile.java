@@ -9,8 +9,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
 import it.unicam.cs.pa.jbudget097670.model.Asset;
-import it.unicam.cs.pa.jbudget097670.model.Piano;
-import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
 import java.io.File;
 import java.io.FileReader;
@@ -48,7 +46,7 @@ public class GestioneFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	/**
 	 * In questo metodo stampo il contenuto del JSON (convertito in una stringa) all'interno di un file txt

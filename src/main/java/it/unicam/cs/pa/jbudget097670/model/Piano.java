@@ -19,6 +19,7 @@ public class Piano implements OperazioniPiano, Serializable{
 	private int id;
 	private Date dataFinale;
 	private Date dataIniziale;
+	DateController data = new DateController();
 	
 	/**
 	 * @param tipo
@@ -84,7 +85,7 @@ public class Piano implements OperazioniPiano, Serializable{
 	 */
 	@Override
 	public Date getDataIniziale() {
-		return DateController.getDate();
+		return data.getDate();
 	}
 
 	/**
@@ -92,7 +93,8 @@ public class Piano implements OperazioniPiano, Serializable{
 	 */
 	@Override
 	public Date getDataFinale() {
-		return DateController.getFinalDate(durataMesi);
+		
+		return data.getFinalDate(durataMesi);
 	}
 
 }
