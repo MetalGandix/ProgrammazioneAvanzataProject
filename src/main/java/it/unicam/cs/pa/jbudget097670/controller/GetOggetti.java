@@ -7,7 +7,6 @@ import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.Piano;
 
 public interface GetOggetti {
-	
 	/**
 	 * @param asset
 	 * @return ritornerà un Movimento con quel determinato ID
@@ -17,8 +16,9 @@ public interface GetOggetti {
 	/**
 	 * @param a
 	 * @return ritornerà un piano con l'id scelto dall'utente
+	 * @throws Exception 
 	 */
-	public Collection<Piano> getPianoPerId(Asset asset);
+	public Collection<Piano> getPianoPerId(Asset asset) throws Exception;
 	
 	/**
 	 * @param c
@@ -30,9 +30,5 @@ public interface GetOggetti {
 	 * @param asset
 	 * @return ritornerà una lista di Piani dello stesso tipo (Ammortamento o Investimento)
 	 */
-	public Collection<Piano> getPianiPerTipo(Asset asset);
-
-	
-
-	
+	public Collection<Piano> getPianiPerTipo(Asset asset);	
 }

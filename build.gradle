@@ -14,11 +14,10 @@ task runServer(type: JavaExec) {
 }
 
 task runClient(type: JavaExec) {
+	standardInput = System.in
 	classpath = sourceSets.main.runtimeClasspath
     main = 'it.unicam.cs.pa.jbudget097670.Client' 
 }
- 
-
 
 repositories {
     // Use jcenter for resolving dependencies.

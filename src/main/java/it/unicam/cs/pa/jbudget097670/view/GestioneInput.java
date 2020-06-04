@@ -82,7 +82,7 @@ public class GestioneInput {
 		}
 	}
 
-	public static OggettiController selezionaOggetto(Asset asset) throws IOException {
+	public static void selezionaOggetto(Asset asset) throws IOException {
 		OggettiController o = new OggettiController();
 		GestioneInput.getInstance();
 		while (true) {
@@ -101,7 +101,7 @@ public class GestioneInput {
 				System.out.println("Devi inserire un numero che sia 1, 2, 3 o 4");
 				continue;
 			case 0:
-				break;
+				return;
 			case 1:
 				o.getMovimentoPerId(asset);
 				continue;
@@ -109,7 +109,11 @@ public class GestioneInput {
 				o.getMovimentiperCategoria(asset);
 				continue;
 			case 3:
-				o.getPianoPerId(asset);
+				try {
+					o.getPianoPerId(asset);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 				continue;
 			case 4:
 				o.getPianiPerTipo(asset);

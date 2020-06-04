@@ -81,7 +81,7 @@ public class OggettiController implements GetOggetti {
 	 * inserisce un ID associato al piano che vuole vedere stampato.
 	 */
 	@Override
-	public Collection<Piano> getPianoPerId(Asset asset) {
+	public Collection<Piano> getPianoPerId(Asset asset) throws Exception{
 		ArrayList<Piano> pianoId = new ArrayList<Piano>();
 		int x = GestioneInput.cercaId("Inserisci l'id del Piano che vuoi visualizzare: \n");
 		asset.getPiani().forEach(p -> {
@@ -89,6 +89,9 @@ public class OggettiController implements GetOggetti {
 				pianoId.add(p);
 			}
 		});
+		if(pianoId.size() == 0) {
+			throw new Exception("Non hai ancora creato nessun Piano");
+		}else {
 		pianoId.forEach(p -> {
 			if (pianoId != null) {
 				System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()
@@ -96,6 +99,7 @@ public class OggettiController implements GetOggetti {
 						+ "\nData finale: " + p.getDataFinale() + "\n");
 			}
 		});
+		}
 		return pianoId;
 	}
 
