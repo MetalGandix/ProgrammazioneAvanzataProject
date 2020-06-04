@@ -8,11 +8,11 @@ import it.unicam.cs.pa.jbudget097670.model.Movimento;
 
 public interface OggettoController {
 	
-	Asset getMovimentoPerId();
+	Collection<Movimento> getMovimentoPerId(Asset a, Movimento m);
 	
-	Asset getPianoPerId();
+	Asset getPianoPerId(Asset a);
 	
-	Asset getMovimentoPerGiorno();
+	Asset getMovimentoPerGiorno(Asset a);
 	
 	/**
 	 * @param c

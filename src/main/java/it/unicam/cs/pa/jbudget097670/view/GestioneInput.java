@@ -163,14 +163,12 @@ public class GestioneInput {
 	public static void stampaRisultati(TipoConto tipo, Client c, Asset contoCorrente, Asset cassa) throws IOException {
 		// Mando dal Client al Server l'oggetto
 		if (tipo == TipoConto.CONTO_CORRENTE) {
-			System.out.println("I movimenti del conto corrente sono: ");
-			System.out.println(contoCorrente);
+			System.out.println("Controlla il file per vedere i Movimenti e i Piani. \n");
 			c.output.writeObject(contoCorrente);
 		} else {
-			System.out.println("I movimenti della cassa sono: ");
 			// Quando stampo l'oggetto, stampo in realtà il toString che ho creato nella
 			// classe Asset
-			System.out.println(cassa);
+			System.out.println("Controlla il file per vedere i Movimenti e i Piani. \n");
 			c.output.writeObject(cassa);
 		}
 		c.output.flush();
@@ -281,6 +279,14 @@ public class GestioneInput {
 		System.out.print(messaggio);
 		String descrizione = null;
 		descrizione = i.nextLine();
+		return descrizione;
+	}
+	
+	public static int cercaId(String messaggio) {
+		GestioneInput.getInstance();
+		System.out.print(messaggio);
+		int descrizione = 0;
+		descrizione = i.nextInt();
 		return descrizione;
 	}
 }

@@ -2,7 +2,6 @@ package it.unicam.cs.pa.jbudget097670.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.model.Categoria;
@@ -55,18 +54,29 @@ public class OggettiController implements OggettoController{
 		return asset;
 	}
 
+	/**
+	 * Questo metodo ritorna il movimento con l'id selezionato dall'utente
+	 * Se l'utente inserisce un id non associato ad un movimento, parte un messaggio d'errore
+	 */
 	@Override
-	public Asset getMovimentoPerId() {
+	public Collection<Movimento> getMovimentoPerId(Asset asset, Movimento m) {
+		ArrayList<Movimento> movWithId = new ArrayList<Movimento>();
+		int x = GestioneInput.cercaId("Inserisci l'id del Movimento che vuoi visualizzare");
+		asset.getMovimenti().forEach(t->{
+			if(x == m.getId()) {
+				movWithId.add(m);
+			}
+		});
+		return movWithId;
+	}
+
+	@Override
+	public Asset getPianoPerId(Asset asset) {
 		return null;
 	}
 
 	@Override
-	public Asset getPianoPerId() {
-		return null;
-	}
-
-	@Override
-	public Asset getMovimentoPerGiorno() {
+	public Asset getMovimentoPerGiorno(Asset asset) {
 		return null;
 	}
 	

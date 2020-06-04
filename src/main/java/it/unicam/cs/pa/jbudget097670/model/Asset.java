@@ -2,10 +2,7 @@ package it.unicam.cs.pa.jbudget097670.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 
-import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
 import it.unicam.cs.pa.jbudget097670.model.gestisciMovimento.Type;
 import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
 

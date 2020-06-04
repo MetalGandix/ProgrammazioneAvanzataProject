@@ -2,13 +2,11 @@ package it.unicam.cs.pa.jbudget097670;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 import it.unicam.cs.pa.jbudget097670.model.Asset;
-import it.unicam.cs.pa.jbudget097670.model.Piano;
 import it.unicam.cs.pa.jbudget097670.view.GestioneFile;
 
 /**

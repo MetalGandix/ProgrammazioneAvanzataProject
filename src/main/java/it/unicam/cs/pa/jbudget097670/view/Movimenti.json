@@ -1,54 +1,27 @@
 {
-  "tipoConto": "CASSA",
-  "saldoDisponibile": 500.0,
+  "tipoConto": "CONTO_CORRENTE",
+  "saldoDisponibile": 300.0,
   "valuta": "€",
   "movimenti": [
     {
       "categoria": {
-        "tipo": "s"
-      },
-      "importo": 35.0,
-      "tipo": "RICAVO",
-      "data": "Jun 4, 2020, 3:41:38 PM",
-      "id": 0
-    },
-    {
-      "categoria": {
         "tipo": "sport"
       },
-      "importo": 15.0,
+      "importo": 300.0,
       "tipo": "RICAVO",
-      "data": "Jun 4, 2020, 3:42:10 PM",
-      "id": 1
-    },
-    {
-      "categoria": {
-        "tipo": "Uni"
-      },
-      "importo": 500.0,
-      "tipo": "RICAVO",
-      "data": "Jun 4, 2020, 3:42:37 PM",
-      "id": 2
-    },
-    {
-      "categoria": {
-        "tipo": "Smash"
-      },
-      "importo": 50.0,
-      "tipo": "SPESA",
-      "data": "Jun 4, 2020, 3:43:05 PM",
-      "id": 3
+      "data": "Jun 4, 2020, 4:01:13 PM",
+      "id": 0
     }
   ],
   "piani": [
     {
-      "importoTotale": 35.0,
-      "durataMesi": 4,
-      "tassoARegime": 2.0,
+      "importoTotale": 50.0,
+      "durataMesi": 5,
+      "tassoARegime": 1.0,
       "tipo": "Investimento",
       "id": 0,
-      "dataFinale": "Oct 4, 2020, 3:43:20 PM",
-      "dataIniziale": "Jun 4, 2020, 3:43:20 PM",
+      "dataFinale": "Nov 4, 2020, 4:01:27 PM",
+      "dataIniziale": "Jun 4, 2020, 4:01:27 PM",
       "data": {}
     }
   ]
