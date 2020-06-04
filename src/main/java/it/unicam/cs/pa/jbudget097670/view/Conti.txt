@@ -1,4 +1,4 @@
-CONTO_CORRENTE
+CASSA
 
-Saldo: 300.0
+Saldo: 30.0
 Valuta: €

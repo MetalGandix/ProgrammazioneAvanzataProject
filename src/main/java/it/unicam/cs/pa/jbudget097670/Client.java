@@ -70,6 +70,12 @@ public class Client implements Serializable {
 	public static void main(String[] args) throws IOException, ParseException {
 		System.out.println("-- Benvenuto su GestioneBadgetPA --\n");
 		GestioneInput.start(
-				"Premi: \n 1)Se vuoi creare un conto e fare dei movimenti.\n 2)Creare un nuovo piano.\n 3)Fermare l'applicazione.\n 4)Guardare i tuoi asset.\n");
+				"Premi: "
+				+ "\n 1)Se vuoi creare un conto e fare dei movimenti."
+				+ "\n 2)Creare un nuovo piano."
+				+ "\n 3)Fermare l'applicazione.\n 4)Guardare i tuoi asset."
+				+ "\n 5)Seleziona un Movimento con un id specifico."
+				+ "\n 6)Seleziona un Movimento con una categoria specifica."
+				+ "\n ");
 	}
 }

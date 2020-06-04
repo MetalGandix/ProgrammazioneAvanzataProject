@@ -14,8 +14,7 @@ import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
  * @author Leonardo Mogianesi Questa classe serve per controllare tutti gli
  *         input che l'utente inserisce all'interno del programma
  */
-public class OggettiController implements OggettoController{
-	
+public class OggettiController implements GetOggetti {
 
 	/**
 	 * @param asset
@@ -55,16 +54,24 @@ public class OggettiController implements OggettoController{
 	}
 
 	/**
-	 * Questo metodo ritorna il movimento con l'id selezionato dall'utente
-	 * Se l'utente inserisce un id non associato ad un movimento, parte un messaggio d'errore
+	 * Questo metodo ritorna il movimento con l'id selezionato dall'utente Se
+	 * l'utente inserisce un id non associato ad un movimento, parte un messaggio
+	 * d'errore
 	 */
 	@Override
-	public Collection<Movimento> getMovimentoPerId(Asset asset, Movimento m) {
+	public Collection<Movimento> getMovimentoPerId(Asset asset) {
 		ArrayList<Movimento> movWithId = new ArrayList<Movimento>();
-		int x = GestioneInput.cercaId("Inserisci l'id del Movimento che vuoi visualizzare");
-		asset.getMovimenti().forEach(t->{
-			if(x == m.getId()) {
-				movWithId.add(m);
+		int x = GestioneInput.cercaId("Inserisci l'id del Movimento che vuoi visualizzare: \n");
+		asset.getMovimenti().forEach(t -> {
+			if (x == t.getId()) {
+				movWithId.add(t);
+			}
+		});
+		movWithId.forEach(t -> {
+			if (movWithId != null) {
+				System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
+						+ "\nCategoria del Movimento: " + t.getTipoCategoria() + "\nImporto del Movimento: "
+						+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
 			}
 		});
 		return movWithId;
@@ -79,13 +86,21 @@ public class OggettiController implements OggettoController{
 	public Asset getMovimentoPerGiorno(Asset asset) {
 		return null;
 	}
-	
+
 	/**
-	 * Mostra i movimenti raggruppati per Categoria
+	 * Questo metodo mostra una lista di Movimenti effettuati che hanno tutti la stessa 
+	 * Categoria inserita dall'utente
 	 */
 	@Override
-	public Collection<Movimento> getMovimentiperCategoria(Categoria c) {
-		return null;
+	public Collection<Movimento> getMovimentiperCategoria(Asset asset) {
+		ArrayList<Movimento> movWithCat = new ArrayList<Movimento>(); 
+		String x = GestioneInput.inputString("Inserisci la categoria del Movimento che vuoi vedere: \n");
+		asset.getMovimenti().forEach(c->{
+			if(x == c.getTipoCategoria()) {
+				movWithCat.add(c);
+			}
+		});
+		return movWithCat;
 	}
-	
+
 }

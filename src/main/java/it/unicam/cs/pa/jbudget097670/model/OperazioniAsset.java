@@ -41,4 +41,5 @@ public interface OperazioniAsset {
 	 * @return ritornerò la lista di Piani
 	 */
 	public ArrayList<Piano> getPiani();
+	
 }

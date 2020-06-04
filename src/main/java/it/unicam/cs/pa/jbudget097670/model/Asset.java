@@ -126,17 +126,14 @@ public class Asset implements OperazioniAsset,Serializable{
 		return piani;
 	}
 	
-	
 	/**
-	 * Questo toString() servirebbe se volessi stampare su file gli oggetti piano e movimento, però usando i json non è necessario
+	 * Questo toString() servirebbe se volessi stampare su file gli oggetti piano e movimento
 	 */
-	/* 
-	@Override
+	/*@Override
 	public String toString() {
 		ArrayList<Movimento> listaMov = this.getMovimenti();
-		ArrayList<Piano> listaPiani = this.getPiani();
+		//ArrayList<Piano> listaPiani = this.getPiani();
 		String risultato = "";
-		//Foreach
 		for(Movimento mov: listaMov) {
 			risultato += mov + "\n";
 		}

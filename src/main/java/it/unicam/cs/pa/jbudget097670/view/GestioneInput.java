@@ -6,6 +6,8 @@ import java.util.Scanner;
 import it.unicam.cs.pa.jbudget097670.Client;
 import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
+import it.unicam.cs.pa.jbudget097670.model.Categoria;
+import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
@@ -41,7 +43,8 @@ public class GestioneInput {
 		// TipoConto inizialmente è null, successivamente l'utente deciderà su quale
 		// tipo di conto fare il movimento o il piano
 		TipoConto tipo = null;
-
+		OggettiController o = new OggettiController();
+		
 		// Finchè è true, continua a chiedere all'utente cosa vuole fare
 		while (true) {
 			
@@ -76,6 +79,12 @@ public class GestioneInput {
 			case 4:
 				GestioneInput.stampaRisultati(tipo, c, contoCorrente, cassa);
 				c.connetti();
+				continue;
+			case 5:
+				o.getMovimentoPerId(cassa);
+				continue;
+			case 6:
+				o.getMovimentiperCategoria(cassa);
 				continue;
 			}
 		}
@@ -282,6 +291,12 @@ public class GestioneInput {
 		return descrizione;
 	}
 	
+	
+	/**
+	 * @param messaggio
+	 * @return ritorna un numero inserito dall'utente, che sarà poi usato per trovare un 
+	 * ID in una lista di movimenti
+	 */
 	public static int cercaId(String messaggio) {
 		GestioneInput.getInstance();
 		System.out.print(messaggio);

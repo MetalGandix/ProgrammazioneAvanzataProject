@@ -1,28 +1,17 @@
 {
-  "tipoConto": "CONTO_CORRENTE",
-  "saldoDisponibile": 300.0,
+  "tipoConto": "CASSA",
+  "saldoDisponibile": 30.0,
   "valuta": "€",
   "movimenti": [
     {
       "categoria": {
         "tipo": "sport"
       },
-      "importo": 300.0,
+      "importo": 30.0,
       "tipo": "RICAVO",
-      "data": "Jun 4, 2020, 4:01:13 PM",
+      "data": "Jun 4, 2020, 5:42:51 PM",
       "id": 0
     }
   ],
-  "piani": [
-    {
-      "importoTotale": 50.0,
-      "durataMesi": 5,
-      "tassoARegime": 1.0,
-      "tipo": "Investimento",
-      "id": 0,
-      "dataFinale": "Nov 4, 2020, 4:01:27 PM",
-      "dataIniziale": "Jun 4, 2020, 4:01:27 PM",
-      "data": {}
-    }
-  ]
+  "piani": []
 }
