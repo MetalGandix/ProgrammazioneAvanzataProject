@@ -1,6 +1,6 @@
 {
   "tipoConto": "CONTO_CORRENTE",
-  "saldoDisponibile": 0.0,
+  "saldoDisponibile": 1.0,
   "valuta": "€",
   "movimenti": [],
   "piani": []

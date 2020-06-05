@@ -40,8 +40,9 @@ public class GestioneInput {
 		Client c = new Client();
 		c.connetti();
 
-		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€', 0);
 		Asset cassa = c.leggiOggetto();
+		Asset contoCorrente = c.leggiOggetto();
+		
 
 		TipoConto tipo = null;
 		OggettiController o = new OggettiController();

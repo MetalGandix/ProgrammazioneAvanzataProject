@@ -68,7 +68,7 @@ public class GestioneFile {
 	 * In questo metodo stampo il contenuto del JSON (convertito in una stringa)
 	 * all'interno di un file txt
 	 */
-	public static Asset letturaFile() {
+	public static Asset letturaFileCassa() {
 		File file = new File("");
 		String path;
 			path = file.getAbsolutePath() + fileNameMov;
@@ -85,7 +85,7 @@ public class GestioneFile {
 		return asset;
 	}
 	
-	public static Asset letturaFile2() {
+	public static Asset letturaFileContoCorrente() {
 		File file = new File("");
 		String path;
 			path = file.getAbsolutePath() + fileNameConti;

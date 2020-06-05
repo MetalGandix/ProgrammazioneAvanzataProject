@@ -49,15 +49,14 @@ public class Server implements Serializable {
 				System.out.println("Connessione client-server stabilita");
 				
 				if(asset == null) {
-				asset = GestioneFile.letturaFile();
+				asset = GestioneFile.letturaFileCassa();
 				if(asset.getTipoConto() == TipoConto.CASSA) {
 				output = new ObjectOutputStream(socket.getOutputStream());
 				output.writeObject(asset);
-				output.reset();
-				}else {
-				asset = GestioneFile.letturaFile2();
-				output.writeObject(asset);
 				}
+				output = new ObjectOutputStream(socket.getOutputStream());
+				asset = GestioneFile.letturaFileContoCorrente();
+				output.writeObject(asset);
 				}
 			 
 				input = new ObjectInputStream(socket.getInputStream());
@@ -66,11 +65,11 @@ public class Server implements Serializable {
 				if(asset.getTipoConto() == TipoConto.CASSA) {
 				System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
 				GestioneFile.scritturaFileMovimenti(asset);	
-				GestioneFile.letturaFile();
+				GestioneFile.letturaFileCassa();
 				}else {
 					System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
 					GestioneFile.scritturaFileMovimenti(asset);	
-					GestioneFile.letturaFile();
+					GestioneFile.letturaFileCassa();
 				}
 			}
 		} catch (IOException e) {

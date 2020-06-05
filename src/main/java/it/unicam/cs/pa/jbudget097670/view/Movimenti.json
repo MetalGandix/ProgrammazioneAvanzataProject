@@ -1,15 +1,15 @@
 {
   "tipoConto": "CASSA",
-  "saldoDisponibile": 399.0,
+  "saldoDisponibile": 149.0,
   "valuta": "€",
   "movimenti": [
     {
       "categoria": {
-        "tipo": "c"
+        "tipo": "g"
       },
-      "importo": 399.0,
+      "importo": 99.0,
       "tipo": "RICAVO",
-      "data": "Jun 5, 2020, 7:48:52 PM",
+      "data": "Jun 5, 2020, 8:26:41 PM",
       "id": 0
     }
   ],
