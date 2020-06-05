@@ -48,10 +48,6 @@ public class GestioneInput {
 			int risultato = 0;
 			risultato = i.nextInt();
 			i.nextLine();
-			if (risultato != 1 && tipo == null) {
-				System.out.println("Devi prima creare il conto.");
-				continue;
-			}
 			/**
 			 * Se il @risultato dello switch è un numero diverso da 1,2,3 o 4, stampa il
 			 * messaggio di default Se @risultato è = 1, l'utente potrà creare un Movimento
