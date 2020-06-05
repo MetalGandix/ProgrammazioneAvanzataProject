@@ -27,7 +27,7 @@ import java.io.FileReader;
  *         saldo che è disponibile nei conti
  */
 public class GestioneFile {
-	public static String fileNameMov = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\Movimenti.json";
+	public static String fileNameMov = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\Cassa.json";
 	public static String fileNameConti = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\ContoCorrente.json";
 
 	/**
@@ -65,8 +65,7 @@ public class GestioneFile {
 	}
  
 	/**
-	 * In questo metodo stampo il contenuto del JSON (convertito in una stringa)
-	 * all'interno di un file txt
+	 * @return ritorno il file.json 
 	 */
 	public static Asset letturaFileCassa() {
 		File file = new File("");
@@ -81,10 +80,12 @@ public class GestioneFile {
 		}
         Gson gson = new Gson();
         Asset asset = gson.fromJson(bufferedReader, Asset.class);
-	
 		return asset;
 	}
 	
+	/**
+	 * @return stampo il file 
+	 */
 	public static Asset letturaFileContoCorrente() {
 		File file = new File("");
 		String path;

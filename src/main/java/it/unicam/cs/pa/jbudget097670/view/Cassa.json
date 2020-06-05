@@ -1,5 +1,5 @@
 {
-  "tipoConto": "CONTO_CORRENTE",
+  "tipoConto": "CASSA",
   "saldoDisponibile": 0.0,
   "valuta": "€",
   "movimenti": [],
