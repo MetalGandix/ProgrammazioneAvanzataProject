@@ -56,9 +56,10 @@ public class OggettiController implements GetOggetti {
 	 * Questo metodo ritorna il movimento con l'id selezionato dall'utente Se
 	 * l'utente inserisce un id non associato ad un movimento, parte un messaggio
 	 * d'errore
+	 * @throws Exception 
 	 */
 	@Override
-	public Collection<Movimento> getMovimentoPerId(Asset asset) {
+	public Collection<Movimento> getMovimentoPerId(Asset asset) throws Exception {
 		ArrayList<Movimento> movWithId = new ArrayList<Movimento>();
 		int x = GestioneInput.cercaId("Inserisci l'id del Movimento che vuoi visualizzare: \n");
 		asset.getMovimenti().forEach(t -> {
@@ -66,6 +67,9 @@ public class OggettiController implements GetOggetti {
 				movWithId.add(t);
 			}
 		});
+		if(movWithId.size() == 0) {
+			throw new Exception("Non hai ancora creato nessun Movimento");
+		}else {
 		movWithId.forEach(t -> {
 			if (movWithId != null) {
 				System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
@@ -73,6 +77,7 @@ public class OggettiController implements GetOggetti {
 						+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
 			}
 		});
+		}
 		return movWithId;
 	}
 

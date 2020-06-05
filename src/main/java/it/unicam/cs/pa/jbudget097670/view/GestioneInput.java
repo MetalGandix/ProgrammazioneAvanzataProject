@@ -28,33 +28,27 @@ public class GestioneInput {
 	 * @param messaggio, che scriverò poi nel main, che spiega all'utente cosa fare
 	 *                   per muoversi nel programma
 	 * @throws IOException
+	 * 
+	 * Connetto il Client con il server
+	 * Inizializzo a 0 i 2 conti
+	 * 
 	 */
 	public static void start(String messaggio) throws IOException {
-		GestioneInput.getInstance();
 		
-		// Connetto il Client con il server
+		GestioneInput.getInstance();
 		Client c = new Client();
 		c.connetti();
-
-		// Inizializzo a 0 i 2 conti
+		
 		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€', 0);
 		Asset cassa = c.leggiOggetto();
 		
 		TipoConto tipo = null;
 		OggettiController o = new OggettiController();
-
 		while (true) {
 			System.out.print(messaggio);
 			int risultato = 0;
 			risultato = i.nextInt();
 			i.nextLine();
-			/**
-			 * Se il @risultato dello switch è un numero diverso da 1,2,3 o 4, stampa il
-			 * messaggio di default Se @risultato è = 1, l'utente potrà creare un Movimento
-			 * Se @risultato è = 2, l'utente potrà creare un Piano Se @risultato è = 3,
-			 * l'utente potrà uscire dall'applicacazione Se @risultato è = 4, l'utente potrà
-			 * stampare i conti e i pani
-			 */
 			switch (risultato) {
 			default:
 				System.out.println("Devi scegliere un numero tra 1, 2, 3, 4 o 5");
@@ -105,7 +99,11 @@ public class GestioneInput {
 			case 0:
 				return;
 			case 1:
-				o.getMovimentoPerId(asset);
+				try {
+					o.getMovimentoPerId(asset);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				continue;
 			case 2:
 				o.getMovimentiperCategoria(asset);

@@ -1,7 +1,5 @@
 package it.unicam.cs.pa.jbudget097670;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -11,7 +9,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 
-import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
 
@@ -19,23 +16,16 @@ import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
  * @author Leonardo Mogianesi
  * 
  * Questa classe manda gli oggetti Movimento e Piano al server
- *
+ * Il serializableUID serve per dire al programma per capire quali classi invieranno e riceveranno oggetti
+ * Dichiaro un nuovo socket e la porta dove scambieranno dati client e server
+ * @output ObjectOutPutStream è il tipo che manda al server un dato
  */
 public class Client implements Serializable {
-	/**
-	 * Il serializableUID serve per dire al programma per capire quali classi invieranno e riceveranno oggetti
-	 */
-	private static final long serialVersionUID = -1167949529498883236L;
 	
-	/**
-	 * Dichiaro un nuovo socket e la porta dove scambieranno dati client e server
-	 */
+	private static final long serialVersionUID = -1167949529498883236L;
 	Socket socket = null;
 	int porta = 4999;
 	
-	/**
-	 * ObjectOutPutStream è quello che manda al server un dato
-	 */
 	public ObjectOutputStream output;
 	public ObjectInputStream input;
 	

@@ -10,8 +10,9 @@ public interface GetOggetti {
 	/**
 	 * @param asset
 	 * @return ritornerà un Movimento con quel determinato ID
+	 * @throws Exception 
 	 */
-	public Collection<Movimento> getMovimentoPerId(Asset asset);
+	public Collection<Movimento> getMovimentoPerId(Asset asset) throws Exception;
 	
 	/**
 	 * @param a
