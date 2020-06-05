@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import it.unicam.cs.pa.jbudget097670.model.Asset;
+import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 import it.unicam.cs.pa.jbudget097670.view.GestioneFile;
 
 /**
@@ -44,21 +45,33 @@ public class Server implements Serializable {
 			System.out.println("Ascolto sulla porta " + porta);
 			Asset asset = null;
 			while (true) {
-		
 				socket = server.accept();
 				System.out.println("Connessione client-server stabilita");
+				
 				if(asset == null) {
 				asset = GestioneFile.letturaFile();
+				if(asset.getTipoConto() == TipoConto.CASSA) {
 				output = new ObjectOutputStream(socket.getOutputStream());
 				output.writeObject(asset);
+				output.reset();
+				}else {
+				asset = GestioneFile.letturaFile2();
+				output.writeObject(asset);
+				}
 				}
 			 
 				input = new ObjectInputStream(socket.getInputStream());
 			
 				asset = (Asset) input.readObject();
+				if(asset.getTipoConto() == TipoConto.CASSA) {
 				System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
 				GestioneFile.scritturaFileMovimenti(asset);	
 				GestioneFile.letturaFile();
+				}else {
+					System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
+					GestioneFile.scritturaFileMovimenti(asset);	
+					GestioneFile.letturaFile();
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,4 +1,0 @@
-CASSA
-
-Saldo: 300.0
-Valuta: €

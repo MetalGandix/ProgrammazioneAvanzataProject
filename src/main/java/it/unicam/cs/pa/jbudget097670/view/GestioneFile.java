@@ -14,6 +14,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
 import it.unicam.cs.pa.jbudget097670.model.Asset;
+import it.unicam.cs.pa.jbudget097670.model.TipoConto;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +28,7 @@ import java.io.FileReader;
  */
 public class GestioneFile {
 	public static String fileNameMov = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\Movimenti.json";
-	public static String fileNameConti = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\Conti.txt";
+	public static String fileNameConti = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\ContoCorrente.json";
 
 	/**
 	 * @param asset
@@ -41,10 +43,17 @@ public class GestioneFile {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		FileWriter writer = null;
 		try { 
+			if(asset.getTipoConto() == TipoConto.CASSA) {
 			writer = new FileWriter(file.getAbsolutePath() + fileNameMov);
 			String g = gson.toJson(asset);
 			System.out.println(g);
 			gson.toJson(asset, writer);
+			}else {
+				writer = new FileWriter(file.getAbsolutePath() + fileNameConti);
+				String g = gson.toJson(asset);
+				System.out.println(g);
+				gson.toJson(asset, writer);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -61,7 +70,8 @@ public class GestioneFile {
 	 */
 	public static Asset letturaFile() {
 		File file = new File("");
-		String path = file.getAbsolutePath() + fileNameMov;
+		String path;
+			path = file.getAbsolutePath() + fileNameMov;
         BufferedReader bufferedReader = null;
 		try {
 			bufferedReader = new BufferedReader(new FileReader(path));
@@ -71,6 +81,24 @@ public class GestioneFile {
 		}
         Gson gson = new Gson();
         Asset asset = gson.fromJson(bufferedReader, Asset.class);
+	
+		return asset;
+	}
+	
+	public static Asset letturaFile2() {
+		File file = new File("");
+		String path;
+			path = file.getAbsolutePath() + fileNameConti;
+        BufferedReader bufferedReader = null;
+		try {
+			bufferedReader = new BufferedReader(new FileReader(path));
+		} catch (FileNotFoundException e) {
+			System.out.println("Il file non esiste");
+			e.printStackTrace();
+		}
+        Gson gson = new Gson();
+        Asset asset = gson.fromJson(bufferedReader, Asset.class);
+	
 		return asset;
 	}
 

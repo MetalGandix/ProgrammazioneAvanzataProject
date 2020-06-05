@@ -10,10 +10,11 @@ public interface OperazioniAsset {
 	public void deposita(double importo);
 	
 	/**
+	 * @return 
 	 * @double importo
 	 * Questo metodo permetterà di prelevare denaro all'interno dei conti
 	 */
-	public void preleva(double importo);
+	public double preleva(double importo);
 	
 	/**
 	 * @param m

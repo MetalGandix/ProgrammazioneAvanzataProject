@@ -7,6 +7,7 @@ import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.model.Categoria;
 import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.Piano;
+import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
@@ -21,16 +22,21 @@ public class OggettiController implements GetOggetti {
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
 	 *         aggiorno iil conto creando un nuovo Movimento
 	 */
-	public static Asset aggiornaConto(Asset asset) {
-		double importo = GestioneInput.inputInt("Scrivi l'importo da transitare: ");
-		Categoria cat = new Categoria(GestioneInput.inputString("Scrivi categoria: "));
-		DateController odierna = new DateController();
-		Movimento mov = new Movimento(cat, importo, odierna.getDate(), asset.getMovimenti().size());
-		asset.aggiungiMovimento(mov);
-		System.out.println("Importo transitato nel Movimento: " + mov.getImporto() + "\nMovimento con categoria: "
-				+ mov.getTipoCategoria() + "\nMovimento effettuato in data: " + mov.getData() + "\nMovimento con ID: "
-				+ mov.getId());
-		return asset;
+	public static Asset aggiornaConto(Asset as1, Asset as2) {
+			double importo = GestioneInput.inputInt("Scrivi l'importo da transitare: ");
+			Categoria cat = new Categoria(GestioneInput.inputString("Scrivi categoria: "));
+			DateController odierna = new DateController();
+			Movimento mov = new Movimento(cat, importo, odierna.getDate(), as1.getMovimenti().size());
+			as1.aggiungiMovimento(mov);
+			if(as1.getTipoConto() == TipoConto.CASSA) {
+				System.out.println("Scegli un importo da prelevare dal ContoCorrente: \n");
+				as2.preleva(importo);
+				as1.deposita(importo - importo);
+			}
+			System.out.println("Importo transitato nel Movimento: " + mov.getImporto() + "\nMovimento con categoria: "
+					+ mov.getTipoCategoria() + "\nMovimento effettuato in data: " + mov.getData() + "\nMovimento con ID: "
+					+ mov.getId());
+			return as1;
 	}
 
 	/**
