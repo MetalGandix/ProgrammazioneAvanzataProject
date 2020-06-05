@@ -48,9 +48,8 @@ public class Client implements Serializable {
 	 */
 	public Socket connetti() {
 		try {
-			System.out.println("CLIENT:");
 			socket = new Socket(InetAddress.getLocalHost(), porta);
-			System.out.println("Connesso alla porta: " + porta + "\n");
+			System.out.println("CLIENT: Connesso alla porta: " + porta + "\n");
 			output = new ObjectOutputStream(socket.getOutputStream());
 		} catch (UnknownHostException e) {
 			System.err.println("Impossibile identificare l'host");
@@ -72,8 +71,9 @@ public class Client implements Serializable {
 	 * Il main esegue il metodo start dell'inputController, che da all'utente la possibilità di scegliere come procedere
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
+		GestioneInput in = new GestioneInput();
 		System.out.println("-- Benvenuto su GestioneBadgetPA --\n");
-		GestioneInput.start(
+		in.start(
 				"- HOME -"
 				+ "\nPremi: "
 				+ "\n 1)Se vuoi creare un conto e fare dei movimenti."

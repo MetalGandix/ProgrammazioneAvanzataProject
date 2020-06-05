@@ -2,9 +2,7 @@ package it.unicam.cs.pa.jbudget097670.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import it.unicam.cs.pa.jbudget097670.model.gestisciMovimento.Type;
-import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
 
 public class Asset implements OperazioniAsset, Serializable {
 
@@ -22,7 +20,7 @@ public class Asset implements OperazioniAsset, Serializable {
 	 * @param valuta
 	 * @param id               Creo il costruttore di Asset
 	 */
-	public Asset(TipoConto tipoConto, double saldoDisponibile, char valuta, int id) {
+	public Asset(TipoConto tipoConto, double saldoDisponibile, char valuta) {
 		piani = new ArrayList<Piano>();
 		movimenti = new ArrayList<Movimento>();
 		this.saldoDisponibile = saldoDisponibile;

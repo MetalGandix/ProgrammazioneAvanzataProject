@@ -23,8 +23,9 @@ public class OggettiController implements GetOggetti {
 	 *         aggiorno iil conto creando un nuovo Movimento
 	 */
 	public static Asset aggiornaConto(Asset as1, Asset as2) {
-			double importo = GestioneInput.inputInt("Scrivi l'importo da transitare: ");
-			Categoria cat = new Categoria(GestioneInput.inputString("Scrivi categoria: "));
+			GestioneInput g = new GestioneInput();
+			double importo = g.inputInt("Scrivi l'importo da transitare: ");
+			Categoria cat = new Categoria(g.inputString("Scrivi categoria: "));
 			DateController odierna = new DateController();
 			Movimento mov = new Movimento(cat, importo, odierna.getDate(), as1.getMovimenti().size());
 			as1.aggiungiMovimento(mov);
@@ -47,10 +48,11 @@ public class OggettiController implements GetOggetti {
 	 *         piano.
 	 */
 	public static Asset aggiornaPiano(Asset asset, Type tipo) {
+		GestioneInput g = new GestioneInput();
 		DateController data = new DateController();
-		double importoPiano = GestioneInput.inputInt("Scrivi l'importo da aggiungere al piano: ");
-		double importo = GestioneInput.inputInt("Scrivi il tasso a regime: ");
-		int durataPiano = (int) GestioneInput.inputInt("Scrivi quanti mesi durerà il piano: ");
+		double importoPiano = g.inputInt("Scrivi l'importo da aggiungere al piano: ");
+		double importo = g.inputInt("Scrivi il tasso a regime: ");
+		int durataPiano = (int) g.inputInt("Scrivi quanti mesi durerà il piano: ");
 		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, data.getDate(),
 				data.getFinalDate(durataPiano), asset.getPiani().size());
 		asset.aggiungiPiano(piano);

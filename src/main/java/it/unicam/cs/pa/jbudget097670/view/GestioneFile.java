@@ -2,20 +2,11 @@ package it.unicam.cs.pa.jbudget097670.view;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-
 import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

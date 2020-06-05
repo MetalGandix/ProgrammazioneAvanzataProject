@@ -1,20 +1,21 @@
 package it.unicam.cs.pa.jbudget097670.view;
 
 import java.io.IOException;
-import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import it.unicam.cs.pa.jbudget097670.Client;
 import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
-import it.unicam.cs.pa.jbudget097670.model.Categoria;
-import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
-public class GestioneInput {
+/**
+ * @author Leonardo Mogianesi
+ * In questa classe ci sono tutti i metodi che gestiscono la view
+ *
+ */
+public class GestioneInput implements UserInput{
 	public static Scanner i = null;
 
 	/**
@@ -34,16 +35,13 @@ public class GestioneInput {
 	 *                     conti
 	 * 
 	 */
-	public static void start(String messaggio) throws IOException {
-
+	@Override
+	public void start(String messaggio) throws IOException {
 		GestioneInput.getInstance();
 		Client c = new Client();
 		c.connetti();
-
 		Asset cassa = c.leggiOggetto();
 		Asset contoCorrente = c.leggiOggetto();
-		
-
 		TipoConto tipo = null;
 		OggettiController o = new OggettiController();
 		while (true) {
@@ -56,16 +54,16 @@ public class GestioneInput {
 				System.out.println("Devi scegliere un numero tra 1, 2, 3, 4 o 5");
 				continue;
 			case 1:
-				tipo = GestioneInput.creaMovimento(contoCorrente, cassa);
+				tipo = creaMovimento(contoCorrente, cassa);
 				continue;
 			case 2:
-				GestioneInput.aggiungiPiani(contoCorrente, cassa);
+				aggiungiPiani(contoCorrente, cassa);
 				continue;
 			case 3:
 				System.out.println("Uscita dall'app in corso...");
 				System.exit(1);
 			case 4:
-				GestioneInput.stampaRisultati(tipo, c, contoCorrente, cassa);
+				stampaRisultati(tipo, c, contoCorrente, cassa);
 				c.connetti();
 				continue;
 			case 5:
@@ -79,12 +77,13 @@ public class GestioneInput {
 	 * @param asset
 	 * @throws IOException Questo metodo chiama i metodi all'interno del Controller
 	 */
-	public static void selezionaOggetto(Asset asset) throws IOException {
+	@Override
+	public void selezionaOggetto(Asset asset) throws IOException {
 		OggettiController o = new OggettiController();
 		GestioneInput.getInstance();
 		while (true) {
 			System.out.println(
-					"Seleziona: " + "\n 0)Per tornare alla home." + "\n 1)Seleziona un Movimento con un ID specifico. "
+					"Seleziona cosa cercare nella carta di credito: " + "\n 0)Per tornare alla home." + "\n 1)Seleziona un Movimento con un ID specifico. "
 							+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
 							+ "\n 3)Seleziona un Piano con un id specifico. "
 							+ "\n 4)Seleziona uno o più Piani dello stesso tipo. "
@@ -129,7 +128,8 @@ public class GestioneInput {
 	 * @param messaggio, che dirà all'utente di inserire un double
 	 * @return
 	 */
-	public static double inputInt(String messaggio) {
+	@Override
+	public double inputInt(String messaggio) {
 		double risultato = 0;
 		GestioneInput.getInstance();
 		System.out.print(messaggio);
@@ -151,16 +151,16 @@ public class GestioneInput {
 	 * @return ritorna il tipo di conto che l'utente ha selezionato, 1
 	 *         contoCorrente, 2 cassa
 	 */
-	public static TipoConto creaMovimento(Asset contoCorrente, Asset cassa) {
+	@Override
+	public TipoConto creaMovimento(Asset contoCorrente, Asset cassa) {
 		TipoConto tipo = null;
-		tipo = GestioneInput.inputConto("Digita il conto che vuoi utilizzare: 1) Conto Corrente, 2) Cassa\n ");
+		tipo = inputConto("Digita il conto che vuoi utilizzare: 1) Conto Corrente, 2) Carta di credito\n ");
 		while (true) {
 			if (tipo == TipoConto.CONTO_CORRENTE)
 				contoCorrente = OggettiController.aggiornaConto(contoCorrente, cassa);
 			else
 				cassa = OggettiController.aggiornaConto(cassa, contoCorrente);
-			boolean continuaMovimento = GestioneInput
-					.sceltaNuovoM("Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
+			boolean continuaMovimento = sceltaNuovoCiclo("Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
 			if (!continuaMovimento) {
 				break;
 			}
@@ -173,22 +173,13 @@ public class GestioneInput {
 	 * @param cassa         A seconda del conto scelto dall'utente, aggiorna il
 	 *                      piano
 	 */
-	public static void aggiungiPiani(Asset contoCorrente, Asset cassa) {
-		TipoConto tipo = GestioneInput.inputConto("Digita il conto che vuoi utilizzare: 1) ContoCorrente, 2) Cassa\n ");
+	@Override
+	public void aggiungiPiani(Asset contoCorrente, Asset cassa) {
 		while (true) {
-			OperazioniPiano.Type tipoPiano = GestioneInput.apriPiano(
+			OperazioniPiano.Type tipoPiano = apriPiano(
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
-			switch (tipo) {
-			default:
-			case CASSA:
-				OggettiController.aggiornaPiano(cassa, tipoPiano);
-				break;
-			case CONTO_CORRENTE:
-				OggettiController.aggiornaPiano(contoCorrente, tipoPiano);
-				break;
-			}
-			boolean continuaPiano = GestioneInput
-					.sceltaNuovoM("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
+			OggettiController.aggiornaPiano(cassa, tipoPiano);
+			boolean continuaPiano = sceltaNuovoCiclo("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
 			if (!continuaPiano) {
 				break;
 			}
@@ -203,14 +194,12 @@ public class GestioneInput {
 	 * @throws IOException In questo metodo mando l'oggetto contoCorrente o cassa al
 	 *                     server, con writeObject()
 	 */
-	public static void stampaRisultati(TipoConto tipo, Client c, Asset contoCorrente, Asset cassa) throws IOException {
-		// Mando dal Client al Server l'oggetto
-		
+	@Override
+	public void stampaRisultati(TipoConto tipo, Client c, Asset contoCorrente, Asset cassa) throws IOException {
 		System.out.println("Controlla il file per vedere i Movimenti e i Piani. \n");
 		c.output.writeObject(contoCorrente);
 		c.output.flush();
 		c.output.close();
-		System.out.println("Controlla il file per vedere i Movimenti e i Piani. \n");
 		c.connetti();
 		c.output.writeObject(cassa);
 		c.output.flush();
@@ -222,18 +211,17 @@ public class GestioneInput {
 	 * @return ritorna true se l'utente vuole creare un altro movimento, altrimenti
 	 *         ritorna false
 	 */
-	public static boolean sceltaNuovoM(String messaggio) {
+	@Override
+	public boolean sceltaNuovoCiclo(String messaggio) {
 		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		int risultato = 0;
 		risultato = i.nextInt();
-		// Il lextLine() dopo il nextInt() serve per risolvere un bug che mi dava, se lo
-		// togliessi mi salterebbe una riga
 		i.nextLine();
 		switch (risultato) {
 		default:
 			System.out.println("Devi inserire un numero che sia 1 o 2");
-			return sceltaNuovoM(messaggio);
+			return sceltaNuovoCiclo(messaggio);
 		case 1:
 			return true;
 		case 2:
@@ -241,27 +229,6 @@ public class GestioneInput {
 		}
 	}
 
-	/**
-	 * @param messaggio
-	 * @return ritorna true se l'utente vuole creare un altro piano, altrimenti
-	 *         ritorna false
-	 */
-	public static boolean sceltaNuovoP(String messaggio) {
-		GestioneInput.getInstance();
-		System.out.print(messaggio);
-		int sceltaNuovoPiano = 0;
-		sceltaNuovoPiano = i.nextInt();
-		i.nextLine();
-		switch (sceltaNuovoPiano) {
-		default:
-			System.out.println("Devi inserire un numero che sia 1 o 2");
-			return sceltaNuovoP(messaggio);
-		case 1:
-			return true;
-		case 2:
-			return false;
-		}
-	}
 
 	/**
 	 * @param messaggio
@@ -293,7 +260,8 @@ public class GestioneInput {
 	 * @return ritorna il conto corrente se risultato è = 1, altrimenti ritorna la
 	 *         cassa In questo metodo scelgo dove fare Movimenti
 	 */
-	public static TipoConto inputConto(String messaggio) {
+	@Override
+	public TipoConto inputConto(String messaggio) {
 		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		int risultato = 0;
@@ -303,10 +271,10 @@ public class GestioneInput {
 			System.out.println("Devi selezionare 1 o 2");
 			return inputConto(messaggio);
 		case 1:
-			System.out.println("Hai scelto il conto corrente.\n ");
+			System.out.println("Hai scelto il conto corrente!\n ");
 			return TipoConto.CONTO_CORRENTE;
 		case 2:
-			System.out.println("Hai scelto la cassa.\n");
+			System.out.println("Hai scelto la carta di credito!\n");
 			return TipoConto.CASSA;
 		}
 	}

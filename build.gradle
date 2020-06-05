@@ -11,12 +11,14 @@ apply plugin: 'java'
 task runServer(type: JavaExec) {
  	 classpath = sourceSets.main.runtimeClasspath
      main = 'it.unicam.cs.pa.jbudget097670.Server'
+     //gradlew runServer --console plain
 }
 
 task runClient(type: JavaExec) {
 	standardInput = System.in
 	classpath = sourceSets.main.runtimeClasspath
     main = 'it.unicam.cs.pa.jbudget097670.Client' 
+    //gradlew runClient --console plain
 }
 
 repositories {
