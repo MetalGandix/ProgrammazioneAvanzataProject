@@ -36,7 +36,7 @@ public class GestioneInput implements UserInput{
 	 * 
 	 */
 	@Override
-	public void start(String messaggio) throws IOException {
+	public void start(String messaggio) throws IOException,NumberFormatException{
 		GestioneInput.getInstance();
 		Client c = new Client();
 		c.connetti();
@@ -57,7 +57,7 @@ public class GestioneInput implements UserInput{
 				tipo = creaMovimento(contoCorrente, cassa);
 				continue;
 			case 2:
-				aggiungiPiani(contoCorrente, cassa);
+				aggiungiPiani(contoCorrente);
 				continue;
 			case 3:
 				System.out.println("Uscita dall'app in corso...");
@@ -178,11 +178,11 @@ public class GestioneInput implements UserInput{
 	 *                      piano
 	 */
 	@Override
-	public void aggiungiPiani(Asset contoCorrente, Asset cassa) {
+	public void aggiungiPiani(Asset contoCorrente) {
 		while (true) {
 			OperazioniPiano.Type tipoPiano = apriPiano(
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
-			OggettiController.aggiornaPiano(cassa, tipoPiano);
+			OggettiController.aggiornaPiano(contoCorrente, tipoPiano);
 			boolean continuaPiano = sceltaNuovoCiclo("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
 			if (!continuaPiano) {
 				break;

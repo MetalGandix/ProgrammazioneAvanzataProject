@@ -17,7 +17,7 @@ import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
  *         input che l'utente inserisce all'interno del programma
  */
 public class OggettiController implements GetOggetti {
-
+	
 	/**
 	 * @param asset
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
@@ -37,12 +37,16 @@ public class OggettiController implements GetOggetti {
 				if (mov != null) {
 					System.out.println("Prelevato: " + importo);
 					destinazione.deposita(importo, cat);
-					System.out.println("Saldo conto corrente: " + sorgente.getSaldoDisponibile()
-							+ "\nSaldo carta di credito: " + destinazione.getSaldoDisponibile());
+					System.out.println("Saldo conto corrente: " + sorgente.getSaldoDisponibile() + "\nSaldo carta di credito: " + destinazione.getSaldoDisponibile());
 				} 
 			}
 		} else {
+			if(importo < 0){
+				mov = null;
+				System.out.println("Non è possibile fare spese con il conto corrente.");
+			}else {
 			mov = destinazione.deposita(importo, cat);
+			}
 		}
 		if (mov != null) {
 			System.out.println("Importo transitato nel Movimento: " + mov.getImporto() + "\nMovimento con categoria: "

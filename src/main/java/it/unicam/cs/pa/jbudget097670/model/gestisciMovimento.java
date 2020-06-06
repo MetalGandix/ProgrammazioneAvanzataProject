@@ -38,6 +38,5 @@ public interface gestisciMovimento {
 	/**
 	 * @return ritornerà l'ID del Movimento
 	 */
-	public int getId();
-	
+	public int getId();	
 }

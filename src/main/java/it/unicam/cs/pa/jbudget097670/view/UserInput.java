@@ -20,7 +20,7 @@ public interface UserInput {
 	 * @throws IOException
 	 * Questo medoto sarà la prima vista che apparirà all'utente
 	 */
-	public void start(String messaggio) throws IOException; 
+	public void start(String messaggio) throws IOException,NumberFormatException; 
 	
 	/**
 	 * @param asset
@@ -49,7 +49,7 @@ public interface UserInput {
 	 * Questo metodo permetterà di aggiungere un nuovo Piano
 	 * ad una lista su uno specifico Asset
 	 */
-	public void aggiungiPiani(Asset asset1, Asset asset2);
+	void aggiungiPiani(Asset asset);
 	
 	/**
 	 * @param tipo
@@ -72,4 +72,6 @@ public interface UserInput {
 	 * @return ritorna il tipo di conto che ha scelto l'utente
 	 */
 	public TipoConto inputConto(String messaggio);
+
+	
 ;}

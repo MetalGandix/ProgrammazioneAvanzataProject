@@ -2,6 +2,10 @@ package it.unicam.cs.pa.jbudget097670.model;
 
 import java.util.ArrayList;
 
+/**
+ * @author Leonardo Mogianesi
+ *
+ */
 public interface OperazioniAsset {
 
 	/**

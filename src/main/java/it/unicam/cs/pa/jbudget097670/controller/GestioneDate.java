@@ -7,7 +7,6 @@ import java.util.Date;
  *
  */
 public interface GestioneDate {
-	
 	/**
 	 * @return ritorerà la data odierna
 	 */
@@ -18,5 +17,4 @@ public interface GestioneDate {
 	 * @return ritornerà la data futura in base al numero di mesi aggiunti dall'utente
 	 */
 	Date getFinalDate(int mesi);
-	
 }
