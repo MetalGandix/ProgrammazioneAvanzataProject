@@ -34,22 +34,14 @@ public class Movimento implements gestisciMovimento,Serializable {
 			this.tipo=Type.SPESA;
 		this.data=data;
 		this.id = id;
-	} 
-	
-	/**
-	 *@return ritorna la categoria del Movimento
-	 */
-	@Override
-	public Categoria getCategoria() {
-		return categoria;
-	}
+	}  
 	
 	/**
 	 *@return ritorna la categoria del Movimento
 	 */
 	public String getTipoCategoria() {
 		return categoria.getTipo();
-	}
+	} 
 	
 	/**
 	 *@return ritorna l'importo del Movimento
@@ -83,8 +75,7 @@ public class Movimento implements gestisciMovimento,Serializable {
 	}
 	
 	/**
-	 * Richiamando un Movimento, richiamo in automatico il toString(), per la stampa su file
-	 * Non è necessario per la stampa visto che i Json stampano direttamente l'oggetto senza bisogno di printare il contenuto
+	 * Se nel System.out.println() ci inserisco un oggetto di tipo Movimento, la stampa che ottengo è questa.
 	 */
 	@Override
 	public String toString() {

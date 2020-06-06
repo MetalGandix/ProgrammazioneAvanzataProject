@@ -40,7 +40,7 @@ public class OggettiController implements GetOggetti {
 					destinazione.deposita(importo, cat);
 					System.out.println("Saldo conto corrente: " + sorgente.getSaldoDisponibile() + "\nSaldo carta di credito: " + destinazione.getSaldoDisponibile());
 				} 
-			}
+			} 
 		} else {
 			if(importo < 0){
 				mov = null;

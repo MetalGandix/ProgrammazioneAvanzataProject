@@ -14,11 +14,10 @@ public interface gestisciMovimento {
 	 */
 	public enum Type{ SPESA , RICAVO };
 	
-	
 	/**
 	 * @return ritornerà la categoria del Movimento
 	 */
-	public Categoria getCategoria();
+	public String getTipoCategoria();
 	
 	/**
 	 * @return ritornerà l'importo del Movimento
