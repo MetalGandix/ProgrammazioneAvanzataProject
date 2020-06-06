@@ -300,7 +300,8 @@ public class GestioneInput implements UserInput{
 	 * @return ritorna una stringa dell'utente che sarà il nome della categoria del
 	 *         Movimento
 	 */
-	public static String inputString(String messaggio) {
+	@Override
+	public String inputString(String messaggio) {
 		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		String descrizione = null;

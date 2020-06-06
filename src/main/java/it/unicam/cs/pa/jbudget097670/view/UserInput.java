@@ -78,6 +78,12 @@ public interface UserInput {
 	 * @return ritornerà un intero che servirà per prendere l'index di un array
 	 */
 	public int cercaId(String messaggio);
+	
+	/**
+	 * @param messaggio
+	 * @return ritornerà una stringa che sarà usata per la categoria dei movimenti o dei piani
+	 */
+	public String inputString(String messaggio);
 
 	
 ;}

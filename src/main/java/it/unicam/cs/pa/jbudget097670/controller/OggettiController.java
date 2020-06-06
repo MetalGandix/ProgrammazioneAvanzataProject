@@ -144,7 +144,7 @@ public class OggettiController implements GetOggetti {
 	@Override
 	public Collection<Movimento> getMovimentiperCategoria(Asset asset) throws Exception {
 		ArrayList<Movimento> movWithCat = new ArrayList<Movimento>();
-		String x = GestioneInput.inputString("Inserisci la categoria del Movimento che vuoi vedere: \n");
+		String x = g.inputString("Inserisci la categoria del Movimento che vuoi vedere: \n");
 		asset.getMovimenti().forEach(c -> {
 			if (x.equals(c.getTipoCategoria())) {
 				movWithCat.add(c);
@@ -191,7 +191,7 @@ public class OggettiController implements GetOggetti {
 	@Override
 	public void deleteMovimentoPerId(Asset asset) throws Exception {
 		int movIndexToRemove = -1;
-		int x = g.cercaId("Inserisci l'id del Movimento che vuoi visualizzare: \n");
+		int x = g.cercaId("Inserisci l'id del Movimento che vuoi eliminare: \n");
 		for (int i = 0; i < asset.getMovimenti().size(); i++) {
 			Movimento t = asset.getMovimenti().get(i);
 			if (t.getId() == x) {
@@ -209,7 +209,7 @@ public class OggettiController implements GetOggetti {
 	@Override
 	public void deletePianoPerId(Asset asset) throws Exception {
 		int pIndexToRemove = -1;
-		int x = g.cercaId("Inserisci l'id del Piano che vuoi visualizzare: \n");
+		int x = g.cercaId("Inserisci l'id del Piano che vuoi eliminare: \n");
 		for (int i = 0; i < asset.getMovimenti().size(); i++) {
 			Piano p = asset.getPiani().get(i);
 			if (p.getId() == x) {
