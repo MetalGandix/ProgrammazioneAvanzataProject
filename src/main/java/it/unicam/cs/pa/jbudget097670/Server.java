@@ -50,6 +50,9 @@ public class Server implements Serializable {
 				
 				if(asset == null) {
 				asset = GestioneFile.letturaFileCassa();
+				/*if(asset == null) {
+					asset = new Asset(TipoConto.CONTO_CORRENTE, 0, '€');
+				}*/
 				if(asset.getTipoConto() == TipoConto.CASSA) {
 				output = new ObjectOutputStream(socket.getOutputStream());
 				output.writeObject(asset);

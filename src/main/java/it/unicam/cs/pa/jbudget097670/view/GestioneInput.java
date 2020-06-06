@@ -118,7 +118,11 @@ public class GestioneInput implements UserInput{
 				o.getPianiPerTipo(asset);
 				continue;
 			case 5:
-				o.deleteMovimentoPerId(asset);
+				try {
+					o.deleteMovimentoPerId(asset);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				continue;
 			}
 		}

@@ -8,6 +8,7 @@ import it.unicam.cs.pa.jbudget097670.model.Categoria;
 import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.Piano;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
+import it.unicam.cs.pa.jbudget097670.model.gestisciMovimento;
 import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
@@ -22,22 +23,35 @@ public class OggettiController implements GetOggetti {
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
 	 *         aggiorno iil conto creando un nuovo Movimento
 	 */
-	public static Asset aggiornaConto(Asset as1, Asset as2) {
-			GestioneInput g = new GestioneInput();
-			double importo = g.inputInt("Scrivi l'importo da transitare: ");
-			Categoria cat = new Categoria(g.inputString("Scrivi categoria: "));
-			DateController odierna = new DateController();
-			Movimento mov = new Movimento(cat, importo, odierna.getDate(), as1.getMovimenti().size());
-			as1.aggiungiMovimento(mov);
-			if(as1.getTipoConto() == TipoConto.CASSA) {
+	public static Asset aggiornaConto(Asset destinazione, Asset sorgente) {
+		GestioneInput g = new GestioneInput();
+		Movimento mov = null;
+		double importo = g.inputInt("Scrivi l'importo da transitare: ");
+		Categoria cat = new Categoria(g.inputString("Scrivi categoria: "));
+		if (destinazione.getTipoConto() == TipoConto.CASSA) {
+			if (importo < 0) {
+				mov = destinazione.preleva(-importo, cat);
+			} else {
 				System.out.println("Scegli un importo da prelevare dal ContoCorrente: \n");
-				as2.preleva(importo);
-				as1.deposita(importo - importo);
+				mov = sorgente.preleva(importo, cat);
+				if (mov != null) {
+					System.out.println("Prelevato: " + importo);
+					destinazione.deposita(importo, cat);
+					System.out.println("Saldo conto corrente: " + sorgente.getSaldoDisponibile()
+							+ "\nSaldo carta di credito: " + destinazione.getSaldoDisponibile());
+				} 
 			}
+		} else {
+			mov = destinazione.deposita(importo, cat);
+		}
+		if (mov != null) {
 			System.out.println("Importo transitato nel Movimento: " + mov.getImporto() + "\nMovimento con categoria: "
-					+ mov.getTipoCategoria() + "\nMovimento effettuato in data: " + mov.getData() + "\nMovimento con ID: "
-					+ mov.getId());
-			return as1;
+					+ mov.getTipoCategoria() + "\nMovimento effettuato in data: " + mov.getData()
+					+ "\nMovimento con ID: " + mov.getId());
+		}else {
+			System.out.println("Non è stato possibile prelevare dal conto.");
+		}
+		return destinazione;
 	}
 
 	/**
@@ -64,7 +78,8 @@ public class OggettiController implements GetOggetti {
 	 * Questo metodo ritorna il movimento con l'id selezionato dall'utente Se
 	 * l'utente inserisce un id non associato ad un movimento, parte un messaggio
 	 * d'errore
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@Override
 	public Collection<Movimento> getMovimentoPerId(Asset asset) throws Exception {
@@ -75,16 +90,16 @@ public class OggettiController implements GetOggetti {
 				movWithId.add(t);
 			}
 		});
-		if(movWithId.size() == 0) {
+		if (movWithId.size() == 0) {
 			throw new Exception("Non hai ancora creato nessun Movimento");
-		}else {
-		movWithId.forEach(t -> {
-			if (movWithId != null) {
-				System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
-						+ "\nCategoria del Movimento: " + t.getTipoCategoria() + "\nImporto del Movimento: "
-						+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
-			}
-		});
+		} else {
+			movWithId.forEach(t -> {
+				if (movWithId != null) {
+					System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
+							+ "\nCategoria del Movimento: " + t.getTipoCategoria() + "\nImporto del Movimento: "
+							+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
+				}
+			});
 		}
 		return movWithId;
 	}
@@ -94,7 +109,7 @@ public class OggettiController implements GetOggetti {
 	 * inserisce un ID associato al piano che vuole vedere stampato.
 	 */
 	@Override
-	public Collection<Piano> getPianoPerId(Asset asset) throws Exception{
+	public Collection<Piano> getPianoPerId(Asset asset) throws Exception {
 		ArrayList<Piano> pianoId = new ArrayList<Piano>();
 		int x = GestioneInput.cercaId("Inserisci l'id del Piano che vuoi visualizzare: \n");
 		asset.getPiani().forEach(p -> {
@@ -102,16 +117,16 @@ public class OggettiController implements GetOggetti {
 				pianoId.add(p);
 			}
 		});
-		if(pianoId.size() == 0) {
+		if (pianoId.size() == 0) {
 			throw new Exception("Non hai ancora creato nessun Piano");
-		}else {
-		pianoId.forEach(p -> {
-			if (pianoId != null) {
-				System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()
-						+ "\nImporto del piano: " + p.importoMensile() + "\nData iniziale: " + p.getDataIniziale()
-						+ "\nData finale: " + p.getDataFinale() + "\n");
-			}
-		});
+		} else {
+			pianoId.forEach(p -> {
+				if (pianoId != null) {
+					System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()
+							+ "\nImporto del piano: " + p.importoMensile() + "\nData iniziale: " + p.getDataIniziale()
+							+ "\nData finale: " + p.getDataFinale() + "\n");
+				}
+			});
 		}
 		return pianoId;
 	}
@@ -140,14 +155,14 @@ public class OggettiController implements GetOggetti {
 	}
 
 	/**
-	 * Questo metodo Ritorna la lista dei Piani con lo stesso tipo inserito dall'utente
+	 * Questo metodo Ritorna la lista dei Piani con lo stesso tipo inserito
+	 * dall'utente
 	 */
 	@Override
 	public Collection<Piano> getPianiPerTipo(Asset asset) {
 		ArrayList<Piano> pianoType = new ArrayList<Piano>();
 		Type x = GestioneInput.apriPiano("Per visualizzare la lista dei piani inserisci: "
-				+ "\n 1)Piani di tipo Ammortamento "
-				+ "\n 2)Piani di tipo Investimento");
+				+ "\n 1)Piani di tipo Ammortamento " + "\n 2)Piani di tipo Investimento");
 		asset.getPiani().forEach(p -> {
 			if (x == p.getTipo()) {
 				pianoType.add(p);
@@ -164,15 +179,25 @@ public class OggettiController implements GetOggetti {
 	}
 
 	@Override
-	public Collection<Movimento> deleteMovimentoPerId(Asset asset) {
-		int x = GestioneInput.cercaId("Inserisci l'id del Movimento che vuoi rimuovere: \n");
-		asset.getMovimenti().remove(x);
-		return null;
+	public void deleteMovimentoPerId(Asset asset) throws Exception {
+		int movIndexToRemove = -1;
+		int x = GestioneInput.cercaId("Inserisci l'id del Movimento che vuoi visualizzare: \n");
+		for (int i = 0; i < asset.getMovimenti().size(); i++) {
+			Movimento t = asset.getMovimenti().get(i);
+			if (t.getId() == x) {
+				movIndexToRemove = i;
+			}
+		}
+		if (movIndexToRemove < 0) {
+			throw new Exception("Non hai un movimento con questo id.");
+		} else {
+			asset.getMovimenti().remove(movIndexToRemove);
+			System.out.println("L'id rimosso è: " + x);
+		}
 	}
 
 	@Override
 	public Collection<Piano> deletePianoPerId(Asset asset) {
-
 		return null;
 	}
 

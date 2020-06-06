@@ -11,7 +11,7 @@ import org.junit.Test;
 public class AggiungiMovimento {
 
 	@Test
-	public void test() {
+	public void testContoCorrente() {
 		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€');
 		Movimento mov = new Movimento(null, 0, null, 0);
 		contoCorrente.aggiungiMovimento(mov);
@@ -20,4 +20,17 @@ public class AggiungiMovimento {
 			assertEquals(iter.next(), mov);
 		}
 	} 
+	
+	@Test
+	public void testCassa() {
+		Asset contoCorrente = new Asset(TipoConto.CASSA, 0, '€');
+		Movimento mov = new Movimento(null, 0, null, 0);
+		contoCorrente.aggiungiMovimento(mov);
+		Iterator<Movimento> iter = contoCorrente.getMovimenti().iterator();
+		while(iter.hasNext()) {
+			assertEquals(iter.next(), mov);
+		}
+	} 
+	
+	
 }

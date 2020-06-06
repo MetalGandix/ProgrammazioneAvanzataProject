@@ -2,6 +2,8 @@ package it.unicam.cs.pa.jbudget097670.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import it.unicam.cs.pa.jbudget097670.controller.DateController;
 import it.unicam.cs.pa.jbudget097670.model.gestisciMovimento.Type;
 
 public class Asset implements OperazioniAsset, Serializable {
@@ -47,8 +49,12 @@ public class Asset implements OperazioniAsset, Serializable {
 	 * dall'utente
 	 */
 	@Override
-	public void deposita(double importo) {
+	public Movimento deposita(double importo, Categoria cat) {
+		DateController odierna = new DateController();
+		Movimento mov = new Movimento(cat, importo, odierna.getDate(), this.getMovimenti().size());
+		this.aggiungiMovimento(mov);
 		this.setSaldoDisponibile(this.getSaldoDisponibile() + importo);
+		return mov;
 	}
 
 	/**
@@ -57,9 +63,16 @@ public class Asset implements OperazioniAsset, Serializable {
 	 * stampa un messaggio e non rimuove denaro dalla cassa
 	 */
 	@Override
-	public double preleva(double importo) {
-		this.setSaldoDisponibile(this.getSaldoDisponibile() - importo);
-		return importo;
+	public Movimento preleva(double importo, Categoria cat) {
+		if (this.saldoDisponibile <= importo) {
+			return null;
+		} else {
+			DateController odierna = new DateController();
+			Movimento mov = new Movimento(cat, -importo, odierna.getDate(), this.getMovimenti().size());
+			this.aggiungiMovimento(mov);
+			this.setSaldoDisponibile(this.getSaldoDisponibile() - importo);
+			return mov;
+		}
 	}
 
 	/**
@@ -69,11 +82,6 @@ public class Asset implements OperazioniAsset, Serializable {
 	 */
 	@Override
 	public void aggiungiMovimento(Movimento m) {
-		if (m.getTipo() == Type.SPESA) {
-			this.preleva(m.getImporto());
-		} else {
-			this.deposita(m.getImporto());
-		}
 		this.movimenti.add(m);
 	}
 

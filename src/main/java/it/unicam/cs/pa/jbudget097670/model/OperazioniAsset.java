@@ -6,15 +6,16 @@ public interface OperazioniAsset {
 
 	/**
 	 * Questo metodo permetterà di depositare denaro all'interno dei conti
+	 * @return 
 	 */
-	public void deposita(double importo);
+	public Movimento deposita(double importo, Categoria cat);
 	
 	/**
 	 * @return 
 	 * @double importo
 	 * Questo metodo permetterà di prelevare denaro all'interno dei conti
 	 */
-	public double preleva(double importo);
+	public Movimento preleva(double importo, Categoria cat);
 	
 	/**
 	 * @param m
@@ -42,5 +43,9 @@ public interface OperazioniAsset {
 	 * @return ritornerò la lista di Piani
 	 */
 	public ArrayList<Piano> getPiani();
+
+	
+
+	
 	
 }

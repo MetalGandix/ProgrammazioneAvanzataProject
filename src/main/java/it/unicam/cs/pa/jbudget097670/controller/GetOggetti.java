@@ -36,8 +36,9 @@ public interface GetOggetti {
 	/**
 	 * @param asset
 	 * @return ritornerà la lista dei Movimenti dove è stato rimosso il Movimento con l'ID selezionato
+	 * @throws Exception 
 	 */
-	public Collection<Movimento> deleteMovimentoPerId(Asset asset);
+	public void deleteMovimentoPerId(Asset asset) throws Exception;
 	
 	/**
 	 * @param asset
