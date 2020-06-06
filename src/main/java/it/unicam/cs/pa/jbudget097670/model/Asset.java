@@ -2,9 +2,7 @@ package it.unicam.cs.pa.jbudget097670.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import it.unicam.cs.pa.jbudget097670.controller.DateController;
-import it.unicam.cs.pa.jbudget097670.model.gestisciMovimento.Type;
 
 public class Asset implements OperazioniAsset, Serializable {
 
@@ -56,7 +54,7 @@ public class Asset implements OperazioniAsset, Serializable {
 		this.setSaldoDisponibile(this.getSaldoDisponibile() + importo);
 		return mov;
 	}
-
+ 
 	/**
 	 * Questo metodo serve a diminuire il saldo dell'asset di una cifra stabilita
 	 * dall'utente se il saldo disponibile è minore o uguale all'importo, il metodo
@@ -121,16 +119,4 @@ public class Asset implements OperazioniAsset, Serializable {
 	public ArrayList<Piano> getPiani() {
 		return piani;
 	}
-
-	/**
-	 * Questo toString() servirebbe se volessi stampare su file gli oggetti piano e
-	 * movimento
-	 */
-	/*
-	 * @Override public String toString() { ArrayList<Movimento> listaMov =
-	 * this.getMovimenti(); //ArrayList<Piano> listaPiani = this.getPiani(); String
-	 * risultato = ""; for(Movimento mov: listaMov) { risultato += mov + "\n"; }
-	 * for(Piano p: listaPiani) { risultato += p +"\n"; } return risultato; }
-	 */
-
 }

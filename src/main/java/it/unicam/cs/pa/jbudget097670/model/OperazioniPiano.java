@@ -11,7 +11,7 @@ public interface OperazioniPiano {
 	 * I tipi di piano
 	 */
 	public enum Type { Ammortamento,Investimento }
-	
+	 
 	/**
 	 * servirà per ottenere il tipo di piano (Ammortameno o Investimento)
 	 */

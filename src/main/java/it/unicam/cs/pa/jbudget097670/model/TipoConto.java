@@ -5,5 +5,5 @@ package it.unicam.cs.pa.jbudget097670.model;
  * I tipi di asset a disposizione dell'utente
  */
 public enum TipoConto {
-	CONTO_CORRENTE,CASSA;
+	CONTO_CORRENTE,CARTA_DI_CREDITO;
 }

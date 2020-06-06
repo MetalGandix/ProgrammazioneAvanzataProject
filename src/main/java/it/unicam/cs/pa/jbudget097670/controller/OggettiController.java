@@ -28,8 +28,8 @@ public class OggettiController implements GetOggetti {
 		GestioneInput g = new GestioneInput();
 		Movimento mov = null;
 		double importo = g.inputInt("Scrivi l'importo da transitare: ");
-		Categoria cat = new Categoria(g.inputString("Scrivi categoria: "));
-		if (destinazione.getTipoConto() == TipoConto.CASSA) {
+		Categoria cat = new Categoria(g.inputString("Scrivi categoria: ")); 
+		if (destinazione.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
 			if (importo < 0) {
 				mov = destinazione.preleva(-importo, cat);
 			} else {

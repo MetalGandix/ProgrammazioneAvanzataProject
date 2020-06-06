@@ -23,7 +23,7 @@ public class AggiungiMovimento {
 	
 	@Test
 	public void testCassa() {
-		Asset contoCorrente = new Asset(TipoConto.CASSA, 0, '€');
+		Asset contoCorrente = new Asset(TipoConto.CARTA_DI_CREDITO, 0, '€');
 		Movimento mov = new Movimento(null, 0, null, 0);
 		contoCorrente.aggiungiMovimento(mov);
 		Iterator<Movimento> iter = contoCorrente.getMovimenti().iterator();

@@ -291,7 +291,7 @@ public class GestioneInput implements UserInput{
 			return TipoConto.CONTO_CORRENTE;
 		case 2:
 			System.out.println("Hai scelto la carta di credito!\n");
-			return TipoConto.CASSA;
+			return TipoConto.CARTA_DI_CREDITO;
 		}
 	}
 

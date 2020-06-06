@@ -53,7 +53,7 @@ public class Server implements Serializable {
 				/*if(asset == null) {
 					asset = new Asset(TipoConto.CONTO_CORRENTE, 0, '€');
 				}*/
-				if(asset.getTipoConto() == TipoConto.CASSA) {
+				if(asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
 				output = new ObjectOutputStream(socket.getOutputStream());
 				output.writeObject(asset);
 				}
@@ -65,7 +65,7 @@ public class Server implements Serializable {
 				input = new ObjectInputStream(socket.getInputStream());
 			
 				asset = (Asset) input.readObject();
-				if(asset.getTipoConto() == TipoConto.CASSA) {
+				if(asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
 				System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
 				GestioneFile.scritturaFileMovimenti(asset);	
 				GestioneFile.letturaFileCassa();

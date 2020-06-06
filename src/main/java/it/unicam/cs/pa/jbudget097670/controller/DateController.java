@@ -20,7 +20,7 @@ public class DateController implements GestioneDate, Serializable{
 	@Override
 	public Date getDate() {
 		Date today = Calendar.getInstance().getTime();
-		return today;
+		return today; 
 	}
 
 	/**

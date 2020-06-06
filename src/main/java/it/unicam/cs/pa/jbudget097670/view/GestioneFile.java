@@ -18,9 +18,9 @@ import java.io.FileReader;
  *         saldo che è disponibile nei conti
  */
 public class GestioneFile {
-	public static String fileNameMov = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\Cassa.json";
+	public static String fileNameMov = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\CartaDiCredito.json";
 	public static String fileNameConti = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\ContoCorrente.json";
-
+ 
 	/**
 	 * @param asset
 	 * @throws JsonIOException Questo metodo serve a trasformare l'oggetto asset in
@@ -34,7 +34,7 @@ public class GestioneFile {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		FileWriter writer = null;
 		try { 
-			if(asset.getTipoConto() == TipoConto.CASSA) {
+			if(asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
 			writer = new FileWriter(file.getAbsolutePath() + fileNameMov);
 			String g = gson.toJson(asset);
 			System.out.println(g);

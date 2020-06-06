@@ -55,7 +55,7 @@ public class Piano implements OperazioniPiano, Serializable{
 	@Override
 	public int getId() {
 		return id;
-	}
+	} 
 
 	/**
 	 *@return ritorna il tipo del Piano
