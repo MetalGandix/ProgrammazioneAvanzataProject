@@ -87,7 +87,8 @@ public class GestioneInput implements UserInput{
 							+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
 							+ "\n 3)Seleziona un Piano con un id specifico. "
 							+ "\n 4)Seleziona uno o più Piani dello stesso tipo. "
-							+ "\n 5)Cancella un Movimento inserendo il suo ID. " + "\n");
+							+ "\n 5)Cancella un Movimento inserendo il suo ID. " + ""
+							+ "\n 6)Cancella un Piano inserendo il suo ID. \n");
 			int risultato = 0;
 			risultato = i.nextInt();
 			i.nextLine();
@@ -101,11 +102,15 @@ public class GestioneInput implements UserInput{
 				try {
 					o.getMovimentoPerId(asset);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 				continue;
 			case 2:
-				o.getMovimentiperCategoria(asset);
+				try {
+					o.getMovimentiperCategoria(asset);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 				continue;
 			case 3:
 				try {
@@ -121,9 +126,16 @@ public class GestioneInput implements UserInput{
 				try {
 					o.deleteMovimentoPerId(asset);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 				continue;
+			case 6:
+				try {
+					o.deletePianoPerId(asset);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -301,7 +313,8 @@ public class GestioneInput implements UserInput{
 	 * @return ritorna un numero inserito dall'utente, che sarà poi usato per
 	 *         trovare un ID in una lista di movimenti
 	 */
-	public static int cercaId(String messaggio) {
+	@Override
+	public int cercaId(String messaggio) {
 		GestioneInput.getInstance();
 		System.out.print(messaggio);
 		int descrizione = 0;

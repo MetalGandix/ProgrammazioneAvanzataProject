@@ -24,8 +24,9 @@ public interface GetOggetti {
 	/**
 	 * @param c
 	 * @return ritornerà una lista di Movimenti con la stessa categoria
+	 * @throws Exception 
 	 */
-	public Collection<Movimento> getMovimentiperCategoria(Asset asset);
+	public Collection<Movimento> getMovimentiperCategoria(Asset asset) throws Exception;
 	
 	/**
 	 * @param asset
@@ -43,6 +44,7 @@ public interface GetOggetti {
 	/**
 	 * @param asset
 	 * @return ritornerà la lista dei Piani dove è stato rimosso il Piano con l'ID selezionato
+	 * @throws Exception 
 	 */
-	public Collection<Piano> deletePianoPerId(Asset asset);
+	public void deletePianoPerId(Asset asset) throws Exception;
 	}

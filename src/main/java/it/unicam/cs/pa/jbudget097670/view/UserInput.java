@@ -72,6 +72,12 @@ public interface UserInput {
 	 * @return ritorna il tipo di conto che ha scelto l'utente
 	 */
 	public TipoConto inputConto(String messaggio);
+	
+	/**
+	 * @param messaggio
+	 * @return ritornerà un intero che servirà per prendere l'index di un array
+	 */
+	public int cercaId(String messaggio);
 
 	
 ;}
