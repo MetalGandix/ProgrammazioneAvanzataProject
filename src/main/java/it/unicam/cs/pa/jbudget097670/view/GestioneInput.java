@@ -259,13 +259,19 @@ public class GestioneInput implements UserInput{
 	@Override
 	public boolean sceltaNuovoCiclo(String messaggio) {
 		getInstance();
-		System.out.print(messaggio);
 		int risultato = 0;
-		risultato = i.nextInt();
-		i.nextLine();
+		while(true) {
+            try {
+            	System.out.println(messaggio);
+                risultato = Integer.parseInt(i.next());
+                break;
+            } catch (Exception e) { 
+            	System.out.println("Devi inserire un numero che sia 1 o 2.\n");
+            }
+		}
 		switch (risultato) {
 		default:
-			System.out.println("Devi inserire un numero che sia 1 o 2");
+			System.out.println("Devi inserire un numero che sia 1 o 2.\n");
 			return sceltaNuovoCiclo(messaggio);
 		case 1:
 			return true;
@@ -283,13 +289,19 @@ public class GestioneInput implements UserInput{
 	 */
 	public OperazioniPiano.Type apriPiano(String messaggio) {
 		getInstance();
-		System.out.print(messaggio);
 		int risultato = 0;
-		risultato = i.nextInt();
-		i.nextLine();
+		while(true) {
+            try {
+            	System.out.println(messaggio);
+                risultato = Integer.parseInt(i.next());
+                break;
+            } catch (Exception e) { 
+            	System.out.println("Devi selezionare 1 per il piano d'ammortamento o 2 per il piano d'investimento.\n");
+            }
+		}
 		switch (risultato) {
 		default:
-			System.out.println("Devi selezionare 1 per il piano d'ammortamento o 2 per il piano d'investimento.");
+			System.out.println("Devi selezionare 1 per il piano d'ammortamento o 2 per il piano d'investimento.\n");
 			return apriPiano(messaggio);
 		case 1:
 			System.out.println("Il Piano scelto è di tipo Ammortamento.\n");
@@ -315,12 +327,12 @@ public class GestioneInput implements UserInput{
                 risultato = Integer.parseInt(i.next());
                 break;
             } catch (Exception e) { 
-            	System.out.println("Devi selezionare 1 o 2");
+            	System.out.println("Devi selezionare 1 o 2.\n");
             }
 		}
 		switch (risultato) {
 		default:
-			System.out.println("Devi selezionare 1 o 2");
+			System.out.println("Devi selezionare 1 o 2.\n");
 			return inputConto(messaggio);
 		case 1:
 			System.out.println("Hai scelto il conto corrente!\n ");
