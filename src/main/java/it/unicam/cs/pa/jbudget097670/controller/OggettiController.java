@@ -20,12 +20,12 @@ public class OggettiController implements GetOggetti {
 	
 	GestioneInput g = new GestioneInput();
 	/**
-	 * @param asset
+	 * @param asset 
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
 	 *         aggiorno iil conto creando un nuovo Movimento
 	 */
 	public static Asset aggiornaConto(Asset destinazione, Asset sorgente) {
-		GestioneInput g = new GestioneInput();
+		GestioneInput g = new GestioneInput(); 
 		Movimento mov = null;
 		double importo = g.inputInt("Scrivi l'importo da transitare: ");
 		Categoria cat = new Categoria(g.inputString("Scrivi categoria: ")); 
@@ -206,7 +206,7 @@ public class OggettiController implements GetOggetti {
 			throw new Exception("Non hai un movimento con questo id.");
 		} else {
 			asset.getMovimenti().remove(movIndexToRemove);
-			System.out.println("L'id rimosso è: " + x);
+			System.out.println("L'id del Movimento rimosso è: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
 		}
 	}
 
@@ -214,7 +214,7 @@ public class OggettiController implements GetOggetti {
 	public void deletePianoPerId(Asset asset) throws Exception {
 		int pIndexToRemove = -1;
 		int x = g.cercaId("Inserisci l'id del Piano che vuoi eliminare: \n");
-		for (int i = 0; i < asset.getMovimenti().size(); i++) {
+		for (int i = 0; i < asset.getPiani().size(); i++) {
 			Piano p = asset.getPiani().get(i);
 			if (p.getId() == x) {
 				pIndexToRemove = i;
@@ -223,9 +223,8 @@ public class OggettiController implements GetOggetti {
 		if (pIndexToRemove < 0) {
 			throw new Exception("Non hai un piano con questo id.");
 		} else {
-			asset.getMovimenti().remove(pIndexToRemove);
-			System.out.println("L'id rimosso è: " + x);
+			asset.getPiani().remove(pIndexToRemove);
+			System.out.println("L'id del Piano rimosso è: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
 		}
 	}
-
 }

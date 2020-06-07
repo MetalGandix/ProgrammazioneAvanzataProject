@@ -48,7 +48,7 @@ public class GestioneInput implements UserInput{
 		while(true) {
 			while(true) {
 	            try {
-	            	System.out.print(messaggio);
+	            	System.out.print(messaggio); 
 	                risultato = Integer.parseInt(i.next());
 	                break;
 	            } catch (Exception e) { 
