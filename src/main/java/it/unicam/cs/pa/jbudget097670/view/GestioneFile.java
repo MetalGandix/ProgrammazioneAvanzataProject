@@ -20,7 +20,7 @@ import java.io.FileReader;
 public class GestioneFile {
 	public static String fileNameMov = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\CartaDiCredito.json";
 	public static String fileNameConti = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\ContoCorrente.json";
- 
+
 	/**
 	 * @param asset
 	 * @throws JsonIOException Questo metodo serve a trasformare l'oggetto asset in
@@ -29,17 +29,17 @@ public class GestioneFile {
 	 *                         di avere il JSON più leggibile il gson.toJson
 	 *                         trasforma un oggetto in un JSON
 	 */
-	public static void scritturaFileMovimenti(Asset asset) throws JsonIOException { 
+	public static void scritturaFileMovimenti(Asset asset) throws JsonIOException {
 		File file = new File("");
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		FileWriter writer = null;
-		try { 
-			if(asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
-			writer = new FileWriter(file.getAbsolutePath() + fileNameMov);
-			String g = gson.toJson(asset);
-			System.out.println(g);
-			gson.toJson(asset, writer);
-			}else {
+		try {
+			if (asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
+				writer = new FileWriter(file.getAbsolutePath() + fileNameMov);
+				String g = gson.toJson(asset);
+				System.out.println(g);
+				gson.toJson(asset, writer);
+			} else {
 				writer = new FileWriter(file.getAbsolutePath() + fileNameConti);
 				String g = gson.toJson(asset);
 				System.out.println(g);
@@ -54,43 +54,43 @@ public class GestioneFile {
 			e.printStackTrace();
 		}
 	}
- 
+
 	/**
-	 * @return ritorno il file.json 
+	 * @return ritorno il file.json
 	 */
 	public static Asset letturaFileCassa() {
 		File file = new File("");
 		String path;
-			path = file.getAbsolutePath() + fileNameMov;
-        BufferedReader bufferedReader = null;
+		path = file.getAbsolutePath() + fileNameMov;
+		BufferedReader bufferedReader = null;
 		try {
 			bufferedReader = new BufferedReader(new FileReader(path));
 		} catch (FileNotFoundException e) {
 			System.out.println("Il file non esiste");
 			e.printStackTrace();
 		}
-        Gson gson = new Gson();
-        Asset asset = gson.fromJson(bufferedReader, Asset.class);
+		Gson gson = new Gson();
+		Asset asset = gson.fromJson(bufferedReader, Asset.class);
 		return asset;
 	}
-	
+
 	/**
-	 * @return stampo il file 
+	 * @return stampo il file
 	 */
 	public static Asset letturaFileContoCorrente() {
 		File file = new File("");
 		String path;
-			path = file.getAbsolutePath() + fileNameConti;
-        BufferedReader bufferedReader = null;
+		path = file.getAbsolutePath() + fileNameConti;
+		BufferedReader bufferedReader = null;
 		try {
 			bufferedReader = new BufferedReader(new FileReader(path));
 		} catch (FileNotFoundException e) {
 			System.out.println("Il file non esiste");
 			e.printStackTrace();
 		}
-        Gson gson = new Gson();
-        Asset asset = gson.fromJson(bufferedReader, Asset.class);
-	
+		Gson gson = new Gson();
+		Asset asset = gson.fromJson(bufferedReader, Asset.class);
+
 		return asset;
 	}
 }

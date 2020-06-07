@@ -11,17 +11,17 @@ import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
 /**
- * @author Leonardo Mogianesi
- * In questa classe ci sono tutti i metodi che gestiscono la view
+ * @author Leonardo Mogianesi In questa classe ci sono tutti i metodi che
+ *         gestiscono la view
  *
  */
-public class GestioneInput implements UserInput{
+public class GestioneInput implements UserInput {
 	public static Scanner i = null;
 
-	/** 
+	/**
 	 * Creo un nuovo scanner
 	 */
-	public void getInstance() { 
+	public void getInstance() {
 		if (i == null)
 			i = new Scanner(System.in);
 	}
@@ -34,28 +34,28 @@ public class GestioneInput implements UserInput{
 	 *                     Connetto il Client con il server Inizializzo a 0 i 2
 	 *                     conti
 	 * 
-	 */ 
+	 */
 	@Override
-	public void start(String messaggio) throws IOException,NumberFormatException{
+	public void start(String messaggio) throws IOException, NumberFormatException {
 		getInstance();
 		Client c = new Client();
 		c.connetti();
 		Asset cassa = c.leggiOggetto();
 		Asset contoCorrente = c.leggiOggetto();
 		TipoConto tipo = null;
-		OggettiController o = new OggettiController(); 
-		int risultato = 0;  
-		while(true) {
-			while(true) {
-	            try {
-	            	System.out.print(messaggio); 
-	                risultato = Integer.parseInt(i.next());
-	                break;
-	            } catch (Exception e) { 
-	            	System.out.println("Devi scegliere un numero tra 1, 2, 3, 4 o 5");
-	            }
+		OggettiController o = new OggettiController();
+		int risultato = 0;
+		while (true) {
+			while (true) {
+				try {
+					System.out.print(messaggio);
+					risultato = Integer.parseInt(i.next());
+					break;
+				} catch (Exception e) {
+					System.out.println("Devi scegliere un numero tra 1, 2, 3, 4 o 5");
+				}
 			}
-			switch (risultato) { 
+			switch (risultato) {
 			default:
 				System.out.println("Devi scegliere un numero tra 1, 2, 3, 4 o 5");
 				continue;
@@ -72,8 +72,8 @@ public class GestioneInput implements UserInput{
 				stampaRisultati(tipo, c, contoCorrente, cassa);
 				c.connetti();
 				continue;
-			case 5: 
-				selezionaOggetto(cassa,contoCorrente);
+			case 5:
+				selezionaOggetto(cassa, contoCorrente);
 				continue;
 			}
 		}
@@ -86,37 +86,38 @@ public class GestioneInput implements UserInput{
 	@Override
 	public void selezionaOggetto(Asset cassa, Asset contoCorrente) throws IOException {
 		int risultato = 0;
-		String messaggio = "Seleziona cosa cercare nella carta di credito: " + "\n 0)Per tornare alla home." + "\n 1)Seleziona un Movimento con un ID specifico. "
+		String messaggio = "Seleziona cosa cercare nella carta di credito: " + "\n 0)Per tornare alla home."
+				+ "\n 1)Seleziona un Movimento con un ID specifico. "
 				+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
-				+ "\n 3)Seleziona un Piano con un id specifico. "
-				+ "\n 4)Seleziona uno o più Piani dello stesso tipo. "
+				+ "\n 3)Seleziona un Piano con un id specifico. " + "\n 4)Seleziona uno o più Piani dello stesso tipo. "
 				+ "\n 5)Cancella un Movimento inserendo il suo ID. " + ""
-				+ "\n 6)Cancella un Piano inserendo il suo ID. \n";;
+				+ "\n 6)Cancella un Piano inserendo il suo ID. \n";
+		;
 		getInstance();
 		switchMethod(risultato, messaggio, cassa, contoCorrente);
-		
+
 	}
-	
-	
+
 	/**
 	 * @param risultato
 	 * @param messaggio
 	 * @param cassa
-	 * @param contoCorrente
-	 * Questo metodo serve per accorciare selezionaOggetto(), perchè altrimenti sarebbe venuto un metodo troppo lungo
-	 * Chiama i metodi del controller con lo scanner di selezionaOggetto()
+	 * @param contoCorrente Questo metodo serve per accorciare selezionaOggetto(),
+	 *                      perchè altrimenti sarebbe venuto un metodo troppo lungo
+	 *                      Chiama i metodi del controller con lo scanner di
+	 *                      selezionaOggetto()
 	 */
-	private void switchMethod(int risultato, String messaggio,Asset cassa, Asset contoCorrente ) {
+	private void switchMethod(int risultato, String messaggio, Asset cassa, Asset contoCorrente) {
 		OggettiController o = new OggettiController();
 		while (true) {
-			while(true) {
-	            try {
-	            	System.out.println(messaggio);
-	                risultato = Integer.parseInt(i.next());
-	                break;
-	            } catch (Exception e) { 
-	            	System.out.println("Devi scegliere un numero tra 1, 2, 3, 4, 5 o 6");
-	            }
+			while (true) {
+				try {
+					System.out.println(messaggio);
+					risultato = Integer.parseInt(i.next());
+					break;
+				} catch (Exception e) {
+					System.out.println("Devi scegliere un numero tra 1, 2, 3, 4, 5 o 6");
+				}
 			}
 			switch (risultato) {
 			default:
@@ -205,7 +206,8 @@ public class GestioneInput implements UserInput{
 				contoCorrente = OggettiController.aggiornaConto(contoCorrente, cassa);
 			else
 				cassa = OggettiController.aggiornaConto(cassa, contoCorrente);
-			boolean continuaMovimento = sceltaNuovoCiclo("Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
+			boolean continuaMovimento = sceltaNuovoCiclo(
+					"Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
 			if (!continuaMovimento) {
 				break;
 			}
@@ -260,14 +262,14 @@ public class GestioneInput implements UserInput{
 	public boolean sceltaNuovoCiclo(String messaggio) {
 		getInstance();
 		int risultato = 0;
-		while(true) {
-            try {
-            	System.out.println(messaggio);
-                risultato = Integer.parseInt(i.next());
-                break;
-            } catch (Exception e) { 
-            	System.out.println("Devi inserire un numero che sia 1 o 2.\n");
-            }
+		while (true) {
+			try {
+				System.out.println(messaggio);
+				risultato = Integer.parseInt(i.next());
+				break;
+			} catch (Exception e) {
+				System.out.println("Devi inserire un numero che sia 1 o 2.\n");
+			}
 		}
 		switch (risultato) {
 		default:
@@ -280,7 +282,6 @@ public class GestioneInput implements UserInput{
 		}
 	}
 
-
 	/**
 	 * @param messaggio
 	 * @return ritorna il piano di tipo ammortamento, se l'utente seleziona 1,
@@ -290,14 +291,14 @@ public class GestioneInput implements UserInput{
 	public OperazioniPiano.Type apriPiano(String messaggio) {
 		getInstance();
 		int risultato = 0;
-		while(true) {
-            try {
-            	System.out.println(messaggio);
-                risultato = Integer.parseInt(i.next());
-                break;
-            } catch (Exception e) { 
-            	System.out.println("Devi selezionare 1 per il piano d'ammortamento o 2 per il piano d'investimento.\n");
-            }
+		while (true) {
+			try {
+				System.out.println(messaggio);
+				risultato = Integer.parseInt(i.next());
+				break;
+			} catch (Exception e) {
+				System.out.println("Devi selezionare 1 per il piano d'ammortamento o 2 per il piano d'investimento.\n");
+			}
 		}
 		switch (risultato) {
 		default:
@@ -314,21 +315,21 @@ public class GestioneInput implements UserInput{
 
 	/**
 	 * @param messaggio
-	 * @return ritorna il conto corrente se risultato è = 1, altrimenti ritorna la carta di credito.
-	 *         In questo metodo scelgo dove fare Movimenti
+	 * @return ritorna il conto corrente se risultato è = 1, altrimenti ritorna la
+	 *         carta di credito. In questo metodo scelgo dove fare Movimenti
 	 */
 	@Override
 	public TipoConto inputConto(String messaggio) {
 		getInstance();
 		int risultato = 0;
-		while(true) {
-            try {
-            	System.out.println(messaggio);
-                risultato = Integer.parseInt(i.next());
-                break;
-            } catch (Exception e) { 
-            	System.out.println("Devi selezionare 1 o 2.\n");
-            }
+		while (true) {
+			try {
+				System.out.println(messaggio);
+				risultato = Integer.parseInt(i.next());
+				break;
+			} catch (Exception e) {
+				System.out.println("Devi selezionare 1 o 2.\n");
+			}
 		}
 		switch (risultato) {
 		default:
