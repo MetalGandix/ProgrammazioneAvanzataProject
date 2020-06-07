@@ -75,7 +75,7 @@ public class Client implements Serializable {
 		System.out.println("-- Benvenuto su GestioneBadgetPA --\n");
 		in.start(
 				"- HOME -"
-				+ "\nPremi: "
+				+ "\nPremi: " 
 				+ "\n 1)Se vuoi creare un conto e fare dei movimenti."
 				+ "\n 2)Creare un nuovo piano."
 				+ "\n 3)Fermare l'applicazione."

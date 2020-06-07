@@ -1,7 +1,28 @@
 {
   "tipoConto": "CONTO_CORRENTE",
-  "saldoDisponibile": 0.0,
+  "saldoDisponibile": 150.0,
   "valuta": "€",
   "movimenti": [],
-  "piani": []
+  "piani": [
+    {
+      "importoTotale": 30.0,
+      "durataMesi": 4,
+      "tassoARegime": 2.0,
+      "tipo": "Ammortamento",
+      "id": 0,
+      "dataFinale": "Oct 6, 2020, 7:14:55 PM",
+      "dataIniziale": "Jun 6, 2020, 7:14:55 PM",
+      "data": {}
+    },
+    {
+      "importoTotale": 3000.0,
+      "durataMesi": 16,
+      "tassoARegime": 2.0,
+      "tipo": "Investimento",
+      "id": 1,
+      "dataFinale": "Oct 6, 2021, 7:18:57 PM",
+      "dataIniziale": "Jun 6, 2020, 7:18:57 PM",
+      "data": {}
+    }
+  ]
 }

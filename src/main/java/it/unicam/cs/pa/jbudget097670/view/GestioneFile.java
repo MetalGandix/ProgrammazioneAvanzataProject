@@ -29,7 +29,7 @@ public class GestioneFile {
 	 *                         di avere il JSON più leggibile il gson.toJson
 	 *                         trasforma un oggetto in un JSON
 	 */
-	public static void scritturaFileMovimenti(Asset asset) throws JsonIOException {
+	public static void scritturaFileMovimenti(Asset asset) throws JsonIOException { 
 		File file = new File("");
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		FileWriter writer = null;
@@ -93,7 +93,4 @@ public class GestioneFile {
 	
 		return asset;
 	}
-
-
-
 }

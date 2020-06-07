@@ -33,7 +33,7 @@ public class OggettiController implements GetOggetti {
 			if (importo < 0) {
 				mov = destinazione.preleva(-importo, cat);
 			} else {
-				System.out.println("Scegli un importo da prelevare dal ContoCorrente: \n");
+				System.out.println("Scegli un importo da prelevare dal ContoCorrente: \n"); 
 				mov = sorgente.preleva(importo, cat);
 				if (mov != null) {
 					System.out.println("Prelevato: " + importo);

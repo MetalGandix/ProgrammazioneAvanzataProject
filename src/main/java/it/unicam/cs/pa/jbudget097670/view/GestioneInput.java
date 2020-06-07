@@ -18,10 +18,10 @@ import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 public class GestioneInput implements UserInput{
 	public static Scanner i = null;
 
-	/**
+	/** 
 	 * Creo un nuovo scanner
 	 */
-	public static void getInstance() {
+	public static void getInstance() { 
 		if (i == null)
 			i = new Scanner(System.in);
 	}
@@ -66,8 +66,8 @@ public class GestioneInput implements UserInput{
 				stampaRisultati(tipo, c, contoCorrente, cassa);
 				c.connetti();
 				continue;
-			case 5:
-				selezionaOggetto(cassa);
+			case 5: 
+				selezionaOggetto(cassa,contoCorrente);
 				continue;
 			}
 		}
@@ -78,7 +78,7 @@ public class GestioneInput implements UserInput{
 	 * @throws IOException Questo metodo chiama i metodi all'interno del Controller
 	 */
 	@Override
-	public void selezionaOggetto(Asset asset) throws IOException {
+	public void selezionaOggetto(Asset cassa, Asset contoCorrente) throws IOException {
 		OggettiController o = new OggettiController();
 		GestioneInput.getInstance();
 		while (true) {
@@ -100,38 +100,38 @@ public class GestioneInput implements UserInput{
 				return;
 			case 1:
 				try {
-					o.getMovimentoPerId(asset);
+					o.getMovimentoPerId(cassa);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 				continue;
 			case 2:
 				try {
-					o.getMovimentiperCategoria(asset);
+					o.getMovimentiperCategoria(cassa);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 				continue;
 			case 3:
 				try {
-					o.getPianoPerId(asset);
+					o.getPianoPerId(contoCorrente);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 				continue;
 			case 4:
-				o.getPianiPerTipo(asset);
+				o.getPianiPerTipo(contoCorrente);
 				continue;
 			case 5:
 				try {
-					o.deleteMovimentoPerId(asset);
+					o.deleteMovimentoPerId(cassa);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 				continue;
 			case 6:
 				try {
-					o.deletePianoPerId(asset);
+					o.deletePianoPerId(contoCorrente);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();

@@ -22,7 +22,7 @@ import it.unicam.cs.pa.jbudget097670.view.GestioneFile;
 public class Server implements Serializable {
 	private static final long serialVersionUID = -1167949529498883236L;
 	
-	ServerSocket server = null;
+	ServerSocket server = null; 
 	Socket socket = null;
 	int porta = 4999;
 	ObjectInputStream input;

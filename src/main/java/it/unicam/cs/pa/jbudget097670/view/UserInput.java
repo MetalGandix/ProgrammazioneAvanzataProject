@@ -28,7 +28,7 @@ public interface UserInput {
 	 * Questo metodo darà la possibilità all'utente di 
 	 * usare i metodi di get/delete all'interno del controller
 	 */
-	public void selezionaOggetto(Asset asset) throws IOException;
+	void selezionaOggetto(Asset cassa, Asset contoCorrente) throws IOException;
 	
 	/**
 	 * @param messaggio
@@ -84,6 +84,8 @@ public interface UserInput {
 	 * @return ritornerà una stringa che sarà usata per la categoria dei movimenti o dei piani
 	 */
 	public String inputString(String messaggio);
+
+	
 
 	
 ;}
