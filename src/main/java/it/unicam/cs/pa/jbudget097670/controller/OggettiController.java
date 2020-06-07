@@ -29,7 +29,7 @@ public class OggettiController implements GetOggetti {
 		Movimento mov = null;
 		double importo = g.inputInt("Scrivi l'importo da transitare: ");
 		Categoria cat = new Categoria(g.inputString("Scrivi categoria: ")); 
-		if (destinazione.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
+		if (destinazione.getTipoConto() == TipoConto.CARTA_DI_CREDITO) { 
 			if (importo < 0) {
 				mov = destinazione.preleva(-importo, cat);
 			} else {
@@ -172,7 +172,7 @@ public class OggettiController implements GetOggetti {
 	@Override
 	public Collection<Piano> getPianiPerTipo(Asset asset) throws Exception {
 		ArrayList<Piano> pianoType = new ArrayList<Piano>();
-		Type x = GestioneInput.apriPiano("Per visualizzare la lista dei piani inserisci: "
+		Type x = g.apriPiano("Per visualizzare la lista dei piani inserisci: "
 				+ "\n 1)Piani di tipo Ammortamento " + "\n 2)Piani di tipo Investimento");
 		asset.getPiani().forEach(p -> {
 			if (x == p.getTipo()) {

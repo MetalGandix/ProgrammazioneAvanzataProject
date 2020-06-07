@@ -21,7 +21,7 @@ public class GestioneInput implements UserInput{
 	/** 
 	 * Creo un nuovo scanner
 	 */
-	public static void getInstance() { 
+	public void getInstance() { 
 		if (i == null)
 			i = new Scanner(System.in);
 	}
@@ -37,7 +37,7 @@ public class GestioneInput implements UserInput{
 	 */
 	@Override
 	public void start(String messaggio) throws IOException,NumberFormatException{
-		GestioneInput.getInstance();
+		getInstance();
 		Client c = new Client();
 		c.connetti();
 		Asset cassa = c.leggiOggetto();
@@ -46,10 +46,13 @@ public class GestioneInput implements UserInput{
 		OggettiController o = new OggettiController();
 		while (true) {
 			System.out.print(messaggio);
-			int risultato = 0;
-			risultato = i.nextInt();
-			i.nextLine();
-			switch (risultato) {
+			int risultato = 0; 
+	            try {
+	                risultato = Integer.parseInt(i.next());
+	                break;
+	            } catch (Exception e) { 
+	            }
+			switch (risultato) { 
 			default:
 				System.out.println("Devi scegliere un numero tra 1, 2, 3, 4 o 5");
 				continue;
@@ -80,7 +83,7 @@ public class GestioneInput implements UserInput{
 	@Override
 	public void selezionaOggetto(Asset cassa, Asset contoCorrente) throws IOException {
 		OggettiController o = new OggettiController();
-		GestioneInput.getInstance();
+		getInstance();
 		while (true) {
 			System.out.println(
 					"Seleziona cosa cercare nella carta di credito: " + "\n 0)Per tornare alla home." + "\n 1)Seleziona un Movimento con un ID specifico. "
@@ -138,7 +141,6 @@ public class GestioneInput implements UserInput{
 					o.deletePianoPerId(contoCorrente);
 				} catch (Exception e6) {
 					System.out.println(e6.getMessage());
-					e.printStackTrace();
 				}
 			}
 		}
@@ -151,7 +153,7 @@ public class GestioneInput implements UserInput{
 	@Override
 	public double inputInt(String messaggio) {
 		double risultato = 0;
-		GestioneInput.getInstance();
+		getInstance();
 		System.out.print(messaggio);
 		while (true) {
 			try {
@@ -233,7 +235,7 @@ public class GestioneInput implements UserInput{
 	 */
 	@Override
 	public boolean sceltaNuovoCiclo(String messaggio) {
-		GestioneInput.getInstance();
+		getInstance();
 		System.out.print(messaggio);
 		int risultato = 0;
 		risultato = i.nextInt();
@@ -256,8 +258,8 @@ public class GestioneInput implements UserInput{
 	 *         altrimenti se seleziona 2 ritorna un piano di tipo investimento In
 	 *         questo metodo scelgo quale tipo di piano aprire
 	 */
-	public static OperazioniPiano.Type apriPiano(String messaggio) {
-		GestioneInput.getInstance();
+	public OperazioniPiano.Type apriPiano(String messaggio) {
+		getInstance();
 		System.out.print(messaggio);
 		int risultato = 0;
 		risultato = i.nextInt();
@@ -282,7 +284,7 @@ public class GestioneInput implements UserInput{
 	 */
 	@Override
 	public TipoConto inputConto(String messaggio) {
-		GestioneInput.getInstance();
+		getInstance();
 		System.out.print(messaggio);
 		int risultato = 0;
 		risultato = i.nextInt();
@@ -306,7 +308,7 @@ public class GestioneInput implements UserInput{
 	 */
 	@Override
 	public String inputString(String messaggio) {
-		GestioneInput.getInstance();
+		getInstance();
 		System.out.print(messaggio);
 		String descrizione = null;
 		descrizione = i.nextLine();
@@ -320,7 +322,7 @@ public class GestioneInput implements UserInput{
 	 */
 	@Override
 	public int cercaId(String messaggio) {
-		GestioneInput.getInstance();
+		getInstance();
 		System.out.print(messaggio);
 		int descrizione = 0;
 		descrizione = i.nextInt();
