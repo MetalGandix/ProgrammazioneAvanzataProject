@@ -1,6 +1,6 @@
 {
   "tipoConto": "CARTA_DI_CREDITO",
-  "saldoDisponibile": 150.0,
+  "saldoDisponibile": 0.0,
   "valuta": "€",
   "movimenti": [],
   "piani": []

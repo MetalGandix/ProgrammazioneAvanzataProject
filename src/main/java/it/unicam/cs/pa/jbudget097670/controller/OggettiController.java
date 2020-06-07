@@ -167,9 +167,10 @@ public class OggettiController implements GetOggetti {
 	/**
 	 * Questo metodo Ritorna la lista dei Piani con lo stesso tipo inserito
 	 * dall'utente
+	 * @throws Exception 
 	 */
 	@Override
-	public Collection<Piano> getPianiPerTipo(Asset asset) {
+	public Collection<Piano> getPianiPerTipo(Asset asset) throws Exception {
 		ArrayList<Piano> pianoType = new ArrayList<Piano>();
 		Type x = GestioneInput.apriPiano("Per visualizzare la lista dei piani inserisci: "
 				+ "\n 1)Piani di tipo Ammortamento " + "\n 2)Piani di tipo Investimento");
@@ -178,6 +179,9 @@ public class OggettiController implements GetOggetti {
 				pianoType.add(p);
 			}
 		});
+		if (pianoType.size() < 0) {
+			throw new Exception("Non hai nessun Piano di questo tipo.");
+		}
 		pianoType.forEach(p -> {
 			if (pianoType != null) {
 				System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()

@@ -101,39 +101,43 @@ public class GestioneInput implements UserInput{
 			case 1:
 				try {
 					o.getMovimentoPerId(cassa);
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
+				} catch (Exception e1) {
+					System.out.println(e1.getMessage());
 				}
 				continue;
 			case 2:
 				try {
 					o.getMovimentiperCategoria(cassa);
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
+				} catch (Exception e2) {
+					System.out.println(e2.getMessage());
 				}
 				continue;
 			case 3:
 				try {
 					o.getPianoPerId(contoCorrente);
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
+				} catch (Exception e3) {
+					System.out.println(e3.getMessage());
 				}
 				continue;
 			case 4:
-				o.getPianiPerTipo(contoCorrente);
+				try {
+					o.getPianiPerTipo(contoCorrente);
+				} catch (Exception e4) {
+					System.out.println(e4.getMessage());
+				}
 				continue;
 			case 5:
 				try {
 					o.deleteMovimentoPerId(cassa);
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
+				} catch (Exception e5) {
+					System.out.println(e5.getMessage());
 				}
 				continue;
 			case 6:
 				try {
 					o.deletePianoPerId(contoCorrente);
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
+				} catch (Exception e6) {
+					System.out.println(e6.getMessage());
 					e.printStackTrace();
 				}
 			}

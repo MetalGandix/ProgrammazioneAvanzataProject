@@ -31,8 +31,9 @@ public interface GetOggetti {
 	/**
 	 * @param asset
 	 * @return ritornerà una lista di Piani dello stesso tipo (Ammortamento o Investimento)
+	 * @throws Exception 
 	 */
-	public Collection<Piano> getPianiPerTipo(Asset asset);	
+	public Collection<Piano> getPianiPerTipo(Asset asset) throws Exception;	
 	
 	/**
 	 * @param asset
