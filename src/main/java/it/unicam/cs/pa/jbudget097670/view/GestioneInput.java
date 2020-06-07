@@ -34,7 +34,7 @@ public class GestioneInput implements UserInput{
 	 *                     Connetto il Client con il server Inizializzo a 0 i 2
 	 *                     conti
 	 * 
-	 */
+	 */ 
 	@Override
 	public void start(String messaggio) throws IOException,NumberFormatException{
 		getInstance();
@@ -302,15 +302,22 @@ public class GestioneInput implements UserInput{
 
 	/**
 	 * @param messaggio
-	 * @return ritorna il conto corrente se risultato è = 1, altrimenti ritorna la
-	 *         cassa In questo metodo scelgo dove fare Movimenti
+	 * @return ritorna il conto corrente se risultato è = 1, altrimenti ritorna la carta di credito.
+	 *         In questo metodo scelgo dove fare Movimenti
 	 */
 	@Override
 	public TipoConto inputConto(String messaggio) {
 		getInstance();
-		System.out.print(messaggio);
 		int risultato = 0;
-		risultato = i.nextInt();
+		while(true) {
+            try {
+            	System.out.println(messaggio);
+                risultato = Integer.parseInt(i.next());
+                break;
+            } catch (Exception e) { 
+            	System.out.println("Devi selezionare 1 o 2");
+            }
+		}
 		switch (risultato) {
 		default:
 			System.out.println("Devi selezionare 1 o 2");
