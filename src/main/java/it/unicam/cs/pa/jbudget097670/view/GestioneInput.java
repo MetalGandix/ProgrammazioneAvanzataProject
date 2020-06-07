@@ -43,15 +43,18 @@ public class GestioneInput implements UserInput{
 		Asset cassa = c.leggiOggetto();
 		Asset contoCorrente = c.leggiOggetto();
 		TipoConto tipo = null;
-		OggettiController o = new OggettiController();
-		while (true) {
-			System.out.print(messaggio);
-			int risultato = 0; 
+		OggettiController o = new OggettiController(); 
+		int risultato = 0;  
+		while(true) {
+			while(true) {
 	            try {
+	            	System.out.print(messaggio);
 	                risultato = Integer.parseInt(i.next());
 	                break;
 	            } catch (Exception e) { 
+	            	System.out.println("Devi scegliere un numero tra 1, 2, 3, 4 o 5");
 	            }
+			}
 			switch (risultato) { 
 			default:
 				System.out.println("Devi scegliere un numero tra 1, 2, 3, 4 o 5");
@@ -82,22 +85,42 @@ public class GestioneInput implements UserInput{
 	 */
 	@Override
 	public void selezionaOggetto(Asset cassa, Asset contoCorrente) throws IOException {
-		OggettiController o = new OggettiController();
+		int risultato = 0;
+		String messaggio = "Seleziona cosa cercare nella carta di credito: " + "\n 0)Per tornare alla home." + "\n 1)Seleziona un Movimento con un ID specifico. "
+				+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
+				+ "\n 3)Seleziona un Piano con un id specifico. "
+				+ "\n 4)Seleziona uno o più Piani dello stesso tipo. "
+				+ "\n 5)Cancella un Movimento inserendo il suo ID. " + ""
+				+ "\n 6)Cancella un Piano inserendo il suo ID. \n";;
 		getInstance();
+		switchMethod(risultato, messaggio, cassa, contoCorrente);
+		
+	}
+	
+	
+	/**
+	 * @param risultato
+	 * @param messaggio
+	 * @param cassa
+	 * @param contoCorrente
+	 * Questo metodo serve per accorciare selezionaOggetto(), perchè altrimenti sarebbe venuto un metodo troppo lungo
+	 * Chiama i metodi del controller con lo scanner di selezionaOggetto()
+	 */
+	private void switchMethod(int risultato, String messaggio,Asset cassa, Asset contoCorrente ) {
+		OggettiController o = new OggettiController();
 		while (true) {
-			System.out.println(
-					"Seleziona cosa cercare nella carta di credito: " + "\n 0)Per tornare alla home." + "\n 1)Seleziona un Movimento con un ID specifico. "
-							+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
-							+ "\n 3)Seleziona un Piano con un id specifico. "
-							+ "\n 4)Seleziona uno o più Piani dello stesso tipo. "
-							+ "\n 5)Cancella un Movimento inserendo il suo ID. " + ""
-							+ "\n 6)Cancella un Piano inserendo il suo ID. \n");
-			int risultato = 0;
-			risultato = i.nextInt();
-			i.nextLine();
+			while(true) {
+	            try {
+	            	System.out.println(messaggio);
+	                risultato = Integer.parseInt(i.next());
+	                break;
+	            } catch (Exception e) { 
+	            	System.out.println("Devi scegliere un numero tra 1, 2, 3, 4, 5 o 6");
+	            }
+			}
 			switch (risultato) {
 			default:
-				System.out.println("Devi inserire un numero che sia 1, 2, 3, 4 o 5");
+				System.out.println("Devi inserire un numero che sia 1, 2, 3, 4, 5 o 6");
 				continue;
 			case 0:
 				return;
