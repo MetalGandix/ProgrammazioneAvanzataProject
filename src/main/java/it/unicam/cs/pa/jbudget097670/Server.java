@@ -39,7 +39,7 @@ public class Server implements Serializable {
 	public Socket comunicazione() throws ClassNotFoundException {
 		try {
 			System.out.println("SERVER: \nInizializzo il server");
-			server = new ServerSocket(porta);
+			server = new ServerSocket(porta); 
 			System.out.println("Ascolto sulla porta " + porta);
 			Asset asset = null;
 			while (true) {
@@ -81,7 +81,6 @@ public class Server implements Serializable {
 			output.writeObject(asset);
 		}
 	}
-	
 	
 	/**
 	 * @param args

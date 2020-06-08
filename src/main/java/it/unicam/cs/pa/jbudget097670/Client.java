@@ -25,7 +25,7 @@ public class Client implements Serializable {
 	private static final long serialVersionUID = -1167949529498883236L;
 	Socket socket = null;
 	int porta = 4999;
-	
+	 
 	public ObjectOutputStream output;
 	public ObjectInputStream input;
 	

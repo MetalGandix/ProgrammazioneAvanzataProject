@@ -12,10 +12,10 @@ public class Categoria implements Serializable {
 	private String tipo;
 	
 	public Categoria(String categoria) {
-		this.tipo = categoria;
+		this.tipo = categoria; 
 	}
 	
-	
+	 
 	/**
 	 * @return ritorna una stringa che servirà a raggruppare i Movimenti
 	 */

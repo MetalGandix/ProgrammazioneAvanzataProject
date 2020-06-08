@@ -27,23 +27,23 @@ public class Movimento implements gestisciMovimento,Serializable {
 		if (importo < 0)
 			this.importo = importo * -1;
 		else
-			this.importo = importo;
+			this.importo = importo; 
 		if(importo>0)
 			this.tipo=Type.RICAVO;
 		else 
 			this.tipo=Type.SPESA;
 		this.data=data;
-		this.id = id;
+		this.id = id; 
 	}  
-	
+	 
 	/**
 	 *@return ritorna la categoria del Movimento
 	 */
-	public String getTipoCategoria() {
+	public String getTipoCategoria() { 
 		return categoria.getTipo();
 	} 
 	
-	/**
+	/** 
 	 *@return ritorna l'importo del Movimento
 	 */
 	@Override

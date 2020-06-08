@@ -82,6 +82,4 @@ public interface UserInput {
 	 *         dei piani
 	 */
 	public String inputString(String messaggio);
-
-	;
 }

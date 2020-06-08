@@ -26,7 +26,7 @@ public class GestioneFile {
 	 * @throws JsonIOException Questo metodo serve a trasformare l'oggetto asset in
 	 *                         un JSON, usando la classe Gson
 	 *                         GsonBuilder().setPrettyPrinting().create() permette
-	 *                         di avere il JSON più leggibile il gson.toJson
+	 *                         di avere il JSON più leggibile il gson.toJson 
 	 *                         trasforma un oggetto in un JSON
 	 */
 	public static void scritturaFileMovimenti(Asset asset) throws JsonIOException {

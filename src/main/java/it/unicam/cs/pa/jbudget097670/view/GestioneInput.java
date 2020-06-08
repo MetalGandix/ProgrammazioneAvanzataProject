@@ -16,7 +16,7 @@ import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
  *
  */
 public class GestioneInput implements UserInput {
-	public static Scanner i = null;
+	public Scanner i = null;
 
 	/**
 	 * Creo un nuovo scanner
@@ -35,7 +35,7 @@ public class GestioneInput implements UserInput {
 	 *                     conti
 	 * 
 	 */
-	@Override
+	@Override 
 	public void start(String messaggio) throws IOException, NumberFormatException {
 		getInstance();
 		Client c = new Client();

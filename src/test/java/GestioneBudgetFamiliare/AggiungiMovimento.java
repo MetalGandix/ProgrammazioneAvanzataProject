@@ -11,26 +11,19 @@ import org.junit.Test;
 public class AggiungiMovimento {
 
 	@Test
-	public void testContoCorrente() {
+	public void testConti() {
 		Asset contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€');
-		Movimento mov = new Movimento(null, 0, null, 0);
+		Asset cassa = new Asset(TipoConto.CARTA_DI_CREDITO, 0, '€');
+		Movimento mov = new Movimento(null, 0, null, 0); 
 		contoCorrente.aggiungiMovimento(mov);
-		Iterator<Movimento> iter = contoCorrente.getMovimenti().iterator();
-		while(iter.hasNext()) {
-			assertEquals(iter.next(), mov);
+		Iterator<Movimento> iter1 = contoCorrente.getMovimenti().iterator();
+		Iterator<Movimento> iter2 = cassa.getMovimenti().iterator();
+		while(iter1.hasNext()) {
+			assertEquals(iter1.next(), mov);
 		}
-	} 
-	
-	@Test
-	public void testCassa() {
-		Asset contoCorrente = new Asset(TipoConto.CARTA_DI_CREDITO, 0, '€');
-		Movimento mov = new Movimento(null, 0, null, 0);
-		contoCorrente.aggiungiMovimento(mov);
-		Iterator<Movimento> iter = contoCorrente.getMovimenti().iterator();
-		while(iter.hasNext()) {
-			assertEquals(iter.next(), mov);
+		while(iter2.hasNext()) {
+			assertEquals(iter2.next(), mov); 
 		}
-	} 
-	
+	} 	
 	
 }
