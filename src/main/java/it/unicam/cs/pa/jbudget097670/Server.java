@@ -38,32 +38,15 @@ public class Server implements Serializable {
 	 */
 	public Socket comunicazione() throws ClassNotFoundException {
 		try {
-			System.out.println("SERVER:");
-			System.out.println("Inizializzo il server");
-			
+			System.out.println("SERVER: \nInizializzo il server");
 			server = new ServerSocket(porta);
 			System.out.println("Ascolto sulla porta " + porta);
 			Asset asset = null;
 			while (true) {
 				socket = server.accept();
 				System.out.println("Connessione client-server stabilita");
-				
-				if(asset == null) {
-				asset = GestioneFile.letturaFileCassa();
-				/*if(asset == null) {
-					asset = new Asset(TipoConto.CONTO_CORRENTE, 0, '€');
-				}*/
-				if(asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
-				output = new ObjectOutputStream(socket.getOutputStream());
-				output.writeObject(asset);
-				}
-				output = new ObjectOutputStream(socket.getOutputStream());
-				asset = GestioneFile.letturaFileContoCorrente();
-				output.writeObject(asset);
-				}
-			 
+				outPutServer(asset);
 				input = new ObjectInputStream(socket.getInputStream());
-			
 				asset = (Asset) input.readObject();
 				if(asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
 				System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
@@ -79,6 +62,24 @@ public class Server implements Serializable {
 			e.printStackTrace();
 		} 
 		return socket;
+	}
+	
+	/**
+	 * @param asset
+	 * @throws IOException
+	 * @output manda al Client l'oggetto che legge nel file Json
+	 */
+	public void outPutServer(Asset asset) throws IOException {
+		if(asset == null) {
+			asset = GestioneFile.letturaFileCassa();
+			if(asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
+			output = new ObjectOutputStream(socket.getOutputStream());
+			output.writeObject(asset);
+			}
+			output = new ObjectOutputStream(socket.getOutputStream());
+			asset = GestioneFile.letturaFileContoCorrente();
+			output.writeObject(asset);
+		}
 	}
 	
 	

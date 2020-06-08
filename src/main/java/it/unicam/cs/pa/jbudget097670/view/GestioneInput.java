@@ -39,9 +39,15 @@ public class GestioneInput implements UserInput {
 	public void start(String messaggio) throws IOException, NumberFormatException {
 		getInstance();
 		Client c = new Client();
-		c.connetti();
+		c.connetti(); 
 		Asset cassa = c.leggiOggetto();
+		if(cassa == null) {
+			cassa = new Asset(TipoConto.CARTA_DI_CREDITO, 0, '€');
+		}
 		Asset contoCorrente = c.leggiOggetto();
+		if(contoCorrente == null) {
+			contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€');
+		}
 		TipoConto tipo = null;
 		OggettiController o = new OggettiController();
 		int risultato = 0;

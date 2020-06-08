@@ -42,9 +42,10 @@ public class OggettiController implements GetOggetti {
 				} 
 			} 
 		} else {
-			if(importo < 0){
+			if(importo < 0){ 
 				mov = null;
 				System.out.println("Non è possibile fare spese con il conto corrente.");
+				return aggiornaConto(destinazione, sorgente);
 			}else {
 			mov = destinazione.deposita(importo, cat);
 			}
@@ -54,7 +55,7 @@ public class OggettiController implements GetOggetti {
 					+ mov.getTipoCategoria() + "\nMovimento effettuato in data: " + mov.getData()
 					+ "\nMovimento con ID: " + mov.getId());
 		}else {
-			System.out.println("Non è stato possibile prelevare dal conto.");
+			System.out.println("Non è stato possibile prelevare dal ContoCorrente perchè non contiene l'importo desiderato.");
 		}
 		return destinazione;
 	}
