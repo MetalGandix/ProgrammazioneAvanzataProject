@@ -24,7 +24,7 @@ public class OggettiController implements GetOggetti {
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
 	 *         aggiorno iil conto creando un nuovo Movimento
 	 */
-	public static Asset aggiornaConto(Asset destinazione, Asset sorgente) {
+	public Asset aggiornaConto(Asset destinazione, Asset sorgente) { 
 		GestioneInput g = new GestioneInput(); 
 		Movimento mov = null;
 		double importo = g.inputInt("Scrivi l'importo da transitare: ");
@@ -67,7 +67,7 @@ public class OggettiController implements GetOggetti {
 	 *         creerà un nuovo piano inserendo l'importo, il tasso e le date del
 	 *         piano.
 	 */
-	public static Asset aggiornaPiano(Asset asset, Type tipo) {
+	public Asset aggiornaPiano(Asset asset, Type tipo) {
 		GestioneInput g = new GestioneInput();
 		DateController data = new DateController();
 		double importoPiano = g.inputInt("Scrivi l'importo da aggiungere al piano: ");

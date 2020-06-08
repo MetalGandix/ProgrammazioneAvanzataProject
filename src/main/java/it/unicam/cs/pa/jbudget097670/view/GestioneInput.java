@@ -54,7 +54,7 @@ public class GestioneInput implements UserInput {
 		while (true) {
 			while (true) {
 				try {
-					System.out.print(messaggio);
+					System.out.print(messaggio); 
 					risultato = Integer.parseInt(i.next());
 					break;
 				} catch (Exception e) {
@@ -205,13 +205,14 @@ public class GestioneInput implements UserInput {
 	 */
 	@Override
 	public TipoConto creaMovimento(Asset contoCorrente, Asset cassa) {
+		OggettiController controller = new OggettiController();
 		TipoConto tipo = null;
 		tipo = inputConto("Digita il conto che vuoi utilizzare: 1) Conto Corrente, 2) Carta di credito\n ");
 		while (true) {
 			if (tipo == TipoConto.CONTO_CORRENTE)
-				contoCorrente = OggettiController.aggiornaConto(contoCorrente, cassa);
+				contoCorrente = controller.aggiornaConto(contoCorrente, cassa);
 			else
-				cassa = OggettiController.aggiornaConto(cassa, contoCorrente);
+				cassa = controller.aggiornaConto(cassa, contoCorrente);
 			boolean continuaMovimento = sceltaNuovoCiclo(
 					"Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
 			if (!continuaMovimento) {
@@ -228,10 +229,11 @@ public class GestioneInput implements UserInput {
 	 */
 	@Override
 	public void aggiungiPiani(Asset contoCorrente) {
+		OggettiController controller = new OggettiController();
 		while (true) {
 			OperazioniPiano.Type tipoPiano = apriPiano(
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
-			OggettiController.aggiornaPiano(contoCorrente, tipoPiano);
+			controller.aggiornaPiano(contoCorrente, tipoPiano);
 			boolean continuaPiano = sceltaNuovoCiclo("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
 			if (!continuaPiano) {
 				break;
