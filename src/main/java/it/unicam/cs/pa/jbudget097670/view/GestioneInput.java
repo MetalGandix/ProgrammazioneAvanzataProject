@@ -220,7 +220,12 @@ public class GestioneInput implements GestioneInputInterface {
 		Categoria cat = new Categoria(inputString("Scrivi categoria: ")); 
 		while (true) {
 			if (tipo == TipoConto.CONTO_CORRENTE)
+				if (contoCorrente.getTipoConto() == TipoConto.CARTA_DI_CREDITO) { 
+					if (importo < 0) {
+						controller.aggiornaContoMinoreDiZero(contoCorrente, cassa, importo, cat);
+					}
 				contoCorrente = controller.aggiornaConto(contoCorrente, cassa, importo, cat);
+				}
 			else
 				cassa = controller.aggiornaConto(cassa, contoCorrente, importo, cat);
 			boolean continuaMovimento = sceltaNuovoCiclo(

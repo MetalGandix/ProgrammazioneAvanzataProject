@@ -52,6 +52,25 @@ public class OggettiController implements OggettiInterface {
 		}
 		return destinazione;
 	}
+	
+	public Asset aggiornaContoMinoreDiZero(Asset destinazione, Asset sorgente, double importo, Categoria cat) {
+		Movimento mov = null;
+		if (destinazione.getTipoConto() == TipoConto.CARTA_DI_CREDITO) { 
+			if (importo < 0) {
+				mov = destinazione.preleva(-importo, cat);
+			} else {
+				System.out.println("Scegli un importo da prelevare dal ContoCorrente: \n"); 
+				mov = sorgente.preleva(importo, cat);
+				if (mov != null) {
+					System.out.println("Prelevato: " + importo);
+					destinazione.deposita(importo, cat);
+					System.out.println("Saldo conto corrente: " + sorgente.getSaldoDisponibile() + "\nSaldo carta di credito: " + destinazione.getSaldoDisponibile());
+				}  
+			} 
+		}
+		
+		return sorgente;
+	}
 
 	/**
 	 * @param asset
