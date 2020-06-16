@@ -19,6 +19,7 @@ import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
  * Il serializableUID serve per dire al programma per capire quali classi invieranno e riceveranno oggetti
  * Dichiaro un nuovo socket e la porta dove scambieranno dati client e server
  * @output ObjectOutPutStream è il tipo che manda al server un dato
+ * Per avviare il Client digitare nel terminale: gradlew runClient --console plain
  */
 public class Client implements Serializable {
 	

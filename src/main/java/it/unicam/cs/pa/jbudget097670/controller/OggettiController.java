@@ -8,27 +8,20 @@ import it.unicam.cs.pa.jbudget097670.model.Categoria;
 import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.Piano;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
-import it.unicam.cs.pa.jbudget097670.model.gestisciMovimento;
-import it.unicam.cs.pa.jbudget097670.view.GestioneInput;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
 
 /**
  * @author Leonardo Mogianesi Questa classe serve per controllare tutti gli
  *         input che l'utente inserisce all'interno del programma
  */
-public class OggettiController implements GetOggetti {
-	
-	
+public class OggettiController implements OggettiInterface {
 	/**
 	 * @param asset 
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
 	 *         aggiorno iil conto creando un nuovo Movimento
 	 */
-	public Asset aggiornaConto(Asset destinazione, Asset sorgente) { 
-		GestioneInput g = new GestioneInput();  
+	public Asset aggiornaConto(Asset destinazione, Asset sorgente, double importo, Categoria cat) {  
 		Movimento mov = null;
-		double importo = g.inputInt("Scrivi l'importo da transitare: ");
-		Categoria cat = new Categoria(g.inputString("Scrivi categoria: ")); 
 		if (destinazione.getTipoConto() == TipoConto.CARTA_DI_CREDITO) { 
 			if (importo < 0) {
 				mov = destinazione.preleva(-importo, cat);
@@ -45,7 +38,7 @@ public class OggettiController implements GetOggetti {
 			if(importo < 0){ 
 				mov = null;
 				System.out.println("Non è possibile fare spese con il conto corrente.");
-				return aggiornaConto(destinazione, sorgente);
+				return aggiornaConto(destinazione, sorgente, importo, cat);
 			}else {
 			mov = destinazione.deposita(importo, cat);
 			}
@@ -67,12 +60,8 @@ public class OggettiController implements GetOggetti {
 	 *         creerà un nuovo piano inserendo l'importo, il tasso e le date del
 	 *         piano.
 	 */
-	public Asset aggiornaPiano(Asset asset, Type tipo) {
-		GestioneInput g = new GestioneInput();
+	public Asset aggiornaPiano(Asset asset, Type tipo, double importoPiano, double importo,int durataPiano) {
 		DateController data = new DateController();
-		double importoPiano = g.inputInt("Scrivi l'importo da aggiungere al piano: ");
-		double importo = g.inputInt("Scrivi il tasso a regime: ");
-		int durataPiano = (int) g.inputInt("Scrivi quanti mesi durerà il piano: ");
 		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, data.getDate(),
 				data.getFinalDate(durataPiano), asset.getPiani().size());
 		asset.aggiungiPiano(piano);
@@ -88,10 +77,8 @@ public class OggettiController implements GetOggetti {
 	 * @throws Exception
 	 */
 	@Override
-	public Collection<Movimento> getMovimentoPerId(Asset asset) throws Exception {
-		GestioneInput g = new GestioneInput();
+	public Collection<Movimento> getMovimentoPerId(Asset asset, int x) throws Exception {
 		ArrayList<Movimento> movWithId = new ArrayList<Movimento>();
-		int x = g.cercaId("Inserisci l'id del Movimento che vuoi visualizzare: \n");
 		asset.getMovimenti().forEach(t -> {
 			if (x == t.getId()) {
 				movWithId.add(t);
@@ -116,10 +103,8 @@ public class OggettiController implements GetOggetti {
 	 * inserisce un ID associato al piano che vuole vedere stampato.
 	 */
 	@Override
-	public Collection<Piano> getPianoPerId(Asset asset) throws Exception {
-		GestioneInput g = new GestioneInput();
+	public Collection<Piano> getPianoPerId(Asset asset, int x) throws Exception {
 		ArrayList<Piano> pianoId = new ArrayList<Piano>();
-		int x = g.cercaId("Inserisci l'id del Piano che vuoi visualizzare: \n");
 		asset.getPiani().forEach(p -> {
 			if (x == p.getId()) {
 				pianoId.add(p);
@@ -145,10 +130,8 @@ public class OggettiController implements GetOggetti {
 	 * @throws Exception 
 	 */
 	@Override
-	public Collection<Movimento> getMovimentiperCategoria(Asset asset) throws Exception {
-		GestioneInput g = new GestioneInput();
+	public Collection<Movimento> getMovimentiperCategoria(Asset asset, String x) throws Exception {
 		ArrayList<Movimento> movWithCat = new ArrayList<Movimento>();
-		String x = g.inputString("Inserisci la categoria del Movimento che vuoi vedere: \n");
 		asset.getMovimenti().forEach(c -> {
 			if (x.equals(c.getTipoCategoria())) {
 				movWithCat.add(c);
@@ -174,11 +157,8 @@ public class OggettiController implements GetOggetti {
 	 * @throws Exception 
 	 */
 	@Override
-	public Collection<Piano> getPianiPerTipo(Asset asset) throws Exception {
-		GestioneInput g = new GestioneInput();
+	public Collection<Piano> getPianiPerTipo(Asset asset, Type x) throws Exception {
 		ArrayList<Piano> pianoType = new ArrayList<Piano>();
-		Type x = g.apriPiano("Per visualizzare la lista dei piani inserisci: "
-				+ "\n 1)Piani di tipo Ammortamento " + "\n 2)Piani di tipo Investimento");
 		asset.getPiani().forEach(p -> {
 			if (x == p.getTipo()) {
 				pianoType.add(p);
@@ -198,10 +178,8 @@ public class OggettiController implements GetOggetti {
 	}
 
 	@Override
-	public void deleteMovimentoPerId(Asset asset) throws Exception {
-		GestioneInput g = new GestioneInput();
+	public void deleteMovimentoPerId(Asset asset, int x) throws Exception {
 		int movIndexToRemove = -1;
-		int x = g.cercaId("Inserisci l'id del Movimento che vuoi eliminare: \n");
 		for (int i = 0; i < asset.getMovimenti().size(); i++) {
 			Movimento t = asset.getMovimenti().get(i);
 			if (t.getId() == x) {
@@ -217,10 +195,8 @@ public class OggettiController implements GetOggetti {
 	}
 
 	@Override
-	public void deletePianoPerId(Asset asset) throws Exception {
-		GestioneInput g = new GestioneInput();
+	public void deletePianoPerId(Asset asset, int x) throws Exception {
 		int pIndexToRemove = -1;
-		int x = g.cercaId("Inserisci l'id del Piano che vuoi eliminare: \n");
 		for (int i = 0; i < asset.getPiani().size(); i++) {
 			Piano p = asset.getPiani().get(i);
 			if (p.getId() == x) {

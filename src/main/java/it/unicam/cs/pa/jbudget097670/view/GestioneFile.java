@@ -18,8 +18,8 @@ import java.io.FileReader;
  *         saldo che è disponibile nei conti
  */
 public class GestioneFile {
-	public static String fileNameMov = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\CartaDiCredito.json";
-	public static String fileNameConti = "\\src\\main\\java\\it\\unicam\\cs\\pa\\jbudget097670\\view\\ContoCorrente.json";
+	public static String fileNameMov = "\\CartaDiCredito.json";
+	public static String fileNameConti = "\\ContoCorrente.json";
 
 	/**
 	 * @param asset
@@ -29,7 +29,7 @@ public class GestioneFile {
 	 *                         di avere il JSON più leggibile il gson.toJson 
 	 *                         trasforma un oggetto in un JSON
 	 */
-	public static void scritturaFileMovimenti(Asset asset) throws JsonIOException {
+	public void scritturaFileMovimenti(Asset asset) throws JsonIOException {
 		File file = new File("");
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		FileWriter writer = null;
@@ -58,7 +58,7 @@ public class GestioneFile {
 	/**
 	 * @return ritorno il file.json
 	 */
-	public static Asset letturaFileCassa() {
+	public Asset letturaFileCassa() {
 		File file = new File("");
 		String path;
 		path = file.getAbsolutePath() + fileNameMov;
@@ -77,7 +77,7 @@ public class GestioneFile {
 	/**
 	 * @return stampo il file
 	 */
-	public static Asset letturaFileContoCorrente() {
+	public Asset letturaFileContoCorrente() {
 		File file = new File("");
 		String path;
 		path = file.getAbsolutePath() + fileNameConti;

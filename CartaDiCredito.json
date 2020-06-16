@@ -1,0 +1,17 @@
+{
+  "tipoConto": "CARTA_DI_CREDITO",
+  "saldoDisponibile": 350.0,
+  "valuta": "€",
+  "movimenti": [
+    {
+      "categoria": {
+        "tipo": "c"
+      },
+      "importo": 50.0,
+      "tipo": "SPESA",
+      "data": "Jun 16, 2020, 9:32:02 PM",
+      "id": 1
+    }
+  ],
+  "piani": []
+}

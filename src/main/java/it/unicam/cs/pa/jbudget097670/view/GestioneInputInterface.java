@@ -12,7 +12,7 @@ import it.unicam.cs.pa.jbudget097670.model.TipoConto;
  *         implementati dalla view
  *
  */
-public interface UserInput {
+public interface GestioneInputInterface {
 
 	/**
 	 * @param messaggio

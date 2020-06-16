@@ -18,6 +18,7 @@ import it.unicam.cs.pa.jbudget097670.view.GestioneFile;
  * Creo un nuovo serverSocket
  * Scelgo la porta dove far comunicare il Client con il Server 
  * @int porta = 4999 
+ * Per avviare il Server digitare nel terminale: gradlew runServer --console plain
  */
 public class Server implements Serializable {
 	private static final long serialVersionUID = -1167949529498883236L;
@@ -37,6 +38,7 @@ public class Server implements Serializable {
 	 * asset con il metodo .readObject() diventa l'oggetto che è stato letto dal server
 	 */
 	public Socket comunicazione() throws ClassNotFoundException {
+		GestioneFile f = new GestioneFile();
 		try {
 			System.out.println("SERVER: \nInizializzo il server");
 			server = new ServerSocket(porta); 
@@ -50,12 +52,12 @@ public class Server implements Serializable {
 				asset = (Asset) input.readObject();
 				if(asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
 				System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
-				GestioneFile.scritturaFileMovimenti(asset);	
-				GestioneFile.letturaFileCassa();
+				f.scritturaFileMovimenti(asset);	
+				f.letturaFileCassa();
 				}else {
 					System.out.println("Inserisco nel file txt Movimento.txt le informazioni dei miei conti con i loro Movimenti.\n");
-					GestioneFile.scritturaFileMovimenti(asset);	
-					GestioneFile.letturaFileCassa();
+					f.scritturaFileMovimenti(asset);	
+					f.letturaFileCassa();
 				}
 			}
 		} catch (IOException e) {
@@ -70,14 +72,15 @@ public class Server implements Serializable {
 	 * @output manda al Client l'oggetto che legge nel file Json
 	 */
 	public void outPutServer(Asset asset) throws IOException {
+		GestioneFile f = new GestioneFile();
 		if(asset == null) {
-			asset = GestioneFile.letturaFileCassa();
+			asset = f.letturaFileCassa();
 			if(asset.getTipoConto() == TipoConto.CARTA_DI_CREDITO) {
 			output = new ObjectOutputStream(socket.getOutputStream());
 			output.writeObject(asset);
 			}
 			output = new ObjectOutputStream(socket.getOutputStream());
-			asset = GestioneFile.letturaFileContoCorrente();
+			asset = f.letturaFileContoCorrente();
 			output.writeObject(asset);
 		}
 	}

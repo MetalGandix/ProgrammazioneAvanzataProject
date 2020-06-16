@@ -6,6 +6,7 @@ import java.util.Scanner;
 import it.unicam.cs.pa.jbudget097670.Client;
 import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
+import it.unicam.cs.pa.jbudget097670.model.Categoria;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
@@ -15,7 +16,7 @@ import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
  *         gestiscono la view
  *
  */
-public class GestioneInput implements UserInput {
+public class GestioneInput implements GestioneInputInterface {
 	public Scanner i = null;
 
 	/**
@@ -133,42 +134,49 @@ public class GestioneInput implements UserInput {
 				return;
 			case 1:
 				try {
-					o.getMovimentoPerId(cassa);
+					int x = cercaId("Inserisci l'id del Movimento che vuoi visualizzare: \n");
+					o.getMovimentoPerId(cassa, x);
 				} catch (Exception e1) {
 					System.out.println(e1.getMessage());
 				}
 				continue;
 			case 2:
 				try {
-					o.getMovimentiperCategoria(cassa);
+					String x = inputString("Inserisci la categoria del Movimento che vuoi vedere: \n");
+					o.getMovimentiperCategoria(cassa,x);
 				} catch (Exception e2) {
 					System.out.println(e2.getMessage());
 				}
 				continue;
 			case 3:
 				try {
-					o.getPianoPerId(contoCorrente);
+					int x = cercaId("Inserisci l'id del Piano che vuoi visualizzare: \n");
+					o.getPianoPerId(contoCorrente, x);
 				} catch (Exception e3) {
 					System.out.println(e3.getMessage());
 				}
 				continue;
 			case 4:
 				try {
-					o.getPianiPerTipo(contoCorrente);
+					Type x = apriPiano("Per visualizzare la lista dei piani inserisci: "
+							+ "\n 1)Piani di tipo Ammortamento " + "\n 2)Piani di tipo Investimento");
+					o.getPianiPerTipo(contoCorrente,x);
 				} catch (Exception e4) {
 					System.out.println(e4.getMessage());
 				}
 				continue;
 			case 5:
 				try {
-					o.deleteMovimentoPerId(cassa);
+					int x = cercaId("Inserisci l'id del Movimento che vuoi eliminare: \n");
+					o.deleteMovimentoPerId(cassa, x);
 				} catch (Exception e5) {
 					System.out.println(e5.getMessage());
 				}
 				continue;
 			case 6:
 				try {
-					o.deletePianoPerId(contoCorrente);
+					int x = cercaId("Inserisci l'id del Piano che vuoi eliminare: \n");
+					o.deletePianoPerId(contoCorrente, x);
 				} catch (Exception e6) {
 					System.out.println(e6.getMessage());
 				}
@@ -208,11 +216,13 @@ public class GestioneInput implements UserInput {
 		OggettiController controller = new OggettiController();
 		TipoConto tipo = null;
 		tipo = inputConto("Digita il conto che vuoi utilizzare: 1) Conto Corrente, 2) Carta di credito\n ");
+		double importo = inputInt("Scrivi l'importo da transitare: ");
+		Categoria cat = new Categoria(inputString("Scrivi categoria: ")); 
 		while (true) {
 			if (tipo == TipoConto.CONTO_CORRENTE)
-				contoCorrente = controller.aggiornaConto(contoCorrente, cassa);
+				contoCorrente = controller.aggiornaConto(contoCorrente, cassa, importo, cat);
 			else
-				cassa = controller.aggiornaConto(cassa, contoCorrente);
+				cassa = controller.aggiornaConto(cassa, contoCorrente, importo, cat);
 			boolean continuaMovimento = sceltaNuovoCiclo(
 					"Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
 			if (!continuaMovimento) {
@@ -233,7 +243,10 @@ public class GestioneInput implements UserInput {
 		while (true) {
 			OperazioniPiano.Type tipoPiano = apriPiano(
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
-			controller.aggiornaPiano(contoCorrente, tipoPiano);
+			double importoPiano = inputInt("Scrivi l'importo da aggiungere al piano: ");
+			double importo = inputInt("Scrivi il tasso a regime: ");
+			int durataPiano = (int) inputInt("Scrivi quanti mesi durerà il piano: ");
+			controller.aggiornaPiano(contoCorrente, tipoPiano, importoPiano, importo, durataPiano);
 			boolean continuaPiano = sceltaNuovoCiclo("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
 			if (!continuaPiano) {
 				break;
@@ -354,6 +367,7 @@ public class GestioneInput implements UserInput {
 
 	/**
 	 * @param messaggio
+	 * Doppia nextLine per evitare un bug
 	 * @return ritorna una stringa dell'utente che sarà il nome della categoria del
 	 *         Movimento
 	 */
@@ -362,6 +376,7 @@ public class GestioneInput implements UserInput {
 		getInstance();
 		System.out.print(messaggio);
 		String descrizione = null;
+		i.nextLine();
 		descrizione = i.nextLine();
 		return descrizione;
 	}
