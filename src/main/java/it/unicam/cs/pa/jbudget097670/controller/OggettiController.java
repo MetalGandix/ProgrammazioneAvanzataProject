@@ -20,16 +20,20 @@ public class OggettiController implements OggettiInterface {
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
 	 *         aggiorno la carta di credito creando un nuovo Movimento
 	 */
-	public Asset aggiornaCartaDiCredito(Asset destinazione, Asset sorgente, double importo, Categoria cat) {  
+	public Asset aggiornaCartaDiCreditoSpesa(Asset destinazione, Asset sorgente, double importo, Categoria cat) {  
 		Movimento mov = null;
 			if (importo < 0) {
 				mov = destinazione.preleva(-importo, cat);
-			} else {
-				mov = sorgente.preleva(importo, cat);
-				if (mov != null) {
-					destinazione.deposita(importo, cat);
-				}  
-			} 
+			}  
+			return destinazione;
+	}
+	
+	public Asset aggiornaCartaDiCreditoRicavo(Asset destinazione, Asset sorgente, double importo, Categoria cat) {
+		Movimento mov = null;
+		mov = sorgente.preleva(importo, cat);
+		if (mov != null) {
+			destinazione.deposita(importo, cat);
+		}  		
 		return destinazione;
 	}
 	

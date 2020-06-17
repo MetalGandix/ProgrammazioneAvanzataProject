@@ -227,7 +227,18 @@ public class GestioneInput implements GestioneInputInterface {
 				System.out.println("Lista dei movimenti del Conto Corrente: \n" + contoCorrente.getMovimenti().toString());
 				}
 			}else {
-				cassa = controller.aggiornaCartaDiCredito(cassa, contoCorrente, importo, cat);
+				if(importo < 0) {
+					System.out.println("Hai effettuato una spesa di : " + -importo);
+					cassa = controller.aggiornaCartaDiCreditoSpesa(cassa, contoCorrente, importo, cat);
+				}else {
+					if(contoCorrente.getSaldoDisponibile() < importo) {
+						System.out.println("Impossibile effettuare un importo dal conto corrente perchè non ci sono abbastanza soldi.");
+					}
+					else {
+					System.out.println("Hai effettuato un ricavo di : " + importo);
+					cassa = controller.aggiornaCartaDiCreditoRicavo(cassa, contoCorrente, importo, cat);
+					}
+				}
 				System.out.println("Saldo conto corrente: " + contoCorrente.getSaldoDisponibile() + "\nSaldo carta di credito: " + cassa.getSaldoDisponibile());
 			}
 			boolean continuaMovimento = sceltaNuovoCiclo(
