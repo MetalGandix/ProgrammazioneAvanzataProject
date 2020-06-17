@@ -215,14 +215,21 @@ public class GestioneInput implements GestioneInputInterface {
 	public TipoConto creaMovimento(Asset contoCorrente, Asset cassa) {
 		OggettiController controller = new OggettiController();
 		TipoConto tipo = null;
-		tipo = inputConto("Digita il conto che vuoi utilizzare: 1) Conto Corrente, 2) Carta di credito\n ");
-		double importo = inputInt("Scrivi l'importo da transitare: ");
-		Categoria cat = new Categoria(inputString("Scrivi categoria: ")); 
 		while (true) {
-			if (tipo == TipoConto.CONTO_CORRENTE)
-				contoCorrente = controller.aggiornaConto(contoCorrente, cassa, importo, cat);
-			else
-				cassa = controller.aggiornaConto(cassa, contoCorrente, importo, cat);
+			tipo = inputConto("Digita il conto che vuoi utilizzare: 1) Conto Corrente, 2) Carta di credito\n ");
+			double importo = inputInt("Scrivi l'importo da transitare: ");
+			Categoria cat = new Categoria(inputString("Scrivi categoria: ")); 
+			if (tipo == TipoConto.CONTO_CORRENTE) {
+				if(importo < 0) {
+					System.out.println("Non puoi effettuare spese nel conto corrente.");
+				}else {
+				contoCorrente = controller.aggiornaContoCorrente(contoCorrente, cassa, importo, cat);
+				System.out.println("Lista dei movimenti del Conto Corrente: \n" + contoCorrente.getMovimenti().toString());
+				}
+			}else {
+				cassa = controller.aggiornaCartaDiCredito(cassa, contoCorrente, importo, cat);
+				System.out.println("Saldo conto corrente: " + contoCorrente.getSaldoDisponibile() + "\nSaldo carta di credito: " + cassa.getSaldoDisponibile());
+			}
 			boolean continuaMovimento = sceltaNuovoCiclo(
 					"Digita 1 per creare un altro movimento o 2 per fermarti qua. \n");
 			if (!continuaMovimento) {
@@ -247,6 +254,7 @@ public class GestioneInput implements GestioneInputInterface {
 			double importo = inputInt("Scrivi il tasso a regime: ");
 			int durataPiano = (int) inputInt("Scrivi quanti mesi durerà il piano: ");
 			controller.aggiornaPiano(contoCorrente, tipoPiano, importoPiano, importo, durataPiano);
+			System.out.println("La lista dei piani è: \n" + contoCorrente.getPiani().toString());
 			boolean continuaPiano = sceltaNuovoCiclo("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
 			if (!continuaPiano) {
 				break;
@@ -376,7 +384,6 @@ public class GestioneInput implements GestioneInputInterface {
 		getInstance();
 		System.out.print(messaggio);
 		String descrizione = null;
-		i.nextLine();
 		descrizione = i.nextLine();
 		return descrizione;
 	}

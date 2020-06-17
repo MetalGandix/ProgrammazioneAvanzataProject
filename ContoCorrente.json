@@ -1,35 +1,7 @@
 {
   "tipoConto": "CONTO_CORRENTE",
-  "saldoDisponibile": 3100.0,
+  "saldoDisponibile": 0.0,
   "valuta": "€",
-  "movimenti": [
-    {
-      "categoria": {
-        "tipo": "Sport"
-      },
-      "importo": 3000.0,
-      "tipo": "RICAVO",
-      "data": "Jun 10, 2020, 4:49:50 PM",
-      "id": 0
-    },
-    {
-      "categoria": {
-        "tipo": "top"
-      },
-      "importo": 500.0,
-      "tipo": "RICAVO",
-      "data": "Jun 16, 2020, 9:30:42 PM",
-      "id": 1
-    },
-    {
-      "categoria": {
-        "tipo": "top"
-      },
-      "importo": 400.0,
-      "tipo": "SPESA",
-      "data": "Jun 16, 2020, 9:31:53 PM",
-      "id": 2
-    }
-  ],
+  "movimenti": [],
   "piani": []
 }

@@ -18,38 +18,32 @@ public class OggettiController implements OggettiInterface {
 	/**
 	 * @param asset 
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
-	 *         aggiorno iil conto creando un nuovo Movimento
+	 *         aggiorno la carta di credito creando un nuovo Movimento
 	 */
-	public Asset aggiornaConto(Asset destinazione, Asset sorgente, double importo, Categoria cat) {  
+	public Asset aggiornaCartaDiCredito(Asset destinazione, Asset sorgente, double importo, Categoria cat) {  
 		Movimento mov = null;
-		if (destinazione.getTipoConto() == TipoConto.CARTA_DI_CREDITO) { 
 			if (importo < 0) {
 				mov = destinazione.preleva(-importo, cat);
 			} else {
-				System.out.println("Scegli un importo da prelevare dal ContoCorrente: \n"); 
 				mov = sorgente.preleva(importo, cat);
 				if (mov != null) {
-					System.out.println("Prelevato: " + importo);
 					destinazione.deposita(importo, cat);
-					System.out.println("Saldo conto corrente: " + sorgente.getSaldoDisponibile() + "\nSaldo carta di credito: " + destinazione.getSaldoDisponibile());
 				}  
 			} 
-		} else {
-			if(importo < 0){ 
-				mov = null;
-				System.out.println("Non è possibile fare spese con il conto corrente.");
-				return aggiornaConto(destinazione, sorgente, importo, cat);
-			}else {
-			mov = destinazione.deposita(importo, cat);
-			}
-		}
-		if (mov != null) {
-			System.out.println("Importo transitato nel Movimento: " + mov.getImporto() + "\nMovimento con categoria: "
-					+ mov.getTipoCategoria() + "\nMovimento effettuato in data: " + mov.getData()
-					+ "\nMovimento con ID: " + mov.getId());
-		}else {
-			System.out.println("Non è stato possibile prelevare dal ContoCorrente perchè non contiene l'importo desiderato.");
-		}
+		return destinazione;
+	}
+	
+	/**
+	 * @param destinazione
+	 * @param sorgente
+	 * @param importo
+	 * @param cat
+	 * @return ritorna il conto scelto come destinazione 
+	 * (In questo caso il conto corrente)
+	 */
+	public Asset aggiornaContoCorrente(Asset destinazione, Asset sorgente, double importo, Categoria cat) {
+		Movimento mov = null;
+		mov = destinazione.deposita(importo, cat);
 		return destinazione;
 	}
 
@@ -65,7 +59,6 @@ public class OggettiController implements OggettiInterface {
 		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, data.getDate(),
 				data.getFinalDate(durataPiano), asset.getPiani().size());
 		asset.aggiungiPiano(piano);
-		System.out.println("Piano di tipo: " + tipo + "\nL'importo mensile del piano è: " + piano.importoMensile());
 		return asset;
 	}
 

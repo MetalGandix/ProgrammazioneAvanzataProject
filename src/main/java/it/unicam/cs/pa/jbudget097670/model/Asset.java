@@ -119,7 +119,7 @@ public class Asset implements OperazioniAsset, Serializable {
 	public ArrayList<Piano> getPiani() {
 		return piani;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
