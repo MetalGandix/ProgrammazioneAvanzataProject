@@ -4,10 +4,10 @@ import java.util.Collection;
 
 import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.model.Movimento;
-import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
+import it.unicam.cs.pa.jbudget097670.model.OperazioniPianoInterface.Type;
 import it.unicam.cs.pa.jbudget097670.model.Piano;
 
-public interface OggettiInterface {
+public interface OggettiControllerInterface {
 	/**
 	 * @param asset
 	 * @param x 

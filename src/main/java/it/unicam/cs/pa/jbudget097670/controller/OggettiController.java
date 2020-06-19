@@ -8,17 +8,20 @@ import it.unicam.cs.pa.jbudget097670.model.Categoria;
 import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.Piano;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
-import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
+import it.unicam.cs.pa.jbudget097670.model.OperazioniPianoInterface.Type;
 
 /**
  * @author Leonardo Mogianesi Questa classe serve per controllare tutti gli
  *         input che l'utente inserisce all'interno del programma
  */
-public class OggettiController implements OggettiInterface {
+public class OggettiController implements OggettiControllerInterface {
 	/**
-	 * @param asset 
+	 * @param destinazione
+	 * @param sorgente
+	 * @param importo
+	 * @param cat
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
-	 *         aggiorno la carta di credito creando un nuovo Movimento
+	 *         aggiorno la carta di credito creando un nuovo Movimento in caso di spesa
 	 */
 	public Asset aggiornaCartaDiCreditoSpesa(Asset destinazione, Asset sorgente, double importo, Categoria cat) {  
 		Movimento mov = null;
@@ -28,6 +31,14 @@ public class OggettiController implements OggettiInterface {
 			return destinazione;
 	}
 	
+	/**
+	 * @param destinazione
+	 * @param sorgente
+	 * @param importo
+	 * @param cat
+	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
+	 *         aggiorno la carta di credito creando un nuovo Movimento in caso di ricavo
+	 */
 	public Asset aggiornaCartaDiCreditoRicavo(Asset destinazione, Asset sorgente, double importo, Categoria cat) {
 		Movimento mov = null;
 		mov = sorgente.preleva(importo, cat);

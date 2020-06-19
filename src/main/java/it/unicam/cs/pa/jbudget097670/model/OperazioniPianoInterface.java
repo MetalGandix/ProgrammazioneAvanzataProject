@@ -6,7 +6,7 @@ import java.util.Date;
  * @author Leonardo Mogianesi
  *
  */
-public interface OperazioniPiano {
+public interface OperazioniPianoInterface {
 	/**
 	 * I tipi di piano
 	 */

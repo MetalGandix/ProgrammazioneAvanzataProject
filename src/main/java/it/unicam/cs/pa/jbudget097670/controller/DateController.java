@@ -8,7 +8,7 @@ import java.util.Date;
  * @author Leonardo Mogianesi
  * Questa classe restituisce la data attuale e una data futura decisa dall'utente
  */
-public class DateController implements GestioneDate, Serializable{
+public class DateController implements GestioneDateInterface, Serializable{
 	/**
 	 * 
 	 */

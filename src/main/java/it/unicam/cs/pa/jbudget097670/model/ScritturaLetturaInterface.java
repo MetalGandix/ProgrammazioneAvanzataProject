@@ -1,6 +1,4 @@
-package it.unicam.cs.pa.jbudget097670.view;
-
-import it.unicam.cs.pa.jbudget097670.model.Asset;
+package it.unicam.cs.pa.jbudget097670.model;
 
 public interface ScritturaLetturaInterface {
 

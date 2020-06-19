@@ -7,7 +7,7 @@ import java.util.Date;
  * La classe Movimento serve a creare una transazione che andrà a variare il saldo di un asset
  * Riconosciuto da una categoria, un importo, una data, un tipo e un id
  */
-public class Movimento implements gestisciMovimento,Serializable {
+public class Movimento implements GestisciMovimentoInterface,Serializable {
 	
 	private static final long serialVersionUID = 8186361857135749011L;
 	private Categoria categoria;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author Leonardo Mogianesi
  *
  */
-public interface OperazioniAsset {
+public interface OperazioniAssetInterface {
 
 	/**
 	 * Questo metodo permetterà di depositare denaro all'interno dei conti

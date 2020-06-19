@@ -7,7 +7,7 @@ import java.util.Date;
  *
  */
 
-public interface gestisciMovimento {
+public interface GestisciMovimentoInterface {
 
 	/**
 	 * I possibili tipi di Movimento

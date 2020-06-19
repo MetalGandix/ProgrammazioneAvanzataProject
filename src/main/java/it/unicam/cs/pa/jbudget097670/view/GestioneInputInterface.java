@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import it.unicam.cs.pa.jbudget097670.Client;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
-import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano;
+import it.unicam.cs.pa.jbudget097670.model.OperazioniPianoInterface;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 
 /**

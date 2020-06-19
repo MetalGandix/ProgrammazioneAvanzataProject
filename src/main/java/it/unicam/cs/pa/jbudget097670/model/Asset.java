@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import it.unicam.cs.pa.jbudget097670.controller.DateController;
 
-public class Asset implements OperazioniAsset, Serializable {
+public class Asset implements OperazioniAssetInterface, Serializable {
 
 	private static final long serialVersionUID = 8186361857135749011L;
 	private TipoConto tipoConto;

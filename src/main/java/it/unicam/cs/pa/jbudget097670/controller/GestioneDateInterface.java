@@ -6,7 +6,7 @@ import java.util.Date;
  * @author Leonardo Mogianesi
  *
  */
-public interface GestioneDate {
+public interface GestioneDateInterface {
 	/**
 	 * @return ritorerà la data odierna
 	 */

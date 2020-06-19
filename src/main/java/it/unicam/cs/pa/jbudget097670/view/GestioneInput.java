@@ -7,9 +7,9 @@ import it.unicam.cs.pa.jbudget097670.Client;
 import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.model.Categoria;
-import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano;
+import it.unicam.cs.pa.jbudget097670.model.OperazioniPianoInterface;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
-import it.unicam.cs.pa.jbudget097670.model.OperazioniPiano.Type;
+import it.unicam.cs.pa.jbudget097670.model.OperazioniPianoInterface.Type;
 
 /**
  * @author Leonardo Mogianesi In questa classe ci sono tutti i metodi che
@@ -259,7 +259,7 @@ public class GestioneInput implements GestioneInputInterface {
 	public void aggiungiPiani(Asset contoCorrente) {
 		OggettiController controller = new OggettiController();
 		while (true) {
-			OperazioniPiano.Type tipoPiano = apriPiano(
+			OperazioniPianoInterface.Type tipoPiano = apriPiano(
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
 			double importoPiano = inputInt("Scrivi l'importo da aggiungere al piano: ");
 			double importo = inputInt("Scrivi il tasso a regime: ");
@@ -328,7 +328,7 @@ public class GestioneInput implements GestioneInputInterface {
 	 *         altrimenti se seleziona 2 ritorna un piano di tipo investimento In
 	 *         questo metodo scelgo quale tipo di piano aprire
 	 */
-	public OperazioniPiano.Type apriPiano(String messaggio) {
+	public OperazioniPianoInterface.Type apriPiano(String messaggio) {
 		getInstance();
 		int risultato = 0;
 		while (true) {

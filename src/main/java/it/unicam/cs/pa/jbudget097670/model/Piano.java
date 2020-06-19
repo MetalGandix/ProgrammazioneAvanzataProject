@@ -10,7 +10,7 @@ import it.unicam.cs.pa.jbudget097670.controller.DateController;
  * Questa classe crea un nuovo Piano che avrà come parametri: l'importo del piano, la durata del piano in mesi,
  * il tassoARegime del piano, il tipo di piano, un id, una data iniziale del piano e una data finale
  */
-public class Piano implements OperazioniPiano, Serializable{
+public class Piano implements OperazioniPianoInterface, Serializable{
 	private static final long serialVersionUID = -4496010640226398163L;
 	private double importoTotale;
 	private int durataMesi;
