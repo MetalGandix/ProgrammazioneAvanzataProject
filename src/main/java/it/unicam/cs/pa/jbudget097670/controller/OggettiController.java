@@ -23,6 +23,7 @@ public class OggettiController implements OggettiControllerInterface {
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
 	 *         aggiorno la carta di credito creando un nuovo Movimento in caso di spesa
 	 */
+	@Override
 	public Asset aggiornaCartaDiCreditoSpesa(Asset destinazione, Asset sorgente, double importo, Categoria cat) {  
 		Movimento mov = null;
 			if (importo < 0) {
@@ -39,6 +40,7 @@ public class OggettiController implements OggettiControllerInterface {
 	 * @return ritorna il movimento che ho aggiunto alla lista In questa classe
 	 *         aggiorno la carta di credito creando un nuovo Movimento in caso di ricavo
 	 */
+	@Override
 	public Asset aggiornaCartaDiCreditoRicavo(Asset destinazione, Asset sorgente, double importo, Categoria cat) {
 		Movimento mov = null;
 		mov = sorgente.preleva(importo, cat);
@@ -56,6 +58,7 @@ public class OggettiController implements OggettiControllerInterface {
 	 * @return ritorna il conto scelto come destinazione 
 	 * (In questo caso il conto corrente)
 	 */
+	@Override
 	public Asset aggiornaContoCorrente(Asset destinazione, Asset sorgente, double importo, Categoria cat) {
 		Movimento mov = null;
 		mov = destinazione.deposita(importo, cat);
@@ -69,6 +72,7 @@ public class OggettiController implements OggettiControllerInterface {
 	 *         creerà un nuovo piano inserendo l'importo, il tasso e le date del
 	 *         piano.
 	 */
+	@Override
 	public Asset aggiornaPiano(Asset asset, Type tipo, double importoPiano, double importo,int durataPiano) {
 		DateController data = new DateController();
 		Piano piano = new Piano(tipo, importoPiano, importo, durataPiano, data.getDate(),
