@@ -46,7 +46,8 @@ public class Piano implements OperazioniPianoInterface, Serializable{
 	 */
 	@Override
 	public double importoMensile() {
-		return (importoTotale*tassoARegime)/durataMesi;
+		double tassodaAggiungdere = (importoTotale*tassoARegime)/100;
+		return (importoTotale+tassodaAggiungdere)/durataMesi;
 	}
 
 	/**

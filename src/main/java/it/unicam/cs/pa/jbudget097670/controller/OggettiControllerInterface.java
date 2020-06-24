@@ -48,7 +48,7 @@ public interface OggettiControllerInterface {
 	 * @return ritornerà la lista dei Movimenti dove è stato rimosso il Movimento con l'ID selezionato
 	 * @throws Exception 
 	 */
-	public void deleteMovimentoPerId(Asset asset, int x) throws Exception;
+	public Movimento deleteMovimentoPerId(Asset asset, int x) throws Exception;
 	
 	/**
 	 * @param asset
@@ -56,7 +56,7 @@ public interface OggettiControllerInterface {
 	 * @return ritornerà la lista dei Piani dove è stato rimosso il Piano con l'ID selezionato
 	 * @throws Exception 
 	 */
-	public void deletePianoPerId(Asset asset, int x) throws Exception;
+	public Piano deletePianoPerId(Asset asset, int x) throws Exception;
 	
 	/**
 	 * @param asset1

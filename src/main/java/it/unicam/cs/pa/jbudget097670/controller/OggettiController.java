@@ -7,7 +7,6 @@ import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.model.Categoria;
 import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.Piano;
-import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPianoInterface.Type;
 
 /**
@@ -85,8 +84,6 @@ public class OggettiController implements OggettiControllerInterface {
 	 * Questo metodo ritorna il movimento con l'id selezionato dall'utente Se
 	 * l'utente inserisce un id non associato ad un movimento, parte un messaggio
 	 * d'errore
-	 * 
-	 * @throws Exception
 	 */
 	@Override
 	public Collection<Movimento> getMovimentoPerId(Asset asset, int x) throws Exception {
@@ -96,17 +93,6 @@ public class OggettiController implements OggettiControllerInterface {
 				movWithId.add(t);
 			}
 		});
-		if (movWithId.size() == 0) {
-			throw new Exception("Non hai ancora creato nessun Movimento");
-		} else {
-			movWithId.forEach(t -> {
-				if (movWithId != null) {
-					System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
-							+ "\nCategoria del Movimento: " + t.getTipoCategoria() + "\nImporto del Movimento: "
-							+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
-				}
-			});
-		}
 		return movWithId;
 	}
 
@@ -122,24 +108,12 @@ public class OggettiController implements OggettiControllerInterface {
 				pianoId.add(p);
 			}
 		});
-		if (pianoId.size() == 0) {
-			throw new Exception("Non hai ancora creato nessun Piano");
-		} else {
-			pianoId.forEach(p -> {
-				if (pianoId != null) {
-					System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()
-							+ "\nImporto del piano: " + p.importoMensile() + "\nData iniziale: " + p.getDataIniziale()
-							+ "\nData finale: " + p.getDataFinale() + "\n");
-				}
-			});
-		}
 		return pianoId;
 	}
 
 	/**
 	 * Questo metodo mostra una lista di Movimenti effettuati che hanno tutti la
 	 * stessa Categoria inserita dall'utente
-	 * @throws Exception 
 	 */
 	@Override
 	public Collection<Movimento> getMovimentiperCategoria(Asset asset, String x) throws Exception {
@@ -149,24 +123,12 @@ public class OggettiController implements OggettiControllerInterface {
 				movWithCat.add(c);
 			}
 		});
-		if (movWithCat.size() == 0) {
-			throw new Exception("Non hai ancora creato nessun Movimento");
-		}else {
-		movWithCat.forEach(t -> {
-			if (movWithCat != null) {
-				System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
-						+ "\nCategoria del Movimento: " + t.getTipoCategoria() + "\nImporto del Movimento: "
-						+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
-			}
-		});
-		}
 		return movWithCat;
 	}
 
 	/**
-	 * Questo metodo Ritorna la lista dei Piani con lo stesso tipo inserito
+	 * Questo metodo ritorna nella console la lista dei Piani con lo stesso tipo inserito
 	 * dall'utente
-	 * @throws Exception 
 	 */
 	@Override
 	public Collection<Piano> getPianiPerTipo(Asset asset, Type x) throws Exception {
@@ -176,50 +138,40 @@ public class OggettiController implements OggettiControllerInterface {
 				pianoType.add(p);
 			}
 		});
-		if (pianoType.size() < 0) {
-			throw new Exception("Non hai nessun Piano di questo tipo.");
-		}
-		pianoType.forEach(p -> {
-			if (pianoType != null) {
-				System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()
-						+ "\nImporto del piano: " + p.importoMensile() + "\nData iniziale: " + p.getDataIniziale()
-						+ "\nData finale: " + p.getDataFinale() + "\n");
-			}
-		});
 		return pianoType;
 	}
 
+	/**
+	 * Questo metodo serve ad eliminare un movimento dalla lista
+	 */
 	@Override
-	public void deleteMovimentoPerId(Asset asset, int x) throws Exception {
+	public Movimento deleteMovimentoPerId(Asset asset, int x) throws Exception {
 		int movIndexToRemove = -1;
 		for (int i = 0; i < asset.getMovimenti().size(); i++) {
 			Movimento t = asset.getMovimenti().get(i);
 			if (t.getId() == x) {
 				movIndexToRemove = i;
+				asset.getMovimenti().remove(movIndexToRemove);
+				return t;
 			}
 		}
-		if (movIndexToRemove < 0) {
-			throw new Exception("Non hai un movimento con questo id.");
-		} else {
-			asset.getMovimenti().remove(movIndexToRemove);
-			System.out.println("L'id del Movimento rimosso è: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
-		}
+		return null;
 	}
 
+	/**
+	 * Questo metodo serve ad eliminare un piano dalla lista
+	 */
 	@Override
-	public void deletePianoPerId(Asset asset, int x) throws Exception {
+	public Piano deletePianoPerId(Asset asset, int x) throws Exception {
 		int pIndexToRemove = -1;
 		for (int i = 0; i < asset.getPiani().size(); i++) {
 			Piano p = asset.getPiani().get(i);
 			if (p.getId() == x) {
 				pIndexToRemove = i;
+				asset.getPiani().remove(pIndexToRemove);
+				return p;
 			}
 		}
-		if (pIndexToRemove < 0) {
-			throw new Exception("Non hai un piano con questo id.");
-		} else {
-			asset.getPiani().remove(pIndexToRemove);
-			System.out.println("L'id del Piano rimosso è: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
-		}
+		return null;
 	}
 }

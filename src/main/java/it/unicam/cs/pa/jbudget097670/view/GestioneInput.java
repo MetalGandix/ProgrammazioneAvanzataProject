@@ -1,13 +1,16 @@
 package it.unicam.cs.pa.jbudget097670.view;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Scanner;
 
 import it.unicam.cs.pa.jbudget097670.Client;
 import it.unicam.cs.pa.jbudget097670.controller.OggettiController;
 import it.unicam.cs.pa.jbudget097670.model.Asset;
 import it.unicam.cs.pa.jbudget097670.model.Categoria;
+import it.unicam.cs.pa.jbudget097670.model.Movimento;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPianoInterface;
+import it.unicam.cs.pa.jbudget097670.model.Piano;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
 import it.unicam.cs.pa.jbudget097670.model.OperazioniPianoInterface.Type;
 
@@ -133,54 +136,164 @@ public class GestioneInput implements GestioneInputInterface {
 			case 0:
 				return;
 			case 1:
-				try {
-					int x = cercaId("Inserisci l'id del Movimento che vuoi visualizzare: \n");
-					o.getMovimentoPerId(cassa, x);
-				} catch (Exception e1) {
-					System.out.println(e1.getMessage());
-				}
+				stampaMovimentoId(o,cassa);
 				continue;
 			case 2:
-				try {
-					String x = inputString("Inserisci la categoria del Movimento che vuoi vedere: \n");
-					o.getMovimentiperCategoria(cassa,x);
-				} catch (Exception e2) {
-					System.out.println(e2.getMessage());
-				}
+				stampaMovimentiConCategorieUguali(o,cassa);
 				continue;
 			case 3:
-				try {
-					int x = cercaId("Inserisci l'id del Piano che vuoi visualizzare: \n");
-					o.getPianoPerId(contoCorrente, x);
-				} catch (Exception e3) {
-					System.out.println(e3.getMessage());
-				}
+				stampaPianoId(o,contoCorrente);
 				continue;
 			case 4:
-				try {
-					Type x = apriPiano("Per visualizzare la lista dei piani inserisci: "
-							+ "\n 1)Piani di tipo Ammortamento " + "\n 2)Piani di tipo Investimento");
-					o.getPianiPerTipo(contoCorrente,x);
-				} catch (Exception e4) {
-					System.out.println(e4.getMessage());
-				}
+				stampaPianoPerTipo(o,contoCorrente);
 				continue;
 			case 5:
-				try {
-					int x = cercaId("Inserisci l'id del Movimento che vuoi eliminare: \n");
-					o.deleteMovimentoPerId(cassa, x);
-				} catch (Exception e5) {
-					System.out.println(e5.getMessage());
-				}
+				stampaMovimentoEliminato(o,cassa);
 				continue;
 			case 6:
-				try {
-					int x = cercaId("Inserisci l'id del Piano che vuoi eliminare: \n");
-					o.deletePianoPerId(contoCorrente, x);
-				} catch (Exception e6) {
-					System.out.println(e6.getMessage());
-				}
+				stampaPianoEliminato(o,contoCorrente);
+				continue;
 			}
+		}
+	}
+	
+	
+	/**
+	 * @param o
+	 * @param cassa 
+	 * Questo metodo stampa il movimento con un determinato ID nella console
+	 */
+	private void stampaMovimentoId(OggettiController o,Asset cassa) { 
+		try {
+			int x = cercaId("Inserisci l'id del Movimento che vuoi visualizzare: \n");
+			Collection<Movimento> movWithId = o.getMovimentoPerId(cassa, x);
+			if (movWithId.size() == 0) {
+				throw new Exception("Non hai ancora creato nessun Movimento");
+			} else {
+				movWithId.forEach(t -> {
+					if (movWithId != null) {
+						System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
+								+ "\nCategoria del Movimento: " + t.getTipoCategoria() + "\nImporto del Movimento: "
+								+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
+					}
+				});
+			}
+		} catch (Exception e1) {
+			System.out.println(e1.getMessage());
+		}
+	}
+	
+	/**
+	 * @param o
+	 * @param contoCorrente
+	 * Questo metodo stampa un piano con un determinato ID nella console
+	 */
+	public void stampaPianoId(OggettiController o, Asset contoCorrente) {
+		try {
+			int x = cercaId("Inserisci l'id del Piano che vuoi visualizzare: \n");
+			Collection<Piano> pianoId = o.getPianoPerId(contoCorrente,x);
+			if (pianoId.size() == 0) {
+				throw new Exception("Non hai ancora creato nessun Piano");
+			} else {
+				pianoId.forEach(p -> {
+					if (pianoId != null) {
+						System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()
+								+ "\nImporto del piano: " + p.importoMensile() + "\nData iniziale: " + p.getDataIniziale()
+								+ "\nData finale: " + p.getDataFinale() + "\n");
+					}
+				});
+			}
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
+	}
+	
+	/**
+	 * @param o
+	 * @param cassa
+	 * Questo metodo stampa i movimenti con categorie uguali nella console
+	 */
+	public void stampaMovimentiConCategorieUguali(OggettiController o, Asset cassa){
+		try {
+			String x = inputString("Inserisci la categoria del Movimento che vuoi vedere: \n");
+			Collection<Movimento> movWithCat = o.getMovimentiperCategoria(cassa,x);
+			if (movWithCat.size() == 0) {
+				throw new Exception("Non hai ancora creato nessun Movimento");
+			}else {
+			movWithCat.forEach(t -> {
+				if (movWithCat != null) {
+					System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
+							+ "\nCategoria del Movimento: " + t.getTipoCategoria() + "\nImporto del Movimento: "
+							+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
+				}
+			});
+			}
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
+	}
+	
+	/**
+	 * @param o
+	 * @param contoCorrente
+	 * Questo metodo stampa i piani con lo stesso tipo nella console
+	 */
+	public void stampaPianoPerTipo(OggettiController o, Asset contoCorrente) {
+		try {
+			Type x = apriPiano("Per visualizzare la lista dei piani inserisci: "
+					+ "\n 1)Piani di tipo Ammortamento " + "\n 2)Piani di tipo Investimento");
+			Collection<Piano> pianoType = o.getPianiPerTipo(contoCorrente,x);
+			if (pianoType.size() < 0) {
+				throw new Exception("Non hai nessun Piano di questo tipo.");
+			}
+			pianoType.forEach(p -> {
+				if (pianoType != null) {
+					System.out.println("ID del piano: " + p.getId() + "\nTipo del piano: " + p.getTipo()
+							+ "\nImporto del piano: " + p.importoMensile() + "\nData iniziale: " + p.getDataIniziale()
+							+ "\nData finale: " + p.getDataFinale() + "\n");
+				}
+			});
+		} catch (Exception e4) {
+			System.out.println(e4.getMessage());
+		}
+	}
+	
+	/**
+	 * @param o
+	 * @param cassa
+	 * Questo metodo stampa l'id del movimento eliminato nella console
+	 */
+	public void stampaMovimentoEliminato(OggettiController o, Asset cassa) {
+		try {
+			int x = cercaId("Inserisci l'id del Movimento che vuoi eliminare: \n");
+			Movimento cancellato = o.deleteMovimentoPerId(cassa, x);
+			if (cancellato == null) {
+				throw new Exception("Non hai un movimento con questo id.");
+			} else {
+				System.out.println("L'id del Movimento rimosso è: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
+			}
+		} catch (Exception e5) {
+			System.out.println(e5.getMessage());
+		}
+	}
+	
+	/**
+	 * @param o
+	 * @param contoCorrente
+	 * Questo metodo stampa l'id del piano eliminato nella console
+	 */
+	public void stampaPianoEliminato(OggettiController o, Asset contoCorrente) {
+		try {
+			int x = cercaId("Inserisci l'id del Piano che vuoi eliminare: \n");
+			Piano cancellato = o.deletePianoPerId(contoCorrente, x);
+			if (cancellato == null) {
+				throw new Exception("Non hai un piano con questo id.");
+			} else {
+				
+				System.out.println("L'id del Piano rimosso è: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
+			}
+		} catch (Exception e6) {
+			System.out.println(e6.getMessage());
 		}
 	}
 
@@ -395,7 +508,7 @@ public class GestioneInput implements GestioneInputInterface {
 		getInstance();
 		System.out.print(messaggio);
 		String descrizione = null;
-		descrizione = i.nextLine();
+		descrizione = i.next();
 		return descrizione;
 	}
 
