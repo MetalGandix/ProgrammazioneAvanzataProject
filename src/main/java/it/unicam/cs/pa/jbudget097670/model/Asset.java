@@ -119,36 +119,4 @@ public class Asset implements OperazioniAssetInterface, Serializable {
 	public ArrayList<Piano> getPiani() {
 		return piani;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(saldoDisponibile);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((tipoConto == null) ? 0 : tipoConto.hashCode());
-		result = prime * result + valuta;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Asset other = (Asset) obj;
-		if (Double.doubleToLongBits(saldoDisponibile) != Double.doubleToLongBits(other.saldoDisponibile))
-			return false;
-		if (tipoConto != other.tipoConto)
-			return false;
-		if (valuta != other.valuta)
-			return false;
-		return true;
-	}
-	
-	
 }

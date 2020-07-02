@@ -8,8 +8,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import it.unicam.cs.pa.jbudget097670.model.Asset;
-import it.unicam.cs.pa.jbudget097670.model.GestioneFile;
 import it.unicam.cs.pa.jbudget097670.model.TipoConto;
+import it.unicam.cs.pa.jbudget097670.view.GestioneFile;
 
 /**
  * @author Leonardo Mogianesi
