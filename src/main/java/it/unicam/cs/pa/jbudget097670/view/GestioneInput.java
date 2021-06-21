@@ -31,7 +31,7 @@ public class GestioneInput implements GestioneInputInterface {
 	}
 
 	/**
-	 * @param messaggio, che scriverò poi nel main, che spiega all'utente cosa fare
+	 * @param messaggio, che scriverï¿½ poi nel main, che spiega all'utente cosa fare
 	 *                   per muoversi nel programma
 	 * @throws IOException
 	 * 
@@ -46,11 +46,11 @@ public class GestioneInput implements GestioneInputInterface {
 		c.connetti(); 
 		Asset cassa = c.leggiOggetto();
 		if(cassa == null) {
-			cassa = new Asset(TipoConto.CARTA_DI_CREDITO, 0, '€');
+			cassa = new Asset(TipoConto.CARTA_DI_CREDITO, 0, 'E');
 		}
 		Asset contoCorrente = c.leggiOggetto();
 		if(contoCorrente == null) {
-			contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, '€');
+			contoCorrente = new Asset(TipoConto.CONTO_CORRENTE, 0, 'E');
 		}
 		TipoConto tipo = null;
 		OggettiController o = new OggettiController();
@@ -98,10 +98,11 @@ public class GestioneInput implements GestioneInputInterface {
 		int risultato = 0;
 		String messaggio = "Seleziona cosa cercare nella carta di credito: " + "\n 0)Per tornare alla home."
 				+ "\n 1)Seleziona un Movimento con un ID specifico. "
-				+ "\n 2)Seleziona uno o più Movimenti con una categoria specifica. "
-				+ "\n 3)Seleziona un Piano con un id specifico. " + "\n 4)Seleziona uno o più Piani dello stesso tipo. "
+				+ "\n 2)Seleziona uno o piï¿½ Movimenti con una categoria specifica. "
+				+ "\n 3)Seleziona un Piano con un id specifico. " + "\n 4)Seleziona uno o piï¿½ Piani dello stesso tipo. "
 				+ "\n 5)Cancella un Movimento inserendo il suo ID. " + ""
-				+ "\n 6)Cancella un Piano inserendo il suo ID. \n";
+				+ "\n 6)Cancella un Piano inserendo il suo ID." 
+				+ "\n 7)Stampa tutti i movimenti. \n";
 		;
 		getInstance();
 		switchMethod(risultato, messaggio, cassa, contoCorrente);
@@ -113,7 +114,7 @@ public class GestioneInput implements GestioneInputInterface {
 	 * @param messaggio
 	 * @param cassa
 	 * @param contoCorrente Questo metodo serve per accorciare selezionaOggetto(),
-	 *                      perchè altrimenti sarebbe venuto un metodo troppo lungo
+	 *                      perchï¿½ altrimenti sarebbe venuto un metodo troppo lungo
 	 *                      Chiama i metodi del controller con lo scanner di
 	 *                      selezionaOggetto()
 	 */
@@ -153,6 +154,9 @@ public class GestioneInput implements GestioneInputInterface {
 			case 6:
 				stampaPianoEliminato(o,contoCorrente);
 				continue;
+			case 7:
+				stampaTuttiIMovimenti(o,contoCorrente);
+				continue;
 			}
 		}
 	}
@@ -167,6 +171,30 @@ public class GestioneInput implements GestioneInputInterface {
 		try {
 			int x = cercaId("Inserisci l'id del Movimento che vuoi visualizzare: \n");
 			Collection<Movimento> movWithId = o.getMovimentoPerId(cassa, x);
+			if (movWithId.size() == 0) {
+				throw new Exception("Non hai ancora creato nessun Movimento");
+			} else {
+				movWithId.forEach(t -> {
+					if (movWithId != null) {
+						System.out.println("ID: " + t.getId() + "\nTipo del Movimento: " + t.getTipo()
+								+ "\nCategoria del Movimento: " + t.getTipoCategoria() + "\nImporto del Movimento: "
+								+ t.getImporto() + "\nData del Movimento: " + t.getData() + "\n");
+					}
+				});
+			}
+		} catch (Exception e1) {
+			System.out.println(e1.getMessage());
+		}
+	}
+
+		/**
+	 * @param o
+	 * @param cassa 
+	 * Questo metodo stampa il movimento con un determinato ID nella console
+	 */
+	private void stampaTuttiIMovimenti(OggettiController o,Asset cassa) { 
+		try {
+			Collection<Movimento> movWithId = o.getAllMovement(cassa);
 			if (movWithId.size() == 0) {
 				throw new Exception("Non hai ancora creato nessun Movimento");
 			} else {
@@ -270,7 +298,7 @@ public class GestioneInput implements GestioneInputInterface {
 			if (cancellato == null) {
 				throw new Exception("Non hai un movimento con questo id.");
 			} else {
-				System.out.println("L'id del Movimento rimosso è: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
+				System.out.println("L'id del Movimento rimosso ï¿½: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
 			}
 		} catch (Exception e5) {
 			System.out.println(e5.getMessage());
@@ -290,7 +318,7 @@ public class GestioneInput implements GestioneInputInterface {
 				throw new Exception("Non hai un piano con questo id.");
 			} else {
 				
-				System.out.println("L'id del Piano rimosso è: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
+				System.out.println("L'id del Piano rimosso ï¿½: " + x + " per vedere il cambiamento, torna alla home e invia i risultati al server.");
 			}
 		} catch (Exception e6) {
 			System.out.println(e6.getMessage());
@@ -298,7 +326,7 @@ public class GestioneInput implements GestioneInputInterface {
 	}
 
 	/**
-	 * @param messaggio, che dirà all'utente di inserire un double
+	 * @param messaggio, che dirï¿½ all'utente di inserire un double
 	 * @return
 	 */
 	@Override
@@ -345,7 +373,7 @@ public class GestioneInput implements GestioneInputInterface {
 					cassa = controller.aggiornaCartaDiCreditoSpesa(cassa, contoCorrente, importo, cat);
 				}else {
 					if(contoCorrente.getSaldoDisponibile() < importo) {
-						System.out.println("Impossibile effettuare un importo dal conto corrente perchè non ci sono abbastanza soldi.");
+						System.out.println("Impossibile effettuare un importo dal conto corrente perchï¿½ non ci sono abbastanza soldi.");
 					}
 					else {
 					System.out.println("Hai effettuato un ricavo di : " + importo);
@@ -376,9 +404,9 @@ public class GestioneInput implements GestioneInputInterface {
 					"Premi 1 se vuoi creare un piano d'ammortamento o premi 2 se vuoi creare un piano d'investimento: ");
 			double importoPiano = inputInt("Scrivi l'importo da aggiungere al piano: ");
 			double importo = inputInt("Scrivi il tasso a regime: ");
-			int durataPiano = (int) inputInt("Scrivi quanti mesi durerà il piano: ");
+			int durataPiano = (int) inputInt("Scrivi quanti mesi durerï¿½ il piano: ");
 			controller.aggiornaPiano(contoCorrente, tipoPiano, importoPiano, importo, durataPiano);
-			System.out.println("La lista dei piani è: \n" + contoCorrente.getPiani().toString());
+			System.out.println("La lista dei piani ï¿½: \n" + contoCorrente.getPiani().toString());
 			boolean continuaPiano = sceltaNuovoCiclo("Digita 1 per creare un altro piano o 2 per fermarti qua. \n");
 			if (!continuaPiano) {
 				break;
@@ -458,17 +486,17 @@ public class GestioneInput implements GestioneInputInterface {
 			System.out.println("Devi selezionare 1 per il piano d'ammortamento o 2 per il piano d'investimento.\n");
 			return apriPiano(messaggio);
 		case 1:
-			System.out.println("Il Piano scelto è di tipo Ammortamento.\n");
+			System.out.println("Il Piano scelto ï¿½ di tipo Ammortamento.\n");
 			return Type.Ammortamento;
 		case 2:
-			System.out.println("Il Piano scelto è di tipo Investimento.\n");
+			System.out.println("Il Piano scelto ï¿½ di tipo Investimento.\n");
 			return Type.Investimento;
 		}
 	}
 
 	/**
 	 * @param messaggio
-	 * @return ritorna il conto corrente se risultato è = 1, altrimenti ritorna la
+	 * @return ritorna il conto corrente se risultato ï¿½ = 1, altrimenti ritorna la
 	 *         carta di credito. In questo metodo scelgo dove fare Movimenti
 	 */
 	@Override
@@ -500,7 +528,7 @@ public class GestioneInput implements GestioneInputInterface {
 	/**
 	 * @param messaggio
 	 * Doppia nextLine per evitare un bug
-	 * @return ritorna una stringa dell'utente che sarà il nome della categoria del
+	 * @return ritorna una stringa dell'utente che sarï¿½ il nome della categoria del
 	 *         Movimento
 	 */
 	@Override
@@ -514,7 +542,7 @@ public class GestioneInput implements GestioneInputInterface {
 
 	/**
 	 * @param messaggio
-	 * @return ritorna un numero inserito dall'utente, che sarà poi usato per
+	 * @return ritorna un numero inserito dall'utente, che sarï¿½ poi usato per
 	 *         trovare un ID in una lista di movimenti
 	 */
 	@Override

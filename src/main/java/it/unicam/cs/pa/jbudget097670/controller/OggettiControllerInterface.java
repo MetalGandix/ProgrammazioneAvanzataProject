@@ -13,24 +13,27 @@ import it.unicam.cs.pa.jbudget097670.model.Piano;
  *
  */
 public interface OggettiControllerInterface {
+
+	public Collection<Movimento> getAllMovement(Asset asset) throws Exception;
+
 	/**
 	 * @param asset
 	 * @param x 
-	 * @return ritornerà un Movimento con quel determinato ID
+	 * @return ritornerï¿½ un Movimento con quel determinato ID
 	 * @throws Exception 
 	 */
 	public Collection<Movimento> getMovimentoPerId(Asset asset, int x) throws Exception;
 	
 	/**
 	 * @param a
-	 * @return ritornerà un piano con l'id scelto dall'utente
+	 * @return ritornerï¿½ un piano con l'id scelto dall'utente
 	 * @throws Exception 
 	 */
 	public Collection<Piano> getPianoPerId(Asset asset, int x) throws Exception;
 	
 	/**
 	 * @param c
-	 * @return ritornerà una lista di Movimenti con la stessa categoria
+	 * @return ritornerï¿½ una lista di Movimenti con la stessa categoria
 	 * @throws Exception 
 	 */
 	public Collection<Movimento> getMovimentiperCategoria(Asset asset, String x) throws Exception;
@@ -38,14 +41,14 @@ public interface OggettiControllerInterface {
 	/**
 	 * @param asset
 	 * @param x 
-	 * @return ritornerà una lista di Piani dello stesso tipo (Ammortamento o Investimento)
+	 * @return ritornerï¿½ una lista di Piani dello stesso tipo (Ammortamento o Investimento)
 	 * @throws Exception 
 	 */
 	public Collection<Piano> getPianiPerTipo(Asset asset, Type x) throws Exception;	
 	
 	/**
 	 * @param asset
-	 * @return ritornerà la lista dei Movimenti dove è stato rimosso il Movimento con l'ID selezionato
+	 * @return ritornerï¿½ la lista dei Movimenti dove ï¿½ stato rimosso il Movimento con l'ID selezionato
 	 * @throws Exception 
 	 */
 	public Movimento deleteMovimentoPerId(Asset asset, int x) throws Exception;
@@ -53,7 +56,7 @@ public interface OggettiControllerInterface {
 	/**
 	 * @param asset
 	 * @param x 
-	 * @return ritornerà la lista dei Piani dove è stato rimosso il Piano con l'ID selezionato
+	 * @return ritornerï¿½ la lista dei Piani dove ï¿½ stato rimosso il Piano con l'ID selezionato
 	 * @throws Exception 
 	 */
 	public Piano deletePianoPerId(Asset asset, int x) throws Exception;
@@ -63,7 +66,7 @@ public interface OggettiControllerInterface {
 	 * @param asset2
 	 * @param importo
 	 * @param cat
-	 * @return ritornerà l'asset della carta di credito aggiornato con la spesa
+	 * @return ritornerï¿½ l'asset della carta di credito aggiornato con la spesa
 	 */
 	public Asset aggiornaCartaDiCreditoSpesa(Asset asset1, Asset asset2, double importo, Categoria cat); 
 	
@@ -72,7 +75,7 @@ public interface OggettiControllerInterface {
 	 * @param asset2
 	 * @param importo
 	 * @param cat
-	 * @return ritornerà l'asset della carta di credito aggiornato col ricavo
+	 * @return ritornerï¿½ l'asset della carta di credito aggiornato col ricavo
 	 */
 	public Asset aggiornaCartaDiCreditoRicavo(Asset asset1, Asset asset2, double importo, Categoria cat);
 	
@@ -81,7 +84,7 @@ public interface OggettiControllerInterface {
 	 * @param asset2
 	 * @param importo
 	 * @param cat
-	 * @return ritornerà l'asset del conto corrente aggiornato
+	 * @return ritornerï¿½ l'asset del conto corrente aggiornato
 	 */
 	public Asset aggiornaContoCorrente(Asset asset1, Asset asset2, double importo, Categoria cat);
 
@@ -91,7 +94,7 @@ public interface OggettiControllerInterface {
 	 * @param importoPiano
 	 * @param importo
 	 * @param durataPiano
-	 * @return ritornerà l'asset del conto corrente con il piano aggiornato
+	 * @return ritornerï¿½ l'asset del conto corrente con il piano aggiornato
 	 */
 	public Asset aggiornaPiano(Asset asset, Type tipo, double importoPiano, double importo, int durataPiano);
 	

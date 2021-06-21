@@ -14,6 +14,9 @@ import it.unicam.cs.pa.jbudget097670.model.OperazioniPianoInterface.Type;
  *         input che l'utente inserisce all'interno del programma
  */
 public class OggettiController implements OggettiControllerInterface {
+
+
+
 	/**
 	 * @param destinazione
 	 * @param sorgente
@@ -68,7 +71,7 @@ public class OggettiController implements OggettiControllerInterface {
 	 * @param asset
 	 * @param tipo
 	 * @return ritorno il piano aggiunto dall'utente In questa classe l'utente
-	 *         creerà un nuovo piano inserendo l'importo, il tasso e le date del
+	 *         creerï¿½ un nuovo piano inserendo l'importo, il tasso e le date del
 	 *         piano.
 	 */
 	@Override
@@ -173,5 +176,14 @@ public class OggettiController implements OggettiControllerInterface {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Collection<Movimento> getAllMovement(Asset asset) throws Exception {
+		ArrayList<Movimento> movWithId = new ArrayList<Movimento>();
+		asset.getMovimenti().forEach(t -> {
+				movWithId.add(t);
+		});
+		return movWithId;
 	}
 }
